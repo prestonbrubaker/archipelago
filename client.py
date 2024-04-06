@@ -36,10 +36,13 @@ class Example(QWidget):
         qp.setBrush(QColor(0, 0, 255))
         qp.drawEllipse(x, y, 100, 100)  # Use random coordinates for the circle
 
-        # Draw a black line
-        qp.setPen(QColor(0, 0, 0))
+        # Create a pen for the line with a specified width and color, then set it
+        linePen = QPen(QColor(0, 0, 0))
         linePen.setWidth(5)  # Sets the line width to 5 pixels
-        qp.drawLine(120, 10, 220, 100)
+        qp.setPen(linePen)
+
+    # Draw a black line with the custom pen
+    qp.drawLine(120, 10, 220, 100)
 
         # Draw some text
         qp.setPen(QColor(255, 0, 0))
