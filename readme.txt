@@ -16,5 +16,18 @@ Lists/Parameters associated with each WORLD
 
 
 Lists/Parameters associated with each ORGANISM:
-Genetic Code:  |Instruction|Data|... x 2^24
-Node ID: |ID|Mass|Type of Node|Immutable Data| Mutable
+Genetic Code:  |Instruction|Data|... x 2^16
+
+Node Info: |ID|Mass|Type of Node|Immutable Data| Mutable Data| Hue | Saturation | Lighting | X-Coord. (x3)| Y-Coord. (x3)|
+
+Muscle Info: |ID| Node 1 ID | Node 2 ID | Min Length | Max Length | Spring Constant | Mutable Data | Hue | Saturation | Lighting |
+
+Oranism Information: | Computer ID | World ID | Organism ID (x5) | Family Name (x5) |
+
+Registers: | Register 1 | Register 2 | Register 3 |
+
+Index: | Index (x2)|
+
+Lifespan: | Time Alive (x3)| 
+
+
