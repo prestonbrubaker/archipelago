@@ -41,8 +41,8 @@ class Example(QWidget):
         linePen.setWidth(5)  # Sets the line width to 5 pixels
         qp.setPen(linePen)
 
-    # Draw a black line with the custom pen
-    qp.drawLine(120, 10, 220, 100)
+        # Draw a black line with the custom pen
+        qp.drawLine(120, 10, 220, 100)
 
         # Draw some text
         qp.setPen(QColor(255, 0, 0))
