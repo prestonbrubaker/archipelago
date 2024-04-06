@@ -38,6 +38,7 @@ class Example(QWidget):
 
         # Draw a black line
         qp.setPen(QColor(0, 0, 0))
+        linePen.setWidth(5)  # Sets the line width to 5 pixels
         qp.drawLine(120, 10, 220, 100)
 
         # Draw some text
