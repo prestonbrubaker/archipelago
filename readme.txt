@@ -51,7 +51,7 @@ INSTRUCTIONS:
 1: Store the Data in register 1
 2: Cycle the registers forward 1 (e.g. register 1 to 2, 2 to 3, 4 to 1...)
 3: Change the Index to the Data so that during the next turn, the organism will read this instruction
-4: Check to see if Reister 2 is greater than register 1, and change the index value to Data only if this condition is satisfied
+4: Check to see if Reister 2 is equal to register 1, and change the index value to Data only if this condition is satisfied
 5: Store the Energy value in register 1
 6: Add register 1 and register 2, and place the result in register 3
 7: Clear register 1
@@ -71,6 +71,8 @@ INSTRUCTIONS:
 20: Activate the second selected node, with the data being used in accordance with the node type
 21: Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child. The second is the angular addition to the angle between the first and second selected nodes it will be shot out from, and the third is the speed the baby is shot out at (energy associated with this will be subtracted from the energy store of the parent)
 22: Die instantly
+23: Check to see if Reister 2 is greater than register 1, and change the index value to Data only if this condition is satisfied
+24: Check to see if Reister 2 is less than register 1, and change the index value to Data only if this condition is satisfied
 
 
 
