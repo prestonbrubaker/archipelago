@@ -21,34 +21,34 @@ class MyApp(QMainWindow):
         
         self.title = QLabel("My Application", self)
         self.title.setAlignment(Qt.AlignCenter)  # Center alignment
-        font = self.title.font()
+        font = QFont()
         font.setPointSize(24)  # Font size
         self.title.setFont(font)
         self.title.setStyleSheet("color: hotpink;")  # Font color
         mainLayout.addWidget(self.title)
         
-        # Layout for the toggle button
-        topLayout = QHBoxLayout()
-        spacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        topLayout.addItem(spacer)  # Pushes the button to the right
+        # Hamburger menu setup
+        self.menuButton = QPushButton("☰", self)
+        self.menuButton.setFixedSize(40, 40)
+        self.menuButton.clicked.connect(self.displayMenu)
+        mainLayout.addWidget(self.menuButton, 0, Qt.AlignLeft | Qt.AlignTop)  # Aligns button top-left
         
+        # Fullscreen toggle button (for demonstration, placed below title)
         toggleButton = QPushButton("Fullscreen", self)
-        toggleButton.setFixedSize(40, 40)  # Smaller, fixed size
         toggleButton.clicked.connect(self.toggleFullscreen)
-        topLayout.addWidget(toggleButton)
-        mainLayout.addLayout(topLayout)
+        mainLayout.addWidget(toggleButton)  # Add the button directly to main layout for simplicity
         
         self.centralWidget.setLayout(mainLayout)
 
-    def createMenu(self):
-        menuButton = self.QPushButton("☰", self)
-        fileMenu = menuButton.addMenu()
-        fileMenu.setAlignment(Qt.AlignRight)
-
+    def displayMenu(self):
+        # Create the menu
+        menu = QMenu(self)
         exitAction = QAction('Exit', self)
-        exitAction.setShortcut('Ctrl+Q')
-        exitAction.triggered.connect(qApp.quit)
-        fileMenu.addAction(exitAction)
+        exitAction.triggered.connect(self.close)
+        menu.addAction(exitAction)
+        
+        # Show the menu at the button's position
+        menu.exec_(self.menuButton.mapToGlobal(self.menuButton.pos()))
 
     def toggleFullscreen(self):
         if self.isFullScreen():
