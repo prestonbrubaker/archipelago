@@ -47,7 +47,7 @@ class Example(QWidget):
         # Draw some text
         qp.setPen(QColor(255, 0, 0))
         qp.setFont(QFont('Arial', 10))
-        qp.drawText(10, 950, "A circle, a line, and this text")  # Moved text to avoid overlap with the circle
+        qp.drawText(10, 500, "A circle, a line, and this text")  # Moved text to avoid overlap with the circle
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
