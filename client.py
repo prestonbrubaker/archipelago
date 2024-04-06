@@ -11,7 +11,7 @@ class Example(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(300, 300, 1000, 1000)  # Window size changed to 1000x1000
+        self.setGeometry(300, 300, 1000, 800)  # Window size 1000x800
         self.setWindowTitle('Shapes and Text')
         
         # Timer setup
