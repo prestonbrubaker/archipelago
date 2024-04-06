@@ -10,7 +10,7 @@ class MyApp(QMainWindow):
 
     def initializeUI(self):
         self.setWindowTitle('ARCHIPELAGO')
-        self.setGeometry(100, 100, 800, 600)  # Set default size
+        self.setGeometry(self.isFullScreen)  # Set default size
         
         self.createMenu()
 
@@ -22,33 +22,38 @@ class MyApp(QMainWindow):
         self.title = QLabel("My Application", self)
         self.title.setAlignment(Qt.AlignCenter)  # Center alignment
         font = QFont()
-        font.setPointSize(24)  # Font size
+        font.setPointSize("Ariel", 24, QFont.Bold)  # Font size
         self.title.setFont(font)
-        self.title.setStyleSheet("color: hotpink;")  # Font color
+        self.title.setStyleSheet("color: hotpink;margin-top: 1rem;")  # Font color
         mainLayout.addWidget(self.title)
         
-        # Hamburger menu setup
         self.menuButton = QPushButton("☰", self)
-        self.menuButton.setFixedSize(40, 40)
+        self.menuButton.setFont(QFont("Arial", 18))
+        self.menuButton.setFixedSize(60, 40)
         self.menuButton.clicked.connect(self.displayMenu)
-        mainLayout.addWidget(self.menuButton, 0, Qt.AlignLeft | Qt.AlignTop)  # Aligns button top-left
-        
-        # Fullscreen toggle button (for demonstration, placed below title)
-        toggleButton = QPushButton("Fullscreen", self)
-        toggleButton.clicked.connect(self.toggleFullscreen)
-        mainLayout.addWidget(toggleButton)  # Add the button directly to main layout for simplicity
-        
+        mainLayout.addWidget(self.menuButton, 0, Qt.AlignLeft | Qt.AlignTop)
+
         self.centralWidget.setLayout(mainLayout)
 
     def displayMenu(self):
         # Create the menu
         menu = QMenu(self)
+        action1 = QAction('Option 1', self)
+        action2 = QAction('Option 2', self)
         exitAction = QAction('Exit', self)
+        
+        action1.triggered.connect(lambda: print("Option 1 selected"))
+        action2.triggered.connect(lambda: print("Option 2 selected"))
         exitAction.triggered.connect(self.close)
+        
+        menu.addAction(action1)
+        menu.addAction(action2)
+        menu.addSeparator()
         menu.addAction(exitAction)
         
         # Show the menu at the button's position
         menu.exec_(self.menuButton.mapToGlobal(self.menuButton.pos()))
+        
 
     def toggleFullscreen(self):
         if self.isFullScreen():
