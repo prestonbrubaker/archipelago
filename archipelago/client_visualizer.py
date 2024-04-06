@@ -10,9 +10,9 @@ class MyApp(QMainWindow):
 
     def initializeUI(self):
         self.setWindowTitle('ARCHIPELAGO')
-        self.setGeometry(self.isFullScreen)  # Set default size
+        self.showNormal()  # Set default size
         
-        self.createMenu()
+        self.displayMenu()
 
         self.centralWidget = QWidget(self)  # Central widget to hold layout
         self.setCentralWidget(self.centralWidget)
@@ -54,12 +54,6 @@ class MyApp(QMainWindow):
         # Show the menu at the button's position
         menu.exec_(self.menuButton.mapToGlobal(self.menuButton.pos()))
         
-
-    def toggleFullscreen(self):
-        if self.isFullScreen():
-            self.showNormal()
-        else:
-            self.showFullScreen()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
