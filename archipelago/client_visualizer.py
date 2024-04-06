@@ -41,8 +41,8 @@ class MyApp(QMainWindow):
         self.centralWidget.setLayout(mainLayout)
 
     def createMenu(self):
-        menuBar = self.QPushButton()
-        fileMenu = menuBar.addMenu("☰")
+        menuButton = self.QPushButton("☰", self)
+        fileMenu = menuButton.addMenu()
         fileMenu.setAlignment(Qt.AlignRight)
 
         exitAction = QAction('Exit', self)
