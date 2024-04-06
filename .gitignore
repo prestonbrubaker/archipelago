@@ -1,0 +1,2 @@
+#This file will serve as a means to allow for faster processing speeds, by allowing our application to potentially ignore scripts it does not inherently need.
+#For example, pycache!
