@@ -39,6 +39,7 @@ Selected Node: | Selected Node | 2nd Selected Node |
 
 
 NODE TYPES:
+0: Soul/Heart. Only has mass. Required as the first node of an organism, and it is what is shot off from another during reproduction
 0: Structual. Only has mass. No activation function
 1: Gripper. Mutable data corresponds to how tightly it grips to the environment, increasing the drag force
 2: Photosynthesis. Harvests energy from the sunlight
@@ -59,8 +60,8 @@ INSTRUCTIONS:
 9: Take the modulus of 1 with respect to 2, and place the result of this in register 3 (e.g. 15, 4 -> 3)
 10: Place the energy value in register 1
 11: Place the Time Alive value register 1
-12: Generate a Node. This will use the next several bytes of the gene to initialize the node. It will automatically trigger the development of a muscle from the selected node to the new node and set the second selected node to the new node.
-13: Generate a Muscle. This will generate a muscle between the selected node and the 2nd selected node
+12: Generate a Node. This will use the next several bytes of the gene to initialize the node. It will automatically trigger the development of a muscle from the selected node to the new node and set the second selected node to the new node. The index will be changed to after this block of data.
+13: Generate a Muscle. This will generate a muscle between the selected node and the 2nd selected node. The index will be changed to after the block of data
 14: Increment the Selected Node ID by 1. If it goes over the max, it cycles back to the first node
 15: Increment the 2nd Selected Node ID by 1. If it goes over the max, it cycles back to the first node
 16: Store a random value in register 1
