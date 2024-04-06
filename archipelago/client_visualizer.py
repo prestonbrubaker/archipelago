@@ -24,7 +24,7 @@ class MyApp(QMainWindow):
         font = self.title.font()
         font.setPointSize(24)  # Font size
         self.title.setFont(font)
-        self.title.setStyleSheet("color: blue;")  # Font color
+        self.title.setStyleSheet("color: hotpink;")  # Font color
         mainLayout.addWidget(self.title)
         
         # Layout for the toggle button
@@ -32,7 +32,7 @@ class MyApp(QMainWindow):
         spacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         topLayout.addItem(spacer)  # Pushes the button to the right
         
-        toggleButton = QPushButton("☰", self)
+        toggleButton = QPushButton("Fullscreen", self)
         toggleButton.setFixedSize(40, 40)  # Smaller, fixed size
         toggleButton.clicked.connect(self.toggleFullscreen)
         topLayout.addWidget(toggleButton)
@@ -41,8 +41,9 @@ class MyApp(QMainWindow):
         self.centralWidget.setLayout(mainLayout)
 
     def createMenu(self):
-        menuBar = self.menuBar()
-        fileMenu = menuBar.addMenu('Menu')
+        menuBar = self.QPushButton()
+        fileMenu = menuBar.addMenu("☰")
+        fileMenu.setAlignment(Qt.AlignRight)
 
         exitAction = QAction('Exit', self)
         exitAction.setShortcut('Ctrl+Q')
