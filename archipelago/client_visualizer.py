@@ -1,5 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QAction, qApp, QMenuBar
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QAction, qApp, QMenuBar, QHBoxLayout, QSpacerItem, QSizePolicy, QFont, QMenu)
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor, QPalette
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -7,28 +9,40 @@ class MyApp(QMainWindow):
         self.initializeUI()
 
     def initializeUI(self):
-        self.setWindowTitle('PyQt5 Fullscreen Toggle')
-        self.setGeometry(100, 100, 600, 400)  # Set default size
+        self.setWindowTitle('ARCHIPELAGO')
+        self.setGeometry(100, 100, 800, 600)  # Set default size
         
         self.createMenu()
 
         self.centralWidget = QWidget(self)  # Central widget to hold layout
         self.setCentralWidget(self.centralWidget)
         
-        layout = QVBoxLayout()  # Use a vertical layout
+        mainLayout = QVBoxLayout()  # Use a vertical layout
         
         self.title = QLabel("My Application", self)
-        layout.addWidget(self.title)  # Add a title
+        self.title.setAlignment(Qt.AlignCenter)  # Center alignment
+        font = self.title.font()
+        font.setPointSize(24)  # Font size
+        self.title.setFont(font)
+        self.title.setStyleSheet("color: blue;")  # Font color
+        mainLayout.addWidget(self.title)
         
-        toggleButton = QPushButton("Toggle Fullscreen", self)
+        # Layout for the toggle button
+        topLayout = QHBoxLayout()
+        spacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        topLayout.addItem(spacer)  # Pushes the button to the right
+        
+        toggleButton = QPushButton("☰", self)
+        toggleButton.setFixedSize(40, 40)  # Smaller, fixed size
         toggleButton.clicked.connect(self.toggleFullscreen)
-        layout.addWidget(toggleButton)  # Add a button to toggle fullscreen
+        topLayout.addWidget(toggleButton)
+        mainLayout.addLayout(topLayout)
         
-        self.centralWidget.setLayout(layout)
+        self.centralWidget.setLayout(mainLayout)
 
     def createMenu(self):
         menuBar = self.menuBar()
-        fileMenu = menuBar.addMenu('File')
+        fileMenu = menuBar.addMenu('Menu')
 
         exitAction = QAction('Exit', self)
         exitAction.setShortcut('Ctrl+Q')
