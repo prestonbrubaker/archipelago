@@ -1,7 +1,7 @@
 import sys
 import random
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtGui import QPainter, QColor, QFont
+from PyQt5.QtGui import QPainter, QColor, QFont, QPen
 from PyQt5.QtCore import Qt, QTimer
 import random
 
