@@ -1,7 +1,7 @@
 import sys
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QAction, qApp, QMenuBar, QHBoxLayout, QSpacerItem, QSizePolicy, QFont, QMenu)
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QAction, qApp, QMenuBar, QHBoxLayout, QSpacerItem, QSizePolicy, QMenu)
+from PyQt5.QtGui import QFont,QColor,QPalette  # Corrected import for QFont
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QPalette
 
 class MyApp(QMainWindow):
     def __init__(self):
