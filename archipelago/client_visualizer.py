@@ -1,55 +1,34 @@
 import sys
-import random
-from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtGui import QPainter, QColor, QFont, QPen
-from PyQt5.QtCore import Qt, QTimer
-import random
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout
+from PyQt5.QtCore import Qt
 
-class Example(QWidget):
+class MainApp(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
-
+    
     def initUI(self):
-        self.setGeometry(300, 300, 1000, 800)  # Window size 1000x800
-        self.setWindowTitle('Shapes and Text')
+        # Set the window to full screen
+        self.showFullScreen()
         
-        # Timer setup
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update)  # Calls the update method, which triggers paintEvent
-        self.timer.start(1000)  # Timer times out every 1000 milliseconds (1 second)
+        # This central widget will hold the layout for other widgets
+        self.centralWidget = QWidget(self)
+        self.setCentralWidget(self.centralWidget)
+        
+        # Create a vertical layout
+        self.layout = QVBoxLayout(self.centralWidget)
+        
+        # Example: Add a title label to the layout
+        self.title = QLabel("My Evolution Simulation Game", self)
+        self.layout.addWidget(self.title)
+        
+        # Placeholder for game area and options
+        # You can add them here using self.layout.addWidget(widget)
+        
+        # Set the layout for the central widget
+        self.centralWidget.setLayout(self.layout)
 
-        self.show()
-
-    def paintEvent(self, event):
-        qp = QPainter()
-        qp.begin(self)
-        self.drawShapes(qp)
-        qp.end()
-
-    def drawShapes(self, qp):
-        # Randomly generate coordinates for the circle
-        x = random.randint(100, 900)  # Adjusted for the circle's size to ensure it's fully visible
-        y = random.randint(100, 700)
-
-        # Set the brush to a nice blue color and draw a circle
-        qp.setBrush(QColor(0, 0, 255))
-        qp.drawEllipse(x, y, 100, 100)  # Use random coordinates for the circle
-
-        # Create a pen for the line with a specified width and color, then set it
-        linePen = QPen(QColor(0, 0, 0))
-        linePen.setWidth(5)  # Sets the line width to 5 pixels
-        qp.setPen(linePen)
-
-        # Draw a black line with the custom pen
-        qp.drawLine(120, 10, 220, 100)
-
-        # Draw some text
-        qp.setPen(QColor(255, 0, 0))
-        qp.setFont(QFont('Arial', 10))
-        qp.drawText(10, 500, "A circle, a line, and this text")  # Moved text to avoid overlap with the circle
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    ex = Example()
+    mainApp = MainApp()
     sys.exit(app.exec_())
