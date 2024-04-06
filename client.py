@@ -29,8 +29,8 @@ class Example(QWidget):
 
     def drawShapes(self, qp):
         # Randomly generate coordinates for the circle
-        x = random.randint(0, 900)  # Adjusted for the circle's size to ensure it's fully visible
-        y = random.randint(0, 900)
+        x = random.randint(100, 900)  # Adjusted for the circle's size to ensure it's fully visible
+        y = random.randint(100, 700)
 
         # Set the brush to a nice blue color and draw a circle
         qp.setBrush(QColor(0, 0, 255))
