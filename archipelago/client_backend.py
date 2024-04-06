@@ -39,12 +39,6 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
-    0, 1, 0, 0,  0, 0, 0, 0,  # x-position
-    0, 0, 0, 0,  0, 0, 0, 0,  # x-position
-    0, 0, 0, 0,  0, 0, 0, 0,  # x-position
-    0, 1, 0, 0,  0, 0, 0, 0,  # y-position
-    0, 0, 0, 0,  0, 0, 0, 0,  # y-position
-    0, 0, 0, 0,  0, 0, 0, 0,  # y-position
     0, 1, 0, 0,  0, 0, 0, 0,  # Energy
     0, 0, 0, 0,  0, 0, 0, 0,  # Selected Node 1
     0, 0, 0, 0,  0, 0, 0, 0,  # Selected Node 2
@@ -65,10 +59,46 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Time alive
   ]
 
-  node_state = [
+  nodes_state = []
   
+  node_state = [
+    0, 0, 0, 0,  0, 0, 0, 0,  # Node ID
+    1, 0, 0, 0,  0, 0, 0, 0,  # Mass of Node
+    0, 0, 0, 0,  0, 0, 0, 0,  # Type of node (SOUL)
+    0, 0, 0, 0,  0, 0, 0, 0,  # Immutable Data
+    0, 0, 0, 0,  0, 0, 0, 0,  # Mutable data
+    0, 0, 0, 0,  0, 0, 0, 0,  # Hue
+    1, 0, 0, 0,  0, 0, 0, 0,  # Saturation
+    1, 0, 0, 0,  0, 0, 0, 0,  # Lighting
+    0, 1, 0, 0,  0, 0, 0 ,0,  # X-coordinate
+    0, 0, 0, 0,  0, 0, 0 ,0,  # X-coordinate
+    0, 0, 0, 0,  0, 0, 0 ,0,  # X-coordinate
+    0, 1, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
+    0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
+    0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
   ]
   
+  nodes_state.append(node_state)  # Adding the soul node to the seed organism
+
+  
   genetic_code = [
-    0, 0, 0, 0
+    0, 0, 0, 0,  1, 1, 0, 0,  # ACTION: Create a Node. The following with further indented comments is relevant data
+    0, 0, 0, 0,  0, 0, 0, 0,    # Node ID
+    1, 0, 0, 0,  0, 0, 0, 0,    # Mass of Node
+    0, 0, 0, 0,  0, 0, 1, 0,    # Type of node (PHOTOSYNTHESIS)
+    0, 0, 0, 0,  0, 0, 0, 0,    # Immutable Data
+    0, 0, 0, 0,  0, 0, 0, 0,    # Mutable data
+    1, 0, 0, 0,  0, 0, 0, 0,    # Hue  (Hopefully green)
+    1, 0, 0, 0,  0, 0, 0, 0,    # Saturation
+    1, 0, 0, 0,  0, 0, 0, 0,    # Lighting
+    0, 1, 0, 0,  0, 0, 0 ,0,    # X-coordinate
+    0, 0, 0, 0,  0, 0, 0 ,0,    # X-coordinate
+    0, 0, 0, 0,  0, 0, 0 ,0,    # X-coordinate
+    0, 1, 0, 0,  0, 0, 0 ,0,    # Y-coordinate
+    0, 0, 0, 0,  0, 0, 0 ,0,    # Y-coordinate
+    0, 0, 0, 0,  0, 0, 0 ,0,    # Y-coordinate
+    
+    
+    
+    
   ]
