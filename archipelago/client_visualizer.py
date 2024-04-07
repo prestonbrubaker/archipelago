@@ -20,7 +20,7 @@ class MyApp(QMainWindow):
         self.title = QLabel("My Archipelago", self)
         self.title.setAlignment(Qt.AlignCenter)  # Center alignment
         font = QFont()
-        font.setPointSize(24, QFont.Bold)  # Font size
+        font.setPointSize(24)  # Font size
         self.title.setFont(font)
         self.title.setStyleSheet("color: hotpink;margin-top: 1rem;")  # Font color
         mainLayout.addWidget(self.title)
