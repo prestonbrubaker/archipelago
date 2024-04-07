@@ -5,6 +5,11 @@ from PyQt5.QtCore import Qt
 
 class MyApp(QMainWindow):
 
+    def __init__(self):
+        super().__init__()
+        self.initializeUI()
+
+
     def initializeUI(self):
         self.setWindowTitle('ARCHIPELAGO')
         self.showFullScreen()  # Set the application to full screen
