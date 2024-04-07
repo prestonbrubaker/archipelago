@@ -12,12 +12,12 @@ class MyApp(QMainWindow):
 
     def initializeUI(self):
         self.setWindowTitle('ARCHIPELAGO')
-        self.showFullScreen()  # Set the application to full screen
+        self.showFullScreen()  
 
-        self.centralWidget = QWidget(self)  # Central widget to hold layout
+        self.centralWidget = QWidget(self) 
         self.setCentralWidget(self.centralWidget)
 
-        mainLayout = QVBoxLayout(self.centralWidget)  # Use a vertical layout for the central widget
+        mainLayout = QVBoxLayout(self.centralWidget) 
 
         self.menuButton = QPushButton("X", self)
         self.menuButton.setFont(QFont("Arial", 18))
@@ -32,9 +32,9 @@ class MyApp(QMainWindow):
 
         self.title = QLabel("Archipelago", self)
         self.title.setAlignment(Qt.AlignCenter)  # Center alignment
-        font = QFont("Arial", 24)
+        font = QFont("Arial", 36)
         self.title.setFont(font)
-        self.title.setStyleSheet("color: red; margin-top: 10px;")  # Font color and top margin
+        self.title.setStyleSheet("color: red; margin-top: 2rem;")  # Font color and top margin
         mainLayout.addWidget(self.title)
 
         spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -46,17 +46,10 @@ class MyApp(QMainWindow):
     def displayMenu(self):
         # Create the menu
         menu = QMenu(self)
-        action1 = QAction('Option 1', self)
-        action2 = QAction('Option 2', self)
         exitAction = QAction('Exit', self)
         
-        action1.triggered.connect(lambda: print("Option 1 selected"))
-        action2.triggered.connect(lambda: print("Option 2 selected"))
         exitAction.triggered.connect(self.close)
         
-        menu.addAction(action1)
-        menu.addAction(action2)
-        menu.addSeparator()
         menu.addAction(exitAction)
         
         # Show the menu at the button's position
