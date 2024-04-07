@@ -4,9 +4,6 @@ from PyQt5.QtGui import QFont,QColor,QPalette  # Corrected import for QFont
 from PyQt5.QtCore import Qt
 
 class MyApp(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.initializeUI()
 
     def initializeUI(self):
         self.setWindowTitle('ARCHIPELAGO')
@@ -17,7 +14,7 @@ class MyApp(QMainWindow):
 
         mainLayout = QVBoxLayout(self.centralWidget)  # Use a vertical layout for the central widget
 
-        self.menuButton = QPushButton("Menu", self)
+        self.menuButton = QPushButton("X", self)
         self.menuButton.setFont(QFont("Arial", 18))
         self.menuButton.clicked.connect(self.displayMenu)
 

@@ -1,3 +1,7 @@
+def __init__(self):
+        super().__init__()
+        self.initializeUI()
+
 #This is a global __init__ file. It will serve to allow for the global 
 #importation of our modules which may be used across our applications. 
 #This is especially important as we consider the division of scripts. It 
