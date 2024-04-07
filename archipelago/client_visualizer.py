@@ -22,7 +22,7 @@ class MyApp(QMainWindow):
         font = QFont()
         font.setPointSize(24)  # Font size
         self.title.setFont(font)
-        self.title.setStyleSheet("color: hotpink;margin-top: 1rem;")  # Font color
+        self.title.setStyleSheet("color: red; margin-top: 10px;")  # Font color
         mainLayout.addWidget(self.title)
         
         self.menuButton = QPushButton("☰", self)
