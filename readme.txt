@@ -65,14 +65,15 @@ INSTRUCTIONS:
 14: Increment the Selected Node ID by 1. If it goes over the max, it cycles back to the first node
 15: Increment the 2nd Selected Node ID by 1. If it goes over the max, it cycles back to the first node
 16: Store a random value in register 1
-17: If there is a muscle between the selected nodes, set it to contraction mode
-18: If there is a muscle between the selected nodes, set it to expansion mode
+17: If there is a muscle between the selected nodes, toggle it's contraction/extension mode
+18: RESERVED
 19: Activate the first selected node, with the data being used in accordance with the node type
 20: Activate the second selected node, with the data being used in accordance with the node type
 21: Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child. The second is the angular addition to the angle between the first and second selected nodes it will be shot out from, and the third is the speed the baby is shot out at (energy associated with this will be subtracted from the energy store of the parent)
 22: Die instantly
-23: Check to see if Reister 2 is greater than register 1, and change the index value to Data only if this condition is satisfied
-24: Check to see if Reister 2 is less than register 1, and change the index value to Data only if this condition is satisfied
+23: Check to see if Register 2 is greater than register 1, and change the index value to Data only if this condition is satisfied
+24: Check to see if Register 2 is less than register 1, and change the index value to Data only if this condition is satisfied
+25: Check to see if Register 2 is NOT equal to register 1, and change the index value to Data only if this condition is satisfied
 
 
 
