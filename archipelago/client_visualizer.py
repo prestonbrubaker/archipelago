@@ -16,6 +16,20 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.centralWidget)
         
         mainLayout = QVBoxLayout()  # Use a vertical layout
+
+        spacer = QWidget(self)
+        spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        mainLayout.addWidget(spacer)
+
+        self.menuButton = QPushButton("Menu", self)
+        self.menuButton.setFont(QFont("Arial", 18))
+        self.menuButton.clicked.connect(self.displayMenu)
+
+        buttonLayout = QHBoxLayout()
+        buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Align button to the right
+        mainLayout.addLayout(buttonLayout)
+
+        self.centralWidget.setLayout(mainLayout)
         
         self.title = QLabel("Archipelago", self)
         self.title.setAlignment(Qt.AlignCenter)  # Center alignment
@@ -24,23 +38,6 @@ class MyApp(QMainWindow):
         self.title.setStyleSheet("color: red;")  # Font color
         mainLayout.addWidget(self.title)
         mainLayout.setAlignment(self.title, Qt.AlignTop)
-        
-    # Spacer to push content to the top
-        spacer = QWidget(self)
-        spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        mainLayout.addWidget(spacer)
-
-    # Menu button setup
-        self.menuButton = QPushButton("Menu", self)
-        self.menuButton.setFont(QFont("Arial", 18))
-        self.menuButton.clicked.connect(self.displayMenu)
-
-    # Menu button layout for right alignment
-        buttonLayout = QHBoxLayout()
-        buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Align button to the right
-        mainLayout.addLayout(buttonLayout)
-
-        self.centralWidget.setLayout(mainLayout)
 
     def displayMenu(self):
         # Create the menu
