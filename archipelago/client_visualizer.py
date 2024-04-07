@@ -25,9 +25,8 @@ class MyApp(QMainWindow):
         self.title.setStyleSheet("color: red; margin-top: 10px;")  # Font color
         mainLayout.addWidget(self.title)
         
-        self.menuButton = QPushButton("☰", self)
+        self.menuButton = QPushButton("Menu", self)
         self.menuButton.setFont(QFont("Ariel", 18))
-        self.menuButton.setFixedSize(60, 40)
         self.menuButton.clicked.connect(self.displayMenu)
         mainLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)
 
