@@ -20,13 +20,13 @@ class MyApp(QMainWindow):
         self.title = QLabel("My Archipelago", self)
         self.title.setAlignment(Qt.AlignCenter)  # Center alignment
         font = QFont()
-        font.setPointSize("Ariel", 24, QFont.Bold)  # Font size
+        font.setPointSize(24, QFont.Bold)  # Font size
         self.title.setFont(font)
         self.title.setStyleSheet("color: hotpink;margin-top: 1rem;")  # Font color
         mainLayout.addWidget(self.title)
         
         self.menuButton = QPushButton("☰", self)
-        self.menuButton.setFont(QFont("Arial", 18))
+        self.menuButton.setFont(QFont(18))
         self.menuButton.setFixedSize(60, 40)
         self.menuButton.clicked.connect(self.displayMenu)
         mainLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)
