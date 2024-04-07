@@ -10,16 +10,12 @@ class MyApp(QMainWindow):
 
     def initializeUI(self):
         self.setWindowTitle('ARCHIPELAGO')
-        self.showFullScreen()  # Set default size
-        
+        self.showFullScreen()  # Set the application to full screen
+
         self.centralWidget = QWidget(self)  # Central widget to hold layout
         self.setCentralWidget(self.centralWidget)
-        
-        mainLayout = QVBoxLayout()  # Use a vertical layout
 
-        spacer = QWidget(self)
-        spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        mainLayout.addWidget(spacer)
+        mainLayout = QVBoxLayout(self.centralWidget)  # Use a vertical layout for the central widget
 
         self.menuButton = QPushButton("Menu", self)
         self.menuButton.setFont(QFont("Arial", 18))
@@ -27,17 +23,23 @@ class MyApp(QMainWindow):
 
         buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Align button to the right
+
+        buttonLayout.addItem(QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum))
+
         mainLayout.addLayout(buttonLayout)
 
-        self.centralWidget.setLayout(mainLayout)
-        
         self.title = QLabel("Archipelago", self)
         self.title.setAlignment(Qt.AlignCenter)  # Center alignment
-        font = QFont("Arial", 24)  # Corrected font family name
+        font = QFont("Arial", 24)
         self.title.setFont(font)
-        self.title.setStyleSheet("color: red;")  # Font color
+        self.title.setStyleSheet("color: red; margin-top: 10px;")  # Font color and top margin
         mainLayout.addWidget(self.title)
-        mainLayout.setAlignment(self.title, Qt.AlignTop)
+
+        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        mainLayout.addItem(spacer)
+
+        self.centralWidget.setLayout(mainLayout)
+
 
     def displayMenu(self):
         # Create the menu
