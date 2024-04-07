@@ -10,16 +10,14 @@ class MyApp(QMainWindow):
 
     def initializeUI(self):
         self.setWindowTitle('ARCHIPELAGO')
-        self.showNormal()  # Set default size
+        self.showFullScreen()  # Set default size
         
-        self.displayMenu()
-
         self.centralWidget = QWidget(self)  # Central widget to hold layout
         self.setCentralWidget(self.centralWidget)
         
         mainLayout = QVBoxLayout()  # Use a vertical layout
         
-        self.title = QLabel("My Application", self)
+        self.title = QLabel("My Archipelago", self)
         self.title.setAlignment(Qt.AlignCenter)  # Center alignment
         font = QFont()
         font.setPointSize("Ariel", 24, QFont.Bold)  # Font size
@@ -31,7 +29,7 @@ class MyApp(QMainWindow):
         self.menuButton.setFont(QFont("Arial", 18))
         self.menuButton.setFixedSize(60, 40)
         self.menuButton.clicked.connect(self.displayMenu)
-        mainLayout.addWidget(self.menuButton, 0, Qt.AlignLeft | Qt.AlignTop)
+        mainLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)
 
         self.centralWidget.setLayout(mainLayout)
 
