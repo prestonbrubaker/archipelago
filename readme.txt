@@ -90,11 +90,11 @@ I will have instead all actions be mapped to a certain amount of information to 
 
 All information about the organism:
 
-GENOME: | Action | Information (if appicable) | ... Repeats up to any length
+GENOME: | Action | Information (if appicable) | ...   Repeats up to any length
 
-AGE: | Age (x3) | The total of the 3 bytes allows for the organism to live for around 16 million iterations as a maximum
+AGE: | Age (x3) |   The total of the 3 bytes allows for the organism to live for around 16 million iterations as a maximum
 
-INDEX: | Index (x3) | The total of the 3 bytes allows for the organism to proceed through a genome up to around 16 million lines long. In reality, skips, jumping, and data allocation will use up a large percentage of the gene space.
+INDEX: | Index (x3) |   The total of the 3 bytes allows for the organism to proceed through a genome up to around 16 million lines long. In reality, skips, jumping, and data allocation will use up a large percentage of the gene space.
 
 REGISTERS: | Register 1 (x3) | Register 2 (x3) | Register 3 (x3) |
 
@@ -102,6 +102,6 @@ NODE INFO: | ID | Mass | Type of Node | Immutable Data | Mutable Data | X-Coord.
 
 MUSCLE INFO: |ID| Selected Node ID | 2nd Selected Node (or current new node) | Min Length (x3) | Max Length (x3) | Current Length (x3) | Spring Constant | Mutable Data |
 
-
+ENERGY: | Energy level |  The organsim shall die if their energy level reaches or falls below a certain threshold
 
 
