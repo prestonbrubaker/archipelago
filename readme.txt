@@ -47,7 +47,7 @@ NODE TYPES:
 
 
 
-INSTRUCTIONS:
+INSTRUCTIONS: Note... when referring to Data with a capital "D", it refers to the following bytes reserved for data
 0: Skip this block
 1: Store the Data in register 1
 2: Cycle the registers forward 1 (e.g. register 1 to 2, 2 to 3, 4 to 1...)
