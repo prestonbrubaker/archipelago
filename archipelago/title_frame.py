@@ -21,7 +21,8 @@ class MyApp(QMainWindow):
 
         self.menuButton = QPushButton("X", self)
         self.menuButton.setFont(QFont("Arial", 18))
-        self.menuButton.clicked.connect(self.close)
+        self.menuButton.clicked.connect(self.close)  # Directly close the application on click
+
 
         buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Align button to the right
