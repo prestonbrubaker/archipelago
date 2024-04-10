@@ -45,15 +45,10 @@ class MyApp(QMainWindow):
 
     def displayMenu(self):
         # Create the menu
-        menu = QMenu(self)
         exitAction = QAction('Exit', self)
         
         exitAction.triggered.connect(self.close)
         
-        menu.addAction(exitAction)
-        
-        # Show the menu at the button's position
-        menu.exec_(self.menuButton.mapToGlobal(self.menuButton.pos()))
         
 
 if __name__ == "__main__":
