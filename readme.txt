@@ -36,7 +36,7 @@ Lifespan: | Time Alive (x3)|
 
 Energy: |Energy|
 
-Selected Node: | Selected Node | 2nd Selected Node |
+
 
 
 NODE TYPES:
@@ -104,6 +104,8 @@ MUSCLE INFO: |ID| Selected Node ID | 2nd Selected Node (or current new node) | M
 
 ENERGY: | Energy level |  The organsim shall die if their energy level reaches or falls below a certain threshold
 
+SELECTED NODE: | Selected Node | 2nd Selected Node |
+
 NODE TYPES:
 0: Soul/Heart. Only has mass. Required as the first node of an organism, and it is what is shot off from another during reproduction
 0: Structual. Only has mass. No activation function
@@ -127,6 +129,7 @@ INSTRUCTIONS:
 6: Add register 1 and register 2, and place the result in register 3
 7: Subtract register 2 from register 1, and place the result in register 3. If the result is negative, set register 3 to zero
 9: Take the modulus of 1 with respect to 2, and place the result of this in register 3 (e.g. 15, 4 -> 3)
+16: Store a random value in register 1
 
 3: Change the Index to the Data so that during the next turn, the organism will read this instruction
 
@@ -141,7 +144,7 @@ INSTRUCTIONS:
 17: If there is a muscle between the selected nodes, toggle it's contraction/extension mode
 14: Increment the Selected Node ID by 1. If it goes over the max, it cycles back to the first node
 15: Increment the 2nd Selected Node ID by 1. If it goes over the max, it cycles back to the first node
-16: Store a random value in register 1
+
 19: Activate the first selected node, with the data being used in accordance with the node type
 20: Activate the second selected node, with the data being used in accordance with the node type
 21: Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child. The second is the angular addition to the angle between the first and second selected nodes it will be shot out from, and the third is the speed the baby is shot out at (energy associated with this will be subtracted from the energy store of the parent)
