@@ -135,8 +135,8 @@ INSTRUCTIONS:
 
 3: Change the index by a value associated with the byte following this instruction. The first bit of the data indicates direction, where 1 is forward and 0 is backwards
 
-5: Store the Energy value in register 1
-11: Place the Time Alive value register 1
+5: Replace register 1's value with the energy value
+11: Replace register 1's value with the time alive value
 
 12: Generate a Node. This will use the next several bytes of the gene to initialize the node. It will automatically trigger the development of a muscle from the selected node to the new node and set the second selected node to the new node. The index will be changed to after this block of data.
 13: Generate a Muscle. This will generate a muscle between the selected node and the 2nd selected node. The index will be changed to after the block of data
