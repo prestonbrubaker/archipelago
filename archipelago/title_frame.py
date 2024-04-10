@@ -21,7 +21,7 @@ class MyApp(QMainWindow):
 
         self.menuButton = QPushButton("X", self)
         self.menuButton.setFont(QFont("Arial", 18))
-        self.menuButton.clicked.connect(self.displayMenu)
+        self.menuButton.clicked.connect(self.close)
 
         buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Align button to the right
@@ -42,13 +42,6 @@ class MyApp(QMainWindow):
 
         self.centralWidget.setLayout(mainLayout)
 
-
-    def displayMenu(self):
-        # Create the menu
-        exitAction = QAction('Exit', self)
-        
-        exitAction.triggered.connect(self.close)
-        
         
 
 if __name__ == "__main__":
