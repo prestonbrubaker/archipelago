@@ -115,37 +115,32 @@ NODE TYPES:
 
 
 INSTRUCTIONS:
-| index of the aciton | description of the action | bytes of Data to proceed action |
-| 0 | Skip this block | 0 |
-1: Store the Data in register 1
-2: Swap registers 1 and 3
-3: Swap registers 2 and 3
-4: Swap registers 1 and 2
-7: Clear register 1
-8: Clear all registers
-4: Check to see if Reister 2 is equal to register 1, and change the index value to Data only if this condition is satisfied
-23: Check to see if Register 2 is greater than register 1, and change the index value to Data only if this condition is satisfied
-24: Check to see if Register 2 is less than register 1, and change the index value to Data only if this condition is satisfied
-25: Check to see if Register 2 is NOT equal to register 1, and change the index value to Data only if this condition is satisfied
-6: Add register 1 and register 2, and place the result in register 3
-7: Subtract register 2 from register 1, and place the result in register 3. If the result is negative, set register 3 to zero
-9: Take the modulus of 1 with respect to 2, and place the result of this in register 3 (e.g. 15, 4 -> 3)
-16: Store a random value in register 1
-
-
-3: Change the index by a value associated with the byte following this instruction. The first bit of the data indicates direction, where 1 is forward and 0 is backwards
-
-5: Replace register 1's value with the energy value
-11: Replace register 1's value with the time alive value
-
-12: Generate a Node. This will use the next several bytes of the gene to initialize the node. It will automatically trigger the development of a muscle from the selected node to the new node and set the second selected node to the new node. The index will be changed to after this block of data.
-13: Generate a Muscle. This will generate a muscle between the selected node and the 2nd selected node. The index will be changed to after the block of data
-17: If there is a muscle between the selected nodes, toggle it's contraction/extension mode
-14: Increment the Selected Node ID by 1. If it goes over the max, it cycles back to the first node
-15: Increment the 2nd Selected Node ID by 1. If it goes over the max, it cycles back to the first node
-
-19: Activate the first selected node, with the data being used in accordance with the node type
-20: Activate the second selected node, with the data being used in accordance with the node type
-21: Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child. The second is the angular addition to the angle between the first and second selected nodes it will be shot out from, and the third is the speed the baby is shot out at (energy associated with this will be subtracted from the energy store of the parent)
-22: Die instantly
+| index of the aciton | bytes of Data to proceed action | description of the action |
+|  0 | 0 | Skip this block
+|  1 | 3 | Store the Data in register 1
+|  2 | 0 | Swap registers 1 and 3
+|  3 | 0 | Swap registers 2 and 3
+|  4 | 0 | Swap registers 1 and 2
+|  5 | 0 | Clear register 1
+|  6 | 0 | Clear all registers
+|  7 | 3 | Check to see if Reister 2 is equal to register 1, and change the index value to Data only if this condition is satisfied
+|  8 | 3 | Check to see if Register 2 is greater than register 1, and change the index value to Data only if this condition is satisfied
+|  9 | 3 | Check to see if Register 2 is less than register 1, and change the index value to Data only if this condition is satisfied
+| 10 | 3 | Check to see if Register 2 is NOT equal to register 1, and change the index value to Data only if this condition is satisfied
+| 11 | 0 | Add register 1 and register 2, and place the result in register 3
+| 12 | 0 | Subtract register 2 from register 1, and place the result in register 3. If the result is negative, set register 3 to zero
+| 13 | 0 | Take the modulus of 1 with respect to 2, and place the result of this in register 3 (e.g. 15, 4 -> 3)
+| 14 | 0 | Store a random value in register 1
+| 15 | 3 | Change the index by a value associated with the Data following this instruction. The first bit of the data indicates direction, where 1 is forward and 0 is backwards
+| 16 | 0 | Replace register 1's value with the energy value
+| 17 | 0 | Replace register 1's value with the time alive value
+| 18 | x | Generate a Node. It will automatically trigger the development of a muscle from the selected node to the new node and set the second selected node to the new node. The index will be changed to after this block of data.
+| 19 | x | Generate a Muscle. This will generate a muscle between the selected node and the 2nd selected node. The index will be changed to after the block of data
+| 20 | 0 | If there is a muscle between the selected nodes, toggle it's contraction/extension mode
+| 21 | 0 | Increment the Selected Node ID by 1. If it goes over the max, it cycles back to the first node
+| 22 | 0 | Increment the 2nd Selected Node ID by 1. If it goes over the max, it cycles back to the first node
+| 23 | 0 | Activate the first selected node, with the data being used in accordance with the node type
+| 24 | 0 | Activate the second selected node, with the data being used in accordance with the node type
+| 25 | x | Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child. The second is the angular addition to the angle between the first and second selected nodes it will be shot out from, and the third is the speed the baby is shot out at (energy associated with this will be subtracted from the energy store of the parent)
+| 26 | 0 | Die instantly
 
