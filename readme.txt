@@ -86,8 +86,21 @@ I now lean more on the side of allowing mutable information in the genetic code 
 
 I think it will be easier for mutations to produce favorable traits if any pointers/GoTo statements are relative to current position, rather than to point to absolute position. The first 1 or 0 should indicate direction, be it backwards or forward in the gene from its current position.
 
+I will have instead all actions be mapped to a certain amount of information to follow. Using this method, there will be many actions that need not contain any following bytes for informaiton.
 
+All information about the organism:
 
+GENOME: | Action | Information (if appicable) | ... Repeats up to any length
+
+AGE: | Age (x3) | The total of the 3 bytes allows for the organism to live for around 16 million iterations as a maximum
+
+INDEX: | Index (x3) | The total of the 3 bytes allows for the organism to proceed through a genome up to around 16 million lines long. In reality, skips, jumping, and data allocation will use up a large percentage of the gene space.
+
+REGISTERS: | Register 1 (x3) | Register 2 (x3) | Register 3 (x3) |
+
+NODE INFO: | ID | Mass | Type of Node | Immutable Data | Mutable Data | X-Coord. (x3)| Y-Coord. (x3)|
+
+MUSCLE INFO: |ID| Selected Node ID | 2nd Selected Node (or current new node) | Min Length (x3) | Max Length (x3) | Current Length (x3) | Spring Constant | Mutable Data |
 
 
 
