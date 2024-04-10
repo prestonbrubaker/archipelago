@@ -1,4 +1,5 @@
-This program was developed by Preston Brubaker and his compatriat, Bo-Bo (Willoh Robbins).
+This program was developed by Preston Brubaker and Willoh Robbins
+
 
 
 SUMMARY:
@@ -75,6 +76,15 @@ INSTRUCTIONS:
 24: Check to see if Register 2 is less than register 1, and change the index value to Data only if this condition is satisfied
 25: Check to see if Register 2 is NOT equal to register 1, and change the index value to Data only if this condition is satisfied
 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+After further thought and research, I found it to be probably possible to use only three registers. With the ability write the contents of a register elsewhere, or even to encode it into the state of the organism, I think the system is has enough degrees of freedom to be Turing Complete. With only three registers, it is not as taxing to reserve action items for all three modes of shuffling the registers, and one can reach any desired organisation of the registers with only two actions. 
+I can provide a mechanism for which it is possible for the organism to record and retrieve information, so that there is hardly a limit as to the logic that is able to be performed.
+
+I now lean more on the side of allowing mutable information in the genetic code of the organism. One might consider this information, if used, to be analogous to epigenetics used by real organisms.
+
+I think it will be easier for mutations to produce favorable traits if any pointers/GoTo statements are relative to current position, rather than to point to absolute position. The first 1 or 0 should indicate direction, be it backwards or forward in the gene from its current position.
 
 
 
