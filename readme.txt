@@ -115,7 +115,8 @@ NODE TYPES:
 
 
 INSTRUCTIONS:
-0: Skip this block
+| index of the aciton | description of the action | bytes of Data to proceed action |
+| 0 | Skip this block | 0 |
 1: Store the Data in register 1
 2: Swap registers 1 and 3
 3: Swap registers 2 and 3
@@ -131,13 +132,11 @@ INSTRUCTIONS:
 9: Take the modulus of 1 with respect to 2, and place the result of this in register 3 (e.g. 15, 4 -> 3)
 16: Store a random value in register 1
 
-3: Change the Index to the Data so that during the next turn, the organism will read this instruction
+
+3: Change the index by a value associated with the byte following this instruction. The first bit of the data indicates direction, where 1 is forward and 0 is backwards
 
 5: Store the Energy value in register 1
 11: Place the Time Alive value register 1
-
-
-
 
 12: Generate a Node. This will use the next several bytes of the gene to initialize the node. It will automatically trigger the development of a muscle from the selected node to the new node and set the second selected node to the new node. The index will be changed to after this block of data.
 13: Generate a Muscle. This will generate a muscle between the selected node and the 2nd selected node. The index will be changed to after the block of data
