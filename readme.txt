@@ -132,15 +132,16 @@ INSTRUCTIONS:
 | 13 | 0 | Take the modulus of 1 with respect to 2, and place the result of this in register 3 (e.g. 15, 4 -> 3)
 | 14 | 0 | Store a random value in register 1
 | 15 | 3 | Change the index by a value associated with the Data following this instruction. The first bit of the data indicates direction, where 1 is forward and 0 is backwards
-| 16 | 0 | Replace register 1's value with the energy value
-| 17 | 0 | Replace register 1's value with the time alive value
-| 18 | x | Generate a Node. It will automatically trigger the development of a muscle from the selected node to the new node and set the second selected node to the new node. The index will be changed to after this block of data.
-| 19 | x | Generate a Muscle. This will generate a muscle between the selected node and the 2nd selected node. The index will be changed to after the block of data
-| 20 | 0 | If there is a muscle between the selected nodes, toggle it's contraction/extension mode
-| 21 | 0 | Increment the Selected Node ID by 1. If it goes over the max, it cycles back to the first node
-| 22 | 0 | Increment the 2nd Selected Node ID by 1. If it goes over the max, it cycles back to the first node
-| 23 | 0 | Activate the first selected node, with the data being used in accordance with the node type
-| 24 | 0 | Activate the second selected node, with the data being used in accordance with the node type
-| 25 | x | Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child. The second is the angular addition to the angle between the first and second selected nodes it will be shot out from, and the third is the speed the baby is shot out at (energy associated with this will be subtracted from the energy store of the parent)
-| 26 | 0 | Die instantly
+| 16 | 6 | Change the values of the DNA an index corresponding to the first three Data bytes ahead or behind, where the first but indicates direction (1 forward, 0 backwards) to the last three bytes od Data
+| 17 | 0 | Replace register 1's value with the energy value
+| 18 | 0 | Replace register 1's value with the time alive value
+| 19 | x | Generate a Node. It will automatically trigger the development of a muscle from the selected node to the new node and set the second selected node to the new node. The index will be changed to after this block of data.
+| 20 | x | Generate a Muscle. This will generate a muscle between the selected node and the 2nd selected node. The index will be changed to after the block of data
+| 21 | 0 | If there is a muscle between the selected nodes, toggle it's contraction/extension mode
+| 22 | 0 | Increment the Selected Node ID by 1. If it goes over the max, it cycles back to the first node
+| 23 | 0 | Increment the 2nd Selected Node ID by 1. If it goes over the max, it cycles back to the first node
+| 24 | 0 | Activate the first selected node, with the data being used in accordance with the node type
+| 25 | 0 | Activate the second selected node, with the data being used in accordance with the node type
+| 26 | 3 | Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child. The second is the angular addition to the angle between the first and second selected nodes it will be shot out from, and the third is the speed the baby is shot out at (energy associated with this will be subtracted from the energy store of the parent)
+| 27 | 0 | Die instantly
 
