@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QAction, qApp, QMenuBar, QHBoxLayout, QSpacerItem, QSizePolicy, QMenu)
-from PyQt5.QtGui import QFont,QColor,QPalette  # Corrected import for QFont
+from PyQt5.QtGui import QFont,QColor,QPalette  
 from PyQt5.QtCore import Qt
 
 class MyApp(QMainWindow):
@@ -21,21 +21,20 @@ class MyApp(QMainWindow):
 
         self.menuButton = QPushButton("X", self)
         self.menuButton.setFont(QFont("Arial", 18))
-        self.menuButton.clicked.connect(self.close)  # Directly close the application on click
+        self.menuButton.clicked.connect(self.close)  
 
 
         buttonLayout = QHBoxLayout()
-        buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Align button to the right
-
-        buttonLayout.addItem(QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum))
+        buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Button does not align right
+        buttonLayout.addItem(QSpacerItem(10, 10, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
         mainLayout.addLayout(buttonLayout)
 
         self.title = QLabel("Archipelago", self)
-        self.title.setAlignment(Qt.AlignCenter)  # Center alignment
+        self.title.setAlignment(Qt.AlignCenter)  
         font = QFont("Arial", 36)
         self.title.setFont(font)
-        self.title.setStyleSheet("color: red; margin-top: 2rem;")  # Font color and top margin
+        self.title.setStyleSheet("color: black; margin-top: 2rem;")  # Font color and top margin
         mainLayout.addWidget(self.title)
 
         spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
