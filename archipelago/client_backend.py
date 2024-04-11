@@ -145,4 +145,4 @@ def main_loop():
     print(byte_value)
     time.sleep(10)
 
-main_loop():
+main_loop()
