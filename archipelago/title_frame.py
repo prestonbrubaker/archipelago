@@ -18,17 +18,7 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.centralWidget)
 
         mainLayout = QVBoxLayout(self.centralWidget) 
-
-        self.menuButton = QPushButton("X", self)
-        self.menuButton.setFont(QFont("Helvetica", 18))
-        self.menuButton.clicked.connect(self.close)
-
-        buttonLayout = QHBoxLayout()
-        buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Button does not align right
-        buttonLayout.addItem(QSpacerItem(50, 50, QSizePolicy.Expanding, QSizePolicy.Minimum))
-
-        mainLayout.addLayout(buttonLayout)
-
+        
         self.title = QLabel("Archipelago", self)
         self.title.setAlignment(Qt.AlignCenter)  
         font = QFont("Arial", 54)
@@ -40,6 +30,18 @@ class MyApp(QMainWindow):
         mainLayout.addItem(spacer)
 
         self.centralWidget.setLayout(mainLayout)
+
+        self.menuButton = QPushButton("X", self)
+        self.menuButton.setFont(QFont("Helvetica", 18))
+        self.menuButton.clicked.connect(self.close)
+
+        buttonLayout = QHBoxLayout()
+        buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Button does not align right
+        buttonLayout.addItem(QSpacerItem(50, 50, QSizePolicy.Expanding, QSizePolicy.Minimum))
+
+        mainLayout.addLayout(buttonLayout)
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
