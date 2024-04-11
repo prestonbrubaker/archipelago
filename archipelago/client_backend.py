@@ -115,15 +115,15 @@ def seed_organism():
     0, 0, 0, 0,  1, 0, 1, 0,    # Data 3 (10)
   ]
   
-  organism_gene_list.append(genetic_code)
-  organism_state_list.append(initial_state)
+  organisms_gene_list.append(genetic_code)
+  organisms_state_list.append(initial_state)
   nodes_state_list.append(nodes_state)
   muscles_state_list.append(muscles_state)
 
 seed_organism()
 
-print("Genetic Code: " + str(genetic_code))
-print(" Initial State: " + str(initial_state))
+print("Genetic Code: " + str(organisms_gene_list))
+print(" Initial State: " + str(organisms_state_list))
 print(" Nodes States: " + str(nodes_state_list))
 print(" Muscles States: " + str(muscles_state_list))
   
