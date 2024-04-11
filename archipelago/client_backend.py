@@ -35,6 +35,8 @@ spring_multiplier = 0.01  # Multiplier for the maximum spring constant
 
 def seed_organism():
   initial_state = [
+
+    
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
@@ -126,4 +128,20 @@ print("Genetic Code: " + str(organisms_gene_list))
 print(" Initial State: " + str(organisms_state_list))
 print(" Nodes States: " + str(nodes_state_list))
 print(" Muscles States: " + str(muscles_state_list))
-  
+
+def read_byte(list_in, index_in):
+  value = 0
+  for i in range(0, 8):
+    if (index_in * 8 < len(list_in)):
+      value += 2**(7 - i) * list_in[index_in * 8]
+  return value
+
+
+
+def main_loop():
+  while True:
+    for state in organisms_state_list:
+      byte_value = read_byte(state, 23)
+    print(byte_value)
+    time.sleep(10)
+
