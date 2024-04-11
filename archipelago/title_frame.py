@@ -12,7 +12,7 @@ class MyApp(QMainWindow):
 
     def initializeUI(self):
         self.setWindowTitle('ARCHIPELAGO')
-        self.showFullScreen()  
+        self.showMaximized()  
 
         self.centralWidget = QWidget(self) 
         self.setCentralWidget(self.centralWidget)
