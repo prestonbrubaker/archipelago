@@ -31,17 +31,6 @@ class MyApp(QMainWindow):
 
         self.centralWidget.setLayout(mainLayout)
 
-        self.menuButton = QPushButton("X", self)
-        self.menuButton.setFont(QFont("Helvetica", 18))
-        self.menuButton.clicked.connect(self.close)
-
-        buttonLayout = QHBoxLayout()
-        buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Button does not align right
-        buttonLayout.addItem(QSpacerItem(50, 50, QSizePolicy.Expanding, QSizePolicy.Minimum))
-
-        mainLayout.addLayout(buttonLayout)
-
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
