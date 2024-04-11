@@ -58,9 +58,6 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
-    0, 0, 0, 0,  0, 0, 0, 0,  # Register 4
-    0, 0, 0, 0,  0, 0, 0, 0,  # Register 4
-    0, 0, 0, 0,  0, 0, 0, 0,  # Register 4
     0, 0, 0, 0,  0, 0, 0, 0,  # Index
     0, 0, 0, 0,  0, 0, 0, 0,  # Time alive
     0, 0, 0, 0,  0, 0, 0, 0,  # Time alive
@@ -74,9 +71,6 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Type of node (SOUL)
     0, 0, 0, 0,  0, 0, 0, 0,  # Immutable Data
     0, 0, 0, 0,  0, 0, 0, 0,  # Mutable data
-    0, 0, 0, 0,  0, 0, 0, 0,  # Hue
-    1, 0, 0, 0,  0, 0, 0, 0,  # Saturation
-    1, 0, 0, 0,  0, 0, 0, 0,  # Lighting
     0, 1, 0, 0,  0, 0, 0 ,0,  # X-coordinate
     0, 0, 0, 0,  0, 0, 0 ,0,  # X-coordinate
     0, 0, 0, 0,  0, 0, 0 ,0,  # X-coordinate
@@ -84,11 +78,51 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
     0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
   ]
+
+  muscles_state = []
   
   nodes_state.append(node_state)  # Adding the soul node to the seed organism
-  genetic_code = [
-    0, 0, 0, 0,  1, 1, 0, 0,  # ACTION: Create a Node. The following with further indented comments is relevant data for node, and 2 indents for muscle info
-    
-    
 
+  genetic_code = [
+    0, 0, 0, 1,  0, 0, 1, 1,  # ACTION 19: Create a Node. The following with further indented comments is relevant data for node, and 2 indents for muscle info
+    1, 1, 1, 1,  1, 1, 1, 1,    # Mass
+    0, 0, 0, 0,  0, 0, 1, 0,    # Type Photosynthesis
+    1, 1, 1, 1,  1, 1, 1, 1,    # X-offset as a fraction of maximum
+    0, 0, 0, 0,  0, 0, 0, 0,    # Y-offset as a fraction of maximum
+    0, 1, 0, 0,  0, 0, 0, 0,      # Contracted muscle length
+    1, 1, 1, 1,  1, 1, 1, 1,      # Expanded muscle length
+    1, 1, 1, 1,  1, 1, 1, 1,      # Spring constant of the muscle
+    0, 0, 0, 1,  0, 1, 0, 1,  # ACTION 21: Toggle muscle
+    0, 0, 0, 0,  1, 1, 1, 0,  # ACTION 14: Store a random value up to Data
+    0, 0, 0, 0,  0, 0, 0, 0,    # Data 1
+    0 ,0, 0, 0,  0, 0, 0, 0,    # Data 2
+    0, 0, 0, 1,  1, 0, 0, 0,    # Data 3 (20)
+    0, 0, 0, 0,  1, 0, 0, 0,  # ACTION 4: Swap register 1 and register 2
+    0, 0, 0, 0,  0, 0, 0, 1,  # ACTION 1: Store Data in register 1
+    0, 0, 0, 0,  0, 0, 0, 0,    # Data 1
+    0, 0, 0, 0,  0, 0, 0, 0,    # Data 2
+    0, 0, 0, 0,  0, 0, 0, 1,    # Data 3 (1)
+    0, 0, 0, 0,  0, 1, 0, 0,  # ACTION 4: Swap register 1 and register 2
+    0, 0, 0, 0,  1, 1, 0, 0,  # ACTION 12: Subtract register 2 from register 1 and store the result in register 3
+    0, 0, 0, 0,  1, 0, 0, 0,  # ACTION 8: Check to see if the value in register 2 is more than the value in register 1, and change the index by the following is this is true
+    0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
+    0, 0, 0, 0,  0, 0, 0, 0,    # Data 2
+    0, 0, 0, 1,  0, 0, 0, 0,    # Data 3 (16)
+    0, 0, 0, 0,  0, 0, 1, 0,  # ACTION 2: Swap the values in registers 1 and 3
+    0, 0, 0, 0,  1, 1, 1, 1,  # ACTION 15: Change the index by Data
+    0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
+    0, 0, 0, 0,  0, 0, 0, 0,    # Data 2
+    0, 0, 0, 0,  1, 0, 1, 0,    # Data 3 (10)
   ]
+  
+  organism_gene_list.append(genetic_code)
+  organism_state_list.append(initial_state)
+  nodes_state_list.append(nodes_state)
+  muscles_state_list.append(muscles_state)
+
+
+print("Genetic Code: " + str(genetic_code))
+print(" Initial State: " + str(initial_state))
+print(" Nodes States: " + str(nodes_state_list))
+print(" Muscles States: " + str(muscles_state_list))
+  
