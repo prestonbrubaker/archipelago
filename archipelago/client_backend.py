@@ -60,7 +60,7 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
-    0, 0, 0, 0,  0, 0, 0, 0,  # Index
+    1, 1, 1, 1,  1, 1, 1, 1,  # Index
     0, 0, 0, 0,  0, 0, 0, 0,  # Time alive
     0, 0, 0, 0,  0, 0, 0, 0,  # Time alive
   ]
