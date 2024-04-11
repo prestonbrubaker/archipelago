@@ -129,7 +129,7 @@ print(" Initial State: " + str(organisms_state_list))
 print(" Nodes States: " + str(nodes_state_list))
 print(" Muscles States: " + str(muscles_state_list))
 
-def read_byte(list_in, index_in):
+def read_byte(list_in, index_in):    # Converts the "index_in"th byte to decimal from list list_in
   value = 0
   for i in range(0, 8):
     if (index_in * 8 < len(list_in)):
