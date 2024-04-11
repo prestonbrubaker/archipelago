@@ -120,6 +120,7 @@ def seed_organism():
   nodes_state_list.append(nodes_state)
   muscles_state_list.append(muscles_state)
 
+seed_organism()
 
 print("Genetic Code: " + str(genetic_code))
 print(" Initial State: " + str(initial_state))
