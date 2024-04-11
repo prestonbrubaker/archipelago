@@ -21,8 +21,7 @@ class MyApp(QMainWindow):
 
         self.menuButton = QPushButton("X", self)
         self.menuButton.setFont(QFont("Arial", 18))
-        self.menuButton.clicked.connect(self.close)  
-
+        self.menuButton.clicked.connect(self.close)
 
         buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Button does not align right
@@ -37,7 +36,7 @@ class MyApp(QMainWindow):
         self.title.setStyleSheet("color: black; margin-top: 2rem;")  # Font color and top margin
         mainLayout.addWidget(self.title)
 
-        spacer = QSpacerItem(40, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        spacer = QSpacerItem(20, 20, QSizePolicy.Expanding, QSizePolicy.Expanding)
         mainLayout.addItem(spacer)
 
         self.centralWidget.setLayout(mainLayout)
