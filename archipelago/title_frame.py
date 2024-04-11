@@ -25,7 +25,7 @@ class MyApp(QMainWindow):
 
         buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(self.menuButton, 0, Qt.AlignRight | Qt.AlignTop)  # Button does not align right
-        buttonLayout.addItem(QSpacerItem(10, 10, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        buttonLayout.addItem(QSpacerItem(50, 50, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         mainLayout.addLayout(buttonLayout)
 
