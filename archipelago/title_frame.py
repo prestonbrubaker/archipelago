@@ -37,7 +37,7 @@ class MyApp(QMainWindow):
         self.title.setStyleSheet("color: black; margin-top: 2rem;")  # Font color and top margin
         mainLayout.addWidget(self.title)
 
-        spacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        spacer = QSpacerItem(40, 20, QSizePolicy.Minimum, QSizePolicy.Expanding)
         mainLayout.addItem(spacer)
 
         self.centralWidget.setLayout(mainLayout)
