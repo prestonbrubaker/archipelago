@@ -135,7 +135,7 @@ def seed_organism():
     0, 0, 0, 0,  1, 1, 1, 1,  # ACTION 15: Change the index by Data
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 2
-    0, 0, 0, 0,  1, 0, 1, 0,    # Data 3 (10)
+    0, 0, 0, 0,  0, 1, 1, 1,    # Data 3 (7)
   ]
   
   organisms_gene_list.append(genetic_code)
