@@ -140,7 +140,7 @@ def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th a
 
 def main_loop():
   while True:
-    for i in Range(0, len(organisms_state_list):    # Iterate through organisms
+    for i in Range(0, len(organisms_state_list)):    # Iterate through organisms
       org_id = read_byte(organisms_state_list[i], 0, 6)
       print(org_id)
     time.sleep(10)
