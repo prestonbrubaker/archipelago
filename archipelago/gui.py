@@ -1,6 +1,6 @@
 import sys
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QAction, qApp, QMenuBar, QHBoxLayout, QSpacerItem, QSizePolicy, QMenu)
-from PyQt5.QtGui import QFont,QColor,QPalette  
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QWidget, QLabel, QSpacerItem, QSizePolicy, QOpenGLWidget)
+from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 
 class MyApp(QMainWindow):
@@ -24,6 +24,7 @@ class MyApp(QMainWindow):
         font = QFont("Arial", 54)
         self.title.setFont(font)
         self.title.setStyleSheet("color: black; margin-top: 2rem;")
+        self.setWindowIcon(QIcon('web.png'))
         mainLayout.addWidget(self.title)
 
         spacer = QSpacerItem(20, 20, QSizePolicy.Expanding, QSizePolicy.Expanding)
