@@ -173,6 +173,8 @@ print("Initial Muscles States: " + str(muscles_state_list))
 
 
 def main_loop():
+  global age_of_world
+  
   while True:
     print("\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     age_of_world_dec = read_byte(age_of_world, 0, 6)
