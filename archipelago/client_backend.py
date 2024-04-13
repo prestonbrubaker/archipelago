@@ -503,10 +503,10 @@ def main_loop():
         print("    Node Two Unit Y-Value: " + str(node_two_y_unit))
 
         # Convert coordingate values back to values ready to be stored in 3 bytes
-        node_one_x_new = int(x_value_new_unit * (2**24 - 1))
-        node_one_y_new = int(y_value_new_unit * (2**24 - 1))
-        node_two_x_new = int(x_value_new_unit * (2**24 - 1))
-        node_two_y_new = int(y_value_new_unit * (2**24 - 1))
+        node_one_x_new = int(node_one_x_unit * (2**24 - 1))
+        node_one_y_new = int(node_one_y_unit * (2**24 - 1))
+        node_two_x_new = int(node_two_x_unit * (2**24 - 1))
+        node_two_y_new = int(node_two_y_unit * (2**24 - 1))
         
         print("    Node One New X-Value: " + str(node_one_x_new))
         print("    Node One New Y-Value: " + str(node_one_y_new))
