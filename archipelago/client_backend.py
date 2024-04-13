@@ -274,17 +274,17 @@ def main_loop():
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 0, 1, j)  # Add a muscle index to the new muscle, incremented by one over the last muscle
         print("    Index Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 1, 1, selected_node_one)  # Add first index of which the muscle is connected to
-        print("    1st Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        print("    1st Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 2, 1, selected_node_two)  # Add second index of which the muscle is connected to
-        print("    2nd Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        print("    2nd Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 3, 1, contracted_muscle_len)  # Add the contracted muscle length
-        print("    Contracted Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        print("    Contracted Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 4, 1, expanded_muscle_len)  # Add the expanded muscle length
-        print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 5, 1, spring_constant)  # Add the spring constant
-        print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Add Mutable Data
-        print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         
         
 
