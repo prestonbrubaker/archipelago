@@ -332,7 +332,7 @@ def main_loop():
         data = read_byte(organisms_gene_list[i], index + 1, 3)
         print("    Value found in Data: " + str(data))
         r = random.randint(0, data)
-        organisms_state_list[i] = write_byte(muscles_state_list[i][j], 14, 3, r)
+        organisms_state_list[i] = write_byte(organisms_state_list[i][j], 14, 3, r)
         print("    Random Value " + str(r) + " Stored in Register 1")
         
         # Increment Genetic Index
