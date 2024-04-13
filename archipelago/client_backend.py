@@ -141,6 +141,19 @@ def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th a
       value += 2**(8 * num_lines_in - 1 - i) * list_in[i + index_in * 8]
   return value
 
+def write_byte(list_in, start_index_in, num_lines_in, value_in):  # Takes in a list and a value and converts the value to binary and overwrites the current selection with the value
+  for i in range(0, 8 * num_lines_in):  # Overwrite current contents with 0
+    list_in[i + index_in * 8] = 0
+  for i in range(0, 8 * num_lines_in):
+    value += 2**(8 * num_lines_in - 1 - i) * list_in[i + index_in * 8]
+    if(value_in >= value):
+      list_in[i + index_in * 8] = 1
+      value_in -= value
+      
+  
+
+  return list_in
+
 seed_organism()
 
 print("\n~~~~~~~~~~~~~~~~~~~~COMPUTER AND WORLD STATE~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
@@ -228,7 +241,8 @@ def main_loop():
         
       
       
-      
+    age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
     time.sleep(10)
+    
 
 main_loop()
