@@ -42,7 +42,7 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
-    0, 0, 0, 0,  0, 1, 1, 0,  # Organism ID
+    0, 0, 0, 0,  0, 1, 1, 1,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
