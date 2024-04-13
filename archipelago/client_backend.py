@@ -238,7 +238,7 @@ def main_loop():
         print("  Y-Offset: " + str(y_offset))
 
         # Add node to nodes_state for the organism
-        nodes_state[i].append([])
+        nodes_state_list[i].append([])
         j = len(nodes_state_list[i]) - 1  # Index of the new node in nodes_state
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 0, 1, j)
         print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
