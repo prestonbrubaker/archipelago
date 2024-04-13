@@ -475,8 +475,8 @@ def main_loop():
       print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 1, 6)))
       for j in range(0, len(muscles_state_list[i])):
         print("  Calculating Physics for Muscle: " + str(read_byte(muscles_state_list[i][j], 1, 1)))
-        node_one_index = read_byte(muscles_state_list[i][j], 2, 1)
-        node_two_index = read_byte(muscles_state_list[i][j], 3, 1)
+        node_one_index = read_byte(muscles_state_list[i][j], 1, 1)
+        node_two_index = read_byte(muscles_state_list[i][j], 2, 1)
         print("    Node One index: " + str(node_one_index))
         print("    Node Two index: " + str(node_two_index))
         node_one_x = read_byte(nodes_state_list[i][node_one_index], 5, 3)
