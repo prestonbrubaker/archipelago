@@ -372,6 +372,8 @@ def main_loop():
         print("  Action to be Executed: Subtract Register 2 from Register 1, and Store the Result in Register 3. Any result less than 0 is made to be zero")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
         subtraction_result = register_two_value - register_one_value
         if(subtraction_result < 0):
           subtraction_result = 0
@@ -385,6 +387,8 @@ def main_loop():
         print("  Action to be Executed: Check if the value in register 2 is more than the value in register 1, and change the index by data if that is the case and proceed otherwise")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
         data = read_byte(organisms_gene_list[i], index + 1, 3)
         print("  Data Value including jump direction bit: " + str(data))
         if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
