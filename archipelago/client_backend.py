@@ -256,8 +256,8 @@ def main_loop():
 
         # Make the 2nd Selected Node the new Node 13
         organisms_state_list[i] = write_byte(organisms_state_list[i], 13, 1, j)
-        print("  Selected Node 1: " + str(read_byte(organisms_state_list[i], 12, 1))
-        print("  Selected Node 2: " + str(read_byte(organisms_state_list[i], 13, 1))
+        print("  Selected Node 1: " + str(read_byte(organisms_state_list[i], 12, 1)))
+        print("  Selected Node 2: " + str(read_byte(organisms_state_list[i], 13, 1)))
         
         
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
