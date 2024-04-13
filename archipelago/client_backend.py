@@ -60,7 +60,9 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
     0, 0, 0, 0,  0, 0, 0, 0,  # Register 3
-    1, 1, 1, 1,  1, 1, 1, 1,  # Index
+    0, 0, 0, 0,  0, 0, 0, 0,  # Index
+    0, 0, 0, 0,  0, 0, 0, 0,  # Index
+    0, 0, 0, 0,  0, 0, 0, 0,  # Time alive
     0, 0, 0, 0,  0, 0, 0, 0,  # Time alive
     0, 0, 0, 0,  0, 0, 0, 0,  # Time alive
   ]
@@ -163,6 +165,10 @@ def main_loop():
       print("Organism's Second Register Value: " + str(register_two))
       register_three = read_byte(organisms_state_list[i], 20, 3) # Retrieve the organism's 3rd register value
       print("Organism's Third Register Value: " + str(register_three))
+      index = read_byte(organisms_state_list[i], 23, 2)  # Retrieve the organism's index for it's genes
+      print("Organism's Index: " + str(index))
+      
+      
       
     time.sleep(10)
 
