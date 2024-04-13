@@ -516,10 +516,10 @@ def main_loop():
         node_two_x_v = nodes_velocity_list[i][node_two_index][0]
         node_two_y_v = nodes_velocity_list[i][node_two_index][1]
 
-        print("    Node One X-Velocity: " + str(node_one_x_new))
-        print("    Node One Y-Velocity: " + str(node_one_y_new))
-        print("    Node Two X-Velocity: " + str(node_two_x_new))
-        print("    Node Two Y-Velocity: " + str(node_two_y_new))
+        print("    Node One X-Velocity: " + str(node_one_x_v))
+        print("    Node One Y-Velocity: " + str(node_one_y_v))
+        print("    Node Two X-Velocity: " + str(node_two_x_v))
+        print("    Node Two Y-Velocity: " + str(node_two_y_v))
 
         # Convert coordingate values back to values ready to be stored in 3 bytes
         node_one_x_new = int(node_one_x_unit * (2**24 - 1))
