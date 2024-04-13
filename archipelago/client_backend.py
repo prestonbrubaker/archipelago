@@ -238,9 +238,9 @@ def main_loop():
         y_offset = read_byte(organisms_gene_list[i], index + 4, 1)  # Y-Offset
         print("  Y-Offset: " + str(y_offset))
 
-        # Add node to nodes_state for the organism
+        # Add node to nodes_state_list for the organism
         nodes_state_list[i].append([])
-        j = len(nodes_state_list[i]) - 1  # Index of the new node in nodes_state
+        j = len(nodes_state_list[i]) - 1  # Index of the new node in nodes_state_list
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 0, 1, j)  # Add a node index to the new node, incremented by one over the last node
         print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 1, 1, mass)  # Add mass to the new node
@@ -256,8 +256,10 @@ def main_loop():
 
         # Make the 2nd Selected Node the new Node 13
         organisms_state_list[i] = write_byte(organisms_state_list[i], 13, 1, j)
-        print("  Selected Node 1: " + str(read_byte(organisms_state_list[i], 12, 1)))
-        print("  Selected Node 2: " + str(read_byte(organisms_state_list[i], 13, 1)))
+        selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
+        print("Organism's First Selected Node: " + str(selected_node_one))
+        selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node, which is now updated
+        print("Organism's Second Selected Node: " + str(selected_node_two))
         
         
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
@@ -266,6 +268,24 @@ def main_loop():
         print("  Expanded Muscle Length: " + str(expanded_muscle_len))
         spring_constant = read_byte(organisms_gene_list[i], index + 7, 1)  # Spring Constant
         print("  Spring Constant of Muscle: " + str(spring_constant))
+
+        # Add muscle to muscles_state_list
+        j = len(muscles_state_list[i]) - 1  # Index of the new muscle in muscles_state_list
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 0, 1, j)  # Add a muscle index to the new muscle, incremented by one over the last muscle
+        print("    Index Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 1, 1, selected_node_one)  # Add first index of which the muscle is connected to
+        print("    1st Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 2, 1, selected_node_two)  # Add second index of which the muscle is connected to
+        print("    2nd Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 3, 1, contracted_muscle_len)  # Add the contracted muscle length
+        print("    Contracted Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 4, 1, expanded_muscle_len)  # Add the expanded muscle length
+        print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 5, 1, spring_constant)  # Add the spring constant
+        print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Add Mutable Data
+        print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j])
+        
         
 
         
