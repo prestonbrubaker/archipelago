@@ -422,8 +422,12 @@ def main_loop():
         print("  Register Three Value: " + str(register_three_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+
+      
       if(action == 15):
         print(" Action to be Executed: Change the Index by Data")
+        data = read_byte(organisms_gene_list[i], index + 1, 3)
+        print("  Data Value including jump direction bit: " + str(data))
         if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
           forward_index_jump = 1
           print("  Jump Direction: Forward")
