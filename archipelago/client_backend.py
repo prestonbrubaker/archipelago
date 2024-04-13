@@ -141,17 +141,21 @@ def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th a
       value += 2**(8 * num_lines_in - 1 - i) * list_in[i + index_in * 8]
   return value
 
+
+
+
 def write_byte(list_in, index_in, num_lines_in, value_in):  # Takes in a list and a value and converts the value to binary and overwrites the current selection with the value
   for i in range(0, 8 * num_lines_in):  # Overwrite current contents with 0
-    list_in[i + index_in * 8] = 0
+    index_i = i + index_in * 8
+    if(index_i >= len(list_in)):
+      list_in.append(0)
+    else:
+      list_in[i + index_in * 8] = 0
   for i in range(0, 8 * num_lines_in):
     value = 2**(8 * num_lines_in - 1 - i)
     if(value_in >= value):
       list_in[i + index_in * 8] = 1
       value_in -= value
-      
-  
-
   return list_in
 
 seed_organism()
