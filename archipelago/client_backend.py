@@ -199,29 +199,29 @@ def main_loop():
       print("Current Action of Organism: " + str(action))
 
       if(action == 19):
-        print("Action to be Executed: Creation of a New Node")
+        print("  Action to be Executed: Creation of a New Node")
         mass = read_byte(organisms_gene_list[i], index + 1, 1)  # Mass of new node
-        print("Mass of New Node: " + str(mass))
+        print("  Mass of New Node: " + str(mass))
         node_type = read_byte(organisms_gene_list[i], index + 2, 1)  # Node type
-        print("Node Type: " + str(node_type))
+        print("  Node Type: " + str(node_type))
         if(node_type == 0):
-          print("Node Type Name: Soul")
+          print("    Node Type Name: Soul")
         elif(node_type == 1):
-          print("Node Type Name: Structual")
+          print("    Node Type Name: Structual")
         elif(node_type == 2):
-          print("Node Type Name: Gripper")
+          print("    Node Type Name: Gripper")
         elif(node_type == 3):
-          print("Node Type Name: Photosynthesis")
+          print("    Node Type Name: Photosynthesis")
         x_offset = read_byte(organisms_gene_list[i], index + 3, 1)  # X-Offset
-        print("X-Offset: " + str(x_offset))
+        print("  X-Offset: " + str(x_offset))
         y_offset = read_byte(organisms_gene_list[i], index + 4, 1)  # Y-Offset
-        print("Y-Offset: " + str(y_offset))
+        print("  Y-Offset: " + str(y_offset))
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
-        print("Contracted Muscle Length: " + str(contracted_muscle_len))
+        print("  Contracted Muscle Length: " + str(contracted_muscle_len))
         expanded_muscle_len = read_byte(organisms_gene_list[i], index + 6, 1)  # Expanded Muscle Length
-        print("Expanded Muscle Length: " + str(expanded_muscle_len))
+        print("  Expanded Muscle Length: " + str(expanded_muscle_len))
         spring_constant = read_byte(organisms_gene_list[i], index + 7, 1)  # Spring Constant
-        print("Spring Constant of Muscle: " + str(spring_constant))
+        print("  Spring Constant of Muscle: " + str(spring_constant))
 
         
         
