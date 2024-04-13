@@ -130,7 +130,7 @@ def seed_organism():
     0, 0, 0, 0,  1, 0, 0, 0,  # ACTION 8: Check to see if the value in register 2 is more than the value in register 1, and change the index by the following is this is true
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 2
-    0, 0, 0, 1,  0, 0, 0, 0,    # Data 3 (16)
+    0, 0, 0, 0,  1, 1, 0, 0,    # Data 3 (12)
     0, 0, 0, 0,  0, 0, 1, 0,  # ACTION 2: Swap the values in registers 1 and 3
     0, 0, 0, 0,  1, 1, 1, 1,  # ACTION 15: Change the index by Data
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
