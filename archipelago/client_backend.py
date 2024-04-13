@@ -141,9 +141,9 @@ def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th a
 def main_loop():
   while True:
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
-      org_id = read_byte(organisms_state_list[i], 0, 6)
+      org_id = read_byte(organisms_state_list[i], 0, 6)    # Retrieve the organism's ID
       print("Organism ID: " + str(org_id))
-      org_fam_id = read_byte(organisms_state_list[i], 6, 6)
+      org_fam_id = read_byte(organisms_state_list[i], 5, 6)  # Retrieve the organism'f family ID
       print("Organism Family ID: " + str(org_fam_id))
     time.sleep(10)
 
