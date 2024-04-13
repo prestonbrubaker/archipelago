@@ -143,10 +143,14 @@ def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th a
 
 seed_organism()
 
+print("\n~~~~~~~~~~~~~~~~~~~~COMPUTER AND WORLD STATE~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
 comp_id_dec = read_byte(computer_id, 0, 1)
 print("Computer's ID: " + str(comp_id_dec))
 world_id_dec = read_byte(world_id, 0, 1)
 print("World's ID: " + str(world_id_dec))
+
+print("\n~~~~~~~~~~~~~~~~~~~~SEED ORANISM INITIAL CONDITIONS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
 print("Genetic Code: " + str(organisms_gene_list))
 print("Initial State: " + str(organisms_state_list))
@@ -157,11 +161,13 @@ print("Initial Muscles States: " + str(muscles_state_list))
 
 def main_loop():
   while True:
+    print("\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    age_of_world_dec = read_byte(age_of_world, 0, 6)
+    print("AGE OF WORLD: " + str(age_of_world_dec))
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
-
-      age_of_world_dec = read_byte(age_of_world, 0, 6)
-      print("AGE OF WORLD: " + str(age_of_world))
-      print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+      
+      
+      print("\n~~~~~~~~~~~~~~~~~~~~STATE OF ORGANISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
       # READ THROUGH THE STATE OF THE ORGANISM
       org_id = read_byte(organisms_state_list[i], 0, 6)    # Retrieve the organism's ID
@@ -186,7 +192,7 @@ def main_loop():
       print("Time Organisms Has Been Alive: " + str(time_alive))
 
 
-      print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+      print("\n~~~~~~~~~~~~~~~~~~~~~~EXECUTING AN ACTION~~~~~~~~~~~~~~~~~~~~~~~~\n")
       # EXECUTE GENE AT THE CURRENT INDEX
 
       action = read_byte(organisms_gene_list[i], index, 1)
