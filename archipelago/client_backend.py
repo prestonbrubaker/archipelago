@@ -90,7 +90,7 @@ def seed_organism():
   genetic_code = [
     0, 0, 0, 1,  0, 0, 1, 1,  # ACTION 19: Create a Node. The following with further indented comments is relevant data for node, and 2 indents for muscle info
     1, 1, 1, 1,  1, 1, 1, 1,    # Mass
-    0, 0, 0, 0,  0, 0, 1, 0,    # Type Photosynthesis
+    0, 0, 0, 0,  0, 0, 1, 1,    # Type Photosynthesis
     1, 1, 1, 1,  1, 1, 1, 1,    # X-offset as a fraction of maximum
     0, 0, 0, 0,  0, 0, 0, 0,    # Y-offset as a fraction of maximum
     0, 1, 0, 0,  0, 0, 0, 0,      # Contracted muscle length
@@ -178,6 +178,22 @@ def main_loop():
 
       action = read_byte(organisms_gene_list[i], index, 1)
       print("Current Action of Organism: " + str(action))
+
+      if(action == 19):
+        print("Action to be Executed: Creation of a New Node")
+        mass = read_byte(organisms_gene_list[i], index + 1, 1)  # Mass of new node
+        print("Mass of New Node: " + str(mass))
+        node_type = read_byte(organisms_gene_list[i], index + 2, 1)  # Node type
+        print("Node Type: " + str(node_type))
+        if(node_type == 0):
+          print("Node Type Name: Soul")
+        elif(node_type == 1):
+          print("Node Type Name: Structual")
+        elif(node_type == 2):
+          print("Node Type Name: Gripper")
+        elif(node_type == 3):
+          print("Node Type Name: Photosynthesis")
+        x_offset = read_byte(organisms_gene_list[i], index + 3, 1)  # X-Offset
       
       
       
