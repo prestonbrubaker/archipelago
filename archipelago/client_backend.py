@@ -374,7 +374,7 @@ def main_loop():
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
         print("  Register One Value: " + str(register_one_value))
         print("  Register Two Value: " + str(register_two_value))
-        subtraction_result = register_two_value - register_one_value
+        subtraction_result = register_one_value - register_two_value
         if(subtraction_result < 0):
           subtraction_result = 0
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, subtraction_result)
