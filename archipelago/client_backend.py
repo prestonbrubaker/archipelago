@@ -132,7 +132,7 @@ print(" Muscles States: " + str(muscles_state_list))
 def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th and "num_lines_in" following byte(s) to decimal from list list_in
   value = 0
   for i in range(0, 8 * num_lines_in):
-    if (index_in * 8 < len(list_in)):
+    if (i < len(list_in)):
       value += 2**(8 * num_lines_in - 1 - i) * list_in[index_in * 8]
   return value
 
