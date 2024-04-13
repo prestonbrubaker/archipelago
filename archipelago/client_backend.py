@@ -31,6 +31,10 @@ nodes_state_list = [      #3-D list of nodes (organism index, node index, node i
 
 ]
 
+nodes_velocity_list = [  #3-D list of node velocity vectors (organism index, node index, [X-Velocity, Y-Velocity])
+
+]
+
 muscles_state_list = [    #3-D list of muscles (organism index, muscle index, muscle info)
 
 ]
@@ -78,7 +82,7 @@ def seed_organism():
   ]
 
   nodes_state = []
-
+  nodes_velocity_state = []
 
 
 
@@ -99,12 +103,14 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
     0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
   ]
+  node_velocity_state = [0, 0]
   muscles_state = []
 
 
 
 
   nodes_state.append(node_state)  # Adding the soul node to the seed organism
+  nodes_velocity_state.append(node_velocity_state)
 
   genetic_code = [
     0, 0, 0, 1,  0, 0, 1, 1,  # ACTION 19: Create a Node. The following with further indented comments is relevant data for node, and 2 indents for muscle info
@@ -141,6 +147,7 @@ def seed_organism():
   organisms_gene_list.append(genetic_code)
   organisms_state_list.append(initial_state)
   nodes_state_list.append(nodes_state)
+  nodes_velocity_list.append(nodes_velocity_state)
   muscles_state_list.append(muscles_state)
 
 
@@ -253,6 +260,7 @@ def main_loop():
 
         # Add node to nodes_state_list for the organism
         nodes_state_list[i].append([])
+        nodes_velocity_list[i].append([0, 0])  # Initialize the node at rest
         j = len(nodes_state_list[i]) - 1  # Index of the new node in nodes_state_list
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 0, 1, j)  # Add a node index to the new node, incremented by one over the last node
         print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
@@ -502,6 +510,17 @@ def main_loop():
         print("    Node Two Unit X-Value: " + str(node_two_x_unit))
         print("    Node Two Unit Y-Value: " + str(node_two_y_unit))
 
+        # Muscle physics
+        node_one_x_v = nodes_velocity_list[i][node_one_index][0]
+        node_one_y_v = nodes_velocity_list[i][node_one_index][1]
+        node_two_x_v = nodes_velocity_list[i][node_two_index][0]
+        node_two_y_v = nodes_velocity_list[i][node_two_index][1]
+
+        print("    Node One X-Velocity: " + str(node_one_x_new))
+        print("    Node One Y-Velocity: " + str(node_one_y_new))
+        print("    Node Two X-Velocity: " + str(node_two_x_new))
+        print("    Node Two Y-Velocity: " + str(node_two_y_new))
+
         # Convert coordingate values back to values ready to be stored in 3 bytes
         node_one_x_new = int(node_one_x_unit * (2**24 - 1))
         node_one_y_new = int(node_one_y_unit * (2**24 - 1))
@@ -512,7 +531,7 @@ def main_loop():
         print("    Node One New Y-Value: " + str(node_one_y_new))
         print("    Node Two New X-Value: " + str(node_two_x_new))
         print("    Node Two New Y-Value: " + str(node_two_y_new))
-
+        
         # Store new values
         nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 5, 3, node_one_x_unit)
         nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 8, 3, node_one_y_unit)
