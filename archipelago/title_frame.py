@@ -18,7 +18,7 @@ class MyApp(QMainWindow):
         self.setCentralWidget(self.centralWidget)
 
         mainLayout = QVBoxLayout(self.centralWidget) 
-        
+
         self.title = QLabel("Archipelago", self)
         self.title.setAlignment(Qt.AlignCenter)  
         font = QFont("Arial", 54)
