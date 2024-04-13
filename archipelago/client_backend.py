@@ -176,7 +176,7 @@ def main_loop():
       print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
       # EXECUTE GENE AT THE CURRENT INDEX
 
-      action = read_byte(organisms_gene_list[i])
+      action = read_byte(organisms_gene_list[i], index, 1)
       print("Current Action of Organism: " + str(action))
       
       
