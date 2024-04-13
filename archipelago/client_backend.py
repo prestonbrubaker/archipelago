@@ -144,7 +144,6 @@ def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th a
 
 
 
-
 def write_byte(list_in, index_in, num_lines_in, value_in):  # Takes in a list and a value and converts the value to binary and overwrites the current selection with the value
   for i in range(0, 8 * num_lines_in):  # Overwrite current contents with 0
     index_i = i + index_in * 8
@@ -185,6 +184,7 @@ def main_loop():
     age_of_world_dec = read_byte(age_of_world, 0, 6)
     print(age_of_world)
     print("AGE OF WORLD: " + str(age_of_world_dec))
+    
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
       
       
@@ -286,6 +286,22 @@ def main_loop():
         print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Add Mutable Data
         print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 8)
+      
+      if(action == 21):
+        print("  Action to be Executed: Toggle Muscle")
+        selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
+        print("  Organism's First Selected Node: " + str(selected_node_one))
+        selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
+        print("  Organism's Second Selected Node: " + str(selected_node_two))
+        for j in range(0, len(muscle_state_list[i])):  # Cycle through the muscles to check if any have connections that match the 1st selected node and 2nd selected node
+          muscle_index = read_byte(muscles_state_list[i][j], 0, 1)
+          muscle_node_one = read_byte(muscles_state_list[i][j], 1, 1)
+          muscle_node_two = read_byte(muscles_state_list[i][j], 2, 1)
+          print("    Muscle " + str(muscle_index) + " Connected to Nodes " + str(muscle_node_one) + " and " + str(muscle_node_two))
+        
         
         
 
