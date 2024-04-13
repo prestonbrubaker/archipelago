@@ -490,6 +490,34 @@ def main_loop():
         print("    Node One Y-Value: " + str(node_one_y))
         print("    Node Two X-Value: " + str(node_two_x))
         print("    Node Two Y-Value: " + str(node_two_y))
+
+        # Convert coordinate values to a unit scale
+        node_one_x_unit = node_one_x  / (2**24 - 1)
+        node_one_y_unit = node_one_y  / (2**24 - 1)
+        node_two_x_unit = node_two_x  / (2**24 - 1)
+        node_two_y_unit = node_two_y  / (2**24 - 1)
+
+        print("    Node One Unit X-Value: " + str(node_one_x_unit))
+        print("    Node One Unit Y-Value: " + str(node_one_y_unit))
+        print("    Node Two Unit X-Value: " + str(node_two_x_unit))
+        print("    Node Two Unit Y-Value: " + str(node_two_y_unit))
+
+        # Convert coordingate values back to values ready to be stored in 3 bytes
+        node_one_x_new = int(x_value_new_unit * (2**24 - 1))
+        node_one_y_new = int(y_value_new_unit * (2**24 - 1))
+        node_two_x_new = int(x_value_new_unit * (2**24 - 1))
+        node_two_y_new = int(y_value_new_unit * (2**24 - 1))
+        
+        print("    Node One New X-Value: " + str(node_one_x_new))
+        print("    Node One New Y-Value: " + str(node_one_y_new))
+        print("    Node Two New X-Value: " + str(node_two_x_new))
+        print("    Node Two New Y-Value: " + str(node_two_y_new))
+
+        # Store new values
+        nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 5, 3, node_one_x_unit)
+        nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 8, 3, node_one_y_unit)
+        nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_unit)
+        nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_unit)
         
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
