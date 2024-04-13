@@ -134,6 +134,7 @@ def seed_organism():
   muscles_state_list.append(muscles_state)
 
 
+
 def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th and "num_lines_in" following byte(s) to decimal from list list_in
   value = 0
   for i in range(0, 8 * num_lines_in):
@@ -240,8 +241,19 @@ def main_loop():
         # Add node to nodes_state for the organism
         nodes_state_list[i].append([])
         j = len(nodes_state_list[i]) - 1  # Index of the new node in nodes_state
-        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 0, 1, j)
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 0, 1, j)  # Add a node index to the new node, incremented by one over the last node
         print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 1, 1, mass)  # Add mass to the new node
+        print("    Mass Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 2, 1, node_type)  # Add node type to the new node
+        print("    Node Type Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 3, 1, 0)  # Add Mutable Data to the new node
+        print("    Mutable Data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 4, 3, x_offset)  # Add X-offset to the new node
+        print("    X-Offset Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 7, 3, y_offset)  # Add Y-offset to the new node
+        print("    Y-Offset Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        
         
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
         print("  Contracted Muscle Length: " + str(contracted_muscle_len))
@@ -249,6 +261,7 @@ def main_loop():
         print("  Expanded Muscle Length: " + str(expanded_muscle_len))
         spring_constant = read_byte(organisms_gene_list[i], index + 7, 1)  # Spring Constant
         print("  Spring Constant of Muscle: " + str(spring_constant))
+        
 
         
         
