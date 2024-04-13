@@ -319,7 +319,7 @@ def main_loop():
               
       if(action == 14):
         print("  Action to be Executed: Store a random value up to Data in register 1")
-        data = read_byte(organism_gene_list[i], index + 1, 3)
+        data = read_byte(organisms_gene_list[i], index + 1, 3)
         print("    Value found in Data: " + str(data))
         
         
@@ -331,7 +331,7 @@ def main_loop():
       
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
-    time.sleep(10)
+    time.sleep(5)
     
 
 main_loop()
