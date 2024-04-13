@@ -336,7 +336,10 @@ def main_loop():
         print("    Random Value " + str(r) + " Stored in Register 1")
         
         # Increment Genetic Index
-        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
+        
+      if(action == 4):
+        print(" Action to be Executed: Swap register 1 and 2")
         
         
 
