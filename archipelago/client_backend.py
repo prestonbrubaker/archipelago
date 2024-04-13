@@ -122,12 +122,6 @@ def seed_organism():
   nodes_state_list.append(nodes_state)
   muscles_state_list.append(muscles_state)
 
-seed_organism()
-
-print("Genetic Code: " + str(organisms_gene_list))
-print(" Initial State: " + str(organisms_state_list))
-print(" Nodes States: " + str(nodes_state_list))
-print(" Muscles States: " + str(muscles_state_list))
 
 def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th and "num_lines_in" following byte(s) to decimal from list list_in
   value = 0
@@ -136,15 +130,40 @@ def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th a
       value += 2**(8 * num_lines_in - 1 - i) * list_in[i + index_in * 8]
   return value
 
+seed_organism()
+
+comp_id_dec = read_byte(computer_id, 0, 1)
+print("Computer's ID: " + str(comp_id_dec))
+world_id_dec = read_byte(world_id, 0, 1)
+print("World's ID: " + str(world_id_dec))
+
+print("Genetic Code: " + str(organisms_gene_list))
+print("Initial State: " + str(organisms_state_list))
+print("Initial Nodes States: " + str(nodes_state_list))
+print("Initial Muscles States: " + str(muscles_state_list))
+
 
 
 def main_loop():
   while True:
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
       org_id = read_byte(organisms_state_list[i], 0, 6)    # Retrieve the organism's ID
-      print("Organism ID: " + str(org_id))
+      print("Organism's ID: " + str(org_id))
       org_fam_id = read_byte(organisms_state_list[i], 6, 5)  # Retrieve the organism's family ID
-      print("Organism Family ID: " + str(org_fam_id))
+      print("Organism's Family ID: " + str(org_fam_id))
+      org_energy = read_byte(organisms_state_list[i], 11, 1)  # Retrieve the organism's energy level
+      print("Organism's Energy Level: " + str(org_energy))
+      selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
+      print("Organism's First Selected Node: " + str(selected_node_one))
+      selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
+      print("Organism's Second Selected Node: " + str(selected_node_two))
+      register_one = read_byte(organisms_state_list[i], 14, 3) # Retrieve the organism's 1st register value
+      print("Organism's First Register Value: " + str(register_one))
+      register_two = read_byte(organisms_state_list[i], 17, 3) # Retrieve the organism's 2nd register value
+      print("Organism's Second Register Value: " + str(register_two))
+      register_three = read_byte(organisms_state_list[i], 20, 3) # Retrieve the organism's 3rd register value
+      print("Organism's Third Register Value: " + str(register_three))
+      
     time.sleep(10)
 
 main_loop()
