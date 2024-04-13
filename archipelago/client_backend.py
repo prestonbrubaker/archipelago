@@ -340,6 +340,17 @@ def main_loop():
         
       if(action == 4):
         print(" Action to be Executed: Swap register 1 and 2")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print(" Register One Value: " + str(register_one_value))
+        print(" Register Two Value: " + str(register_two_value))
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, register_two_value)
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 17, 3, register_one_value)
+        print("    Registers Swapped!")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print(" Register One Value: " + str(register_one_value))
+        print(" Register Two Value: " + str(register_two_value))
         
         
 
