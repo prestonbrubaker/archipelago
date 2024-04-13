@@ -78,7 +78,14 @@ def seed_organism():
   ]
 
   nodes_state = []
-  
+
+
+
+
+
+
+
+
   node_state = [
     0, 0, 0, 0,  0, 0, 0, 0,  # Node ID
     1, 0, 0, 0,  0, 0, 0, 0,  # Mass of Node
@@ -92,9 +99,11 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
     0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
   ]
-
   muscles_state = []
-  
+
+
+
+
   nodes_state.append(node_state)  # Adding the soul node to the seed organism
 
   genetic_code = [
@@ -323,8 +332,11 @@ def main_loop():
         data = read_byte(organisms_gene_list[i], index + 1, 3)
         print("    Value found in Data: " + str(data))
         r = random.randint(0, data)
+        organisms_state_list[i] = write_byte(muscles_state_list[i][j], 14, 3, r)
+        print("    Random Value " + str(r) + " Stored in Register 1")
         
-        
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
         
         
 
