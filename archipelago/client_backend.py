@@ -528,7 +528,7 @@ def main_loop():
         print("  Y-Distance: " + str(dy))
         print("  Distance Between Nodes: " + str(distance))
 
-        spring_constant = read_byte(muscle_state_list[i][j], 5, 1)
+        spring_constant = read_byte(muscles_state_list[i][j], 5, 1)
 
         print("  Spring Constant: " + str(spring_constant))
 
