@@ -337,7 +337,8 @@ def main_loop():
         
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
-        
+
+      
       if(action == 4):
         print(" Action to be Executed: Swap register 1 and 2")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
@@ -351,7 +352,19 @@ def main_loop():
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
         print(" Register One Value: " + str(register_one_value))
         print(" Register Two Value: " + str(register_two_value))
-        
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+
+      
+      if(action == 1):
+        print("  Action to be Executed: Store Data in Register 1")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        print("  Register One Value: " + str(register_one_value))
+        data = read_byte(organisms_gene_list[i], index + 1, 3)
+        print("  Data to be Stored in Register 1: " + str(data))
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, data)
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
         
 
         
