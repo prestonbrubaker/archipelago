@@ -270,6 +270,7 @@ def main_loop():
         print("  Spring Constant of Muscle: " + str(spring_constant))
 
         # Add muscle to muscles_state_list
+        muscles_state_list[i].append([])
         j = len(muscles_state_list[i]) - 1  # Index of the new muscle in muscles_state_list
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 0, 1, j)  # Add a muscle index to the new muscle, incremented by one over the last muscle
         print("    Index Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
