@@ -8,6 +8,15 @@ world_id = [
   0, 0, 0, 0,  0, 0, 0, 0
 ]
 
+age_of_world = [
+  0, 0, 0, 0,  0, 0, 0, 0,
+  0, 0, 0, 0,  0, 0, 0, 0,
+  0, 0, 0, 0,  0, 0, 0, 0,
+  0, 0, 0, 0,  0, 0, 0, 0,
+  0, 0, 0, 0,  0, 0, 0, 0,
+  0, 0, 0, 0,  0, 0, 0, 0
+]
+
 # Organism specific global variables
 
 organisms_gene_list = [  #2-D list of organism genes (organism index, genes)
@@ -150,6 +159,10 @@ def main_loop():
   while True:
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
 
+      age_of_world_dec = read_bytes(age_of_world, 0, 6)
+      print("AGE OF WORLD: " + str(age_of_world))
+      print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
       # READ THROUGH THE STATE OF THE ORGANISM
       org_id = read_byte(organisms_state_list[i], 0, 6)    # Retrieve the organism's ID
       print("Organism's ID: " + str(org_id))
@@ -194,6 +207,19 @@ def main_loop():
         elif(node_type == 3):
           print("Node Type Name: Photosynthesis")
         x_offset = read_byte(organisms_gene_list[i], index + 3, 1)  # X-Offset
+        print("X-Offset: " + str(x_offset))
+        y_offset = read_byte(organsims_gene_list[i], index + 4, 1)  # Y-Offset
+        print("Y-Offset: " + str(y_offset))
+        contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
+        print("Contracted Muscle Length: " + str(contracted_muscle_len))
+        expanded_muscle_len = read_byte(organisms_gene_list[i], index + 6, 1)  # Expanded Muscle Length
+        print("Expanded Muscle Length: " + str(expanded_muscle_len))
+        spring_constant = read_byte(organisms_gene_list[i], index + 7, 1)  # Spring Constant
+        print("Spring Constant of Muscle: " + str(spring_constant))
+
+        
+        
+        
       
       
       
