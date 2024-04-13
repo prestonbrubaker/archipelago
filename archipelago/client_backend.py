@@ -262,8 +262,8 @@ def main_loop():
         print("    Mutable Data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
 
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
-        x_value_ref_unit = read_byte(nodes_state_list[i][selected_node_one, 5, 3) / 2**24 - 1)  # X-value of selected node one, in unit form
-        y_value_ref_unit = read_byte(nodes_state_list[i][selected_node_one, 8, 3) / (2**24 - 1)  # Y-value of selected node one, in unit form
+        x_value_ref_unit = read_byte(nodes_state_list[i][selected_node_one], 5, 3) / 2**24 - 1)  # X-value of selected node one, in unit form
+        y_value_ref_unit = read_byte(nodes_state_list[i][selected_node_one], 8, 3) / (2**24 - 1)  # Y-value of selected node one, in unit form
         print("      X-value of selected node 1 in unit form: " + str(x_value_ref_unit))
         print("      Y-value of selected node 1 in unit form: " + str(y_value_ref_unit))
         x_value_new_unit = x_value_ref_unit + (x_offset / 255 - 0.5)
