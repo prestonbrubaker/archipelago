@@ -225,7 +225,8 @@ def main_loop():
 
       print("\n~~~~~~~~~~~~~~~~~~~~~~EXECUTING AN ACTION~~~~~~~~~~~~~~~~~~~~~~~~\n")
       # EXECUTE GENE AT THE CURRENT INDEX
-
+      if(index >= len(organisms_gene_list[i]):  # Reset the index if it passes the last action
+        index = 0
       action = read_byte(organisms_gene_list[i], index, 1)
       print("Current Action of Organism: " + str(action))
 
@@ -340,18 +341,18 @@ def main_loop():
 
       
       if(action == 4):
-        print(" Action to be Executed: Swap register 1 and 2")
+        print("  Action to be Executed: Swap register 1 and 2")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print(" Register One Value: " + str(register_one_value))
-        print(" Register Two Value: " + str(register_two_value))
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, register_two_value)
         organisms_state_list[i] = write_byte(organisms_state_list[i], 17, 3, register_one_value)
         print("    Registers Swapped!")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print(" Register One Value: " + str(register_one_value))
-        print(" Register Two Value: " + str(register_two_value))
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
@@ -365,6 +366,70 @@ def main_loop():
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, data)
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
+
+      
+      if(action == 12):
+        print("  Action to be Executed: Subtract Register 2 from Register 1, and Store the Result in Register 3. Any result less than 0 is made to be zero")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        subtraction_result = register_two_value - register_one_value
+        if(subtraction_result < 0):
+          subtraction_result = 0
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, subtraction_result)
+        print("  Result Stored in Register 3: " + str(subtraction_result))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+
+      
+      if(action == 8):
+        print("  Action to be Executed: Check if the value in register 2 is more than the value in register 1, and change the index by data if that is the case and proceed otherwise")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        data = read_byte(organisms_gene_list[i], index + 1, 3)
+        print("  Data Value including jump direction bit: " + str(data))
+        if(data >= 2**(8*24 - 1):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
+          forward_index_jump = 1
+          print("  Jump Direction: Forward")
+          data -= 2**(8*24 - 1)
+        else:
+          forward_index_jump = -1
+          print("  Jump Direction: Backward")
+        print("  Data Value not including jump direction bit: " + str(data))        
+        if(register_two_value > register_one_value):
+          print("  Register 2 is More Than Register 1")
+          print("  Changing Index by: " + str(data * forward_index_jump))
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
+        else:
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
+
+      
+      if(action == 2):
+        print("  Action to be Executed: Swap the Values in Registers 1 and 3")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_three_value = read_byte(organisms_state_list[i], 20, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Three Value: " + str(register_three_value))
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, register_three_value)
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, register_one_value)
+        print("    Registers Swapped!")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 20, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Three Value: " + str(register_three_value))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+      if(action == 15):
+        print(" Action to be Executed: Change the Index by Data")
+        if(data >= 2**(8*24 - 1):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
+          forward_index_jump = 1
+          print("  Jump Direction: Forward")
+          data -= 2**(8*24 - 1)
+        else:
+          forward_index_jump = -1
+          print("  Jump Direction: Backward")
+        print("  Data Value not including jump direction bit: " + str(data))        
+        print("  Changing Index by: " + str(data * forward_index_jump))
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
         
 
         
@@ -374,6 +439,6 @@ def main_loop():
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
     time.sleep(2)
-    
+    # Random Willoh Shoutout
 
 main_loop()
