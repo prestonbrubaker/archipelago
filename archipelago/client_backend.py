@@ -149,6 +149,8 @@ print("Initial Muscles States: " + str(muscles_state_list))
 def main_loop():
   while True:
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
+
+      # READ THROUGH THE STATE OF THE ORGANISM
       org_id = read_byte(organisms_state_list[i], 0, 6)    # Retrieve the organism's ID
       print("Organism's ID: " + str(org_id))
       org_fam_id = read_byte(organisms_state_list[i], 6, 5)  # Retrieve the organism's family ID
@@ -167,6 +169,15 @@ def main_loop():
       print("Organism's Third Register Value: " + str(register_three))
       index = read_byte(organisms_state_list[i], 23, 2)  # Retrieve the organism's index for it's genes
       print("Organism's Index: " + str(index))
+      time_alive = read_byte(organisms_state_list[i], 25, 3) # Retrieve the time the organism has been alive
+      print("Time Organisms Has Been Alive: " + str(time_alive))
+
+
+      print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+      # EXECUTE GENE AT THE CURRENT INDEX
+
+      action = read_byte(organisms_gene_list[i])
+      print("Current Action of Organism: " + str(action))
       
       
       
