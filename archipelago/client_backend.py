@@ -180,7 +180,7 @@ def main_loop():
   global age_of_world
   
   while True:
-    print("\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     age_of_world_dec = read_byte(age_of_world, 0, 6)
     print(age_of_world)
     print("AGE OF WORLD: " + str(age_of_world_dec))
@@ -188,7 +188,7 @@ def main_loop():
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
       
       
-      print("\n~~~~~~~~~~~~~~~~~~~~STATE OF ORGANISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+      print("\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF ORGANISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
       # READ THROUGH THE STATE OF THE ORGANISM
       org_id = read_byte(organisms_state_list[i], 0, 6)    # Retrieve the organism's ID
@@ -312,6 +312,15 @@ def main_loop():
               print("      Muscle is currently contracted")
               muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Toggle to expanded state
               print("      Muscle toggled to expanded")
+        
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+            
+              
+      if(action == 14):
+        print("  Action to be Executed: Store a random value up to Data in register 1")
+        data = read_byte(organism_gene_list[i], index + 1, 3)
+        print("    Value found in Data: " + str(data))
         
         
         
