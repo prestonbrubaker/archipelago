@@ -42,7 +42,7 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
-    0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
+    0, 0, 0, 0,  0, 1, 1, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
@@ -129,20 +129,20 @@ print(" Initial State: " + str(organisms_state_list))
 print(" Nodes States: " + str(nodes_state_list))
 print(" Muscles States: " + str(muscles_state_list))
 
-def read_byte(list_in, index_in):    # Converts the "index_in"th byte to decimal from list list_in
+def read_byte(list_in, index_in, num_lines_in):    # Converts the "index_in"th and "num_lines_in" following byte(s) to decimal from list list_in
   value = 0
-  for i in range(0, 8):
+  for i in range(0, 8 * num_lines_in):
     if (index_in * 8 < len(list_in)):
-      value += 2**(7 - i) * list_in[index_in * 8]
+      value += 2**(8 * num_lines_in - 1 - i) * list_in[index_in * 8]
   return value
 
 
 
 def main_loop():
   while True:
-    for state in organisms_state_list:
-      byte_value = read_byte(state, 23)
-    print(byte_value)
+    for i in Range(0, len(organisms_state_list):    # Iterate through organisms
+      org_id = read_byte(organisms_state_list[i], 0, 6)
+      print(org_id)
     time.sleep(10)
 
 main_loop()
