@@ -194,8 +194,10 @@ def main_loop():
     age_of_world_dec = read_byte(age_of_world, 0, 6)
     print(age_of_world)
     print("AGE OF WORLD: " + str(age_of_world_dec))
+
+    print("\n\n\n~~~~~~~~~~~~~~~~~~~~ACTIONS SECTION~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     
-    for i in range(0, len(organisms_state_list)):    # Iterate through organisms
+    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ACTIONS
       
       
       print("\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF ORGANISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
@@ -266,12 +268,12 @@ def main_loop():
         y_value_ref_unit = read_byte(nodes_state_list[i][selected_node_one], 8, 3) / (2**24 - 1)  # Y-value of selected node one, in unit form
         print("      X-value of selected node 1 in unit form: " + str(x_value_ref_unit))
         print("      Y-value of selected node 1 in unit form: " + str(y_value_ref_unit))
-        x_value_new_unit = x_value_ref_unit + (x_offset / 255 - 0.5)
+        x_value_new_unit = x_value_ref_unit + (x_offset / 255 - 0.5) * max_node_offset
         if(x_value_new_unit < 0):
           x_value_new_unit = 0
         elif(x_value_new_unit > 1):
           x_value_new_unit = 1
-        y_value_new_unit = y_value_ref_unit + (y_offset / 255 - 0.5)
+        y_value_new_unit = y_value_ref_unit + (y_offset / 255 - 0.5) * max_node_offset
         if(y_value_new_unit < 0):
           y_value_new_unit = 0
         elif(y_value_new_unit > 1):
@@ -467,12 +469,25 @@ def main_loop():
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
         
-        
 
+    print("\n\n\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
+      print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 1, 6)))
+      for j in range(0, len(muscles_state_list[i]):
+        print("  Calculating Physics for Muscle: " + str(read_byte(muscles_state_list[i][j], 1, 1)))
+        node_one_index = read_byte(muscles_state_list[i][j], 2, 1)
+        node_two_index = read_byte(muscles_state_list[i][j], 3, 1)
+        print("    Node One index: " + str(node_one_index))
+        print("    Node Two index: " + str(node_two_index))
+        node_one_x = read_byte(nodes_state_list[i][node_one_index], 5, 3)
+        node_one_y = read_byte(nodes_state_list[i][node_one_index], 8, 3)
+        node_two_x = read_byte(nodes_state_list[i][node_two_index], 5, 3)
+        node_two_y = read_byte(nodes_state_list[i][node_two_index], 8, 3)
+        print("    Node One X-Value: " + str(node_one_x))
+        print("    Node One Y-Value: " + str(node_one_y))
+        print("    Node Two X-Value: " + str(node_two_x))
+        print("    Node Two Y-Value: " + str(node_two_y))
         
-        
-        
-      
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
     time.sleep(1)
