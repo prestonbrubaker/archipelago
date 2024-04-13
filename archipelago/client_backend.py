@@ -239,9 +239,9 @@ def main_loop():
 
         # Add node to nodes_state for the organism
         nodes_state[i].append([])
-        j = len(nodes_state[i]) - 1  # Index of the new node in nodes_state
-        nodes_state[i][j] = write_byte(nodes_state[i][j], 0, 1, j)
-        print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state[i][j]))
+        j = len(nodes_state_list[i]) - 1  # Index of the new node in nodes_state
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 0, 1, j)
+        print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
         
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
         print("  Contracted Muscle Length: " + str(contracted_muscle_len))
