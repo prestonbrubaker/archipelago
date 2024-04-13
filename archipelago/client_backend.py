@@ -284,7 +284,7 @@ def main_loop():
         print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 5, 1, spring_constant)  # Add the spring constant
         print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
-        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Add Mutable Data
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Add Mutable Data. Set to expanded state to start. 0 = expanded, 1 = contracted. Other bits reserved for future features.
         print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
 
         # Increment Genetic Index
@@ -303,6 +303,15 @@ def main_loop():
           print("    Muscle " + str(muscle_index) + " Connected to Nodes " + str(muscle_node_one) + " and " + str(muscle_node_two))
           if(muscle_node_one == selected_node_one and muscle_node_two == selected_node_two or muscle_node_two == selected_node_one and muscle_node_one == selected_node_two):
             print("      Muscle is selected!")
+            current_contraction_state = read_byte(muscle_state_list[i][j], 6, 1)
+            if(current_contraction_state == 0):
+              print("      Muscle is currently expanded")
+              muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 1)  # Toggle to contracted state
+              print("      Muscle toggled to contracted")
+            else:
+              print("      Muscle is currently contracted")
+              muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Toggle to expanded state
+              print("      Muscle toggled to expanded")
         
         
         
