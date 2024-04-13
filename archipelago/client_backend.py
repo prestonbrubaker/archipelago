@@ -120,7 +120,7 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1
     0 ,0, 0, 0,  0, 0, 0, 0,    # Data 2
     0, 0, 0, 1,  1, 0, 0, 0,    # Data 3 (20)
-    0, 0, 0, 0,  1, 0, 0, 0,  # ACTION 4: Swap register 1 and register 2
+    0, 0, 0, 0,  0, 1, 0, 0,  # ACTION 4: Swap register 1 and register 2
     0, 0, 0, 0,  0, 0, 0, 1,  # ACTION 1: Store Data in register 1
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 2
@@ -349,7 +349,7 @@ def main_loop():
       
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
-    time.sleep(5)
+    time.sleep(2)
     
 
 main_loop()
