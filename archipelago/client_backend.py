@@ -148,7 +148,7 @@ def write_byte(list_in, index_in, num_lines_in, value_in):  # Takes in a list an
   for i in range(0, 8 * num_lines_in):  # Overwrite current contents with 0
     index_i = i + index_in * 8
     if(index_i >= len(list_in)):
-      list_in.append(0)
+      list_in.append(0)      # This will expand the list if new information is being added to the end of list_in
     else:
       list_in[i + index_in * 8] = 0
   for i in range(0, 8 * num_lines_in):
@@ -236,6 +236,13 @@ def main_loop():
         print("  X-Offset: " + str(x_offset))
         y_offset = read_byte(organisms_gene_list[i], index + 4, 1)  # Y-Offset
         print("  Y-Offset: " + str(y_offset))
+
+        # Add node to nodes_state for the organism
+        nodes_state[i].append([])
+        j = len(nodes_state[i]) - 1  # Index of the new node in nodes_state
+        nodes_state[i][j] = write_byte(nodes_state[i][j], 0, 1, j)
+        print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state[i][j]))
+        
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
         print("  Contracted Muscle Length: " + str(contracted_muscle_len))
         expanded_muscle_len = read_byte(organisms_gene_list[i], index + 6, 1)  # Expanded Muscle Length
