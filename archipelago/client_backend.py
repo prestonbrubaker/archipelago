@@ -303,7 +303,7 @@ def main_loop():
           print("    Muscle " + str(muscle_index) + " Connected to Nodes " + str(muscle_node_one) + " and " + str(muscle_node_two))
           if(muscle_node_one == selected_node_one and muscle_node_two == selected_node_two or muscle_node_two == selected_node_one and muscle_node_one == selected_node_two):
             print("      Muscle is selected!")
-            current_contraction_state = read_byte(muscle_state_list[i][j], 6, 1)
+            current_contraction_state = read_byte(muscles_state_list[i][j], 6, 1)
             if(current_contraction_state == 0):
               print("      Muscle is currently expanded")
               muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 1)  # Toggle to contracted state
