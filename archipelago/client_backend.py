@@ -521,6 +521,20 @@ def main_loop():
         print("    Node Two X-Velocity: " + str(node_two_x_v))
         print("    Node Two Y-Velocity: " + str(node_two_y_v))
 
+        dx = node_two_x_unit - node_one_x_unit
+        dy = node_two_y_unit - node_one_y_unit
+        distance = ((dx)**2 + (dy)**2)**0.5
+        print("  X-Distance: " + str(dx))
+        print("  Y-Distance: " + str(dy))
+        print("  Distance Between Nodes: " + str(distance))
+
+        spring_constant = read_byte(muscle_state_list[i][j], 5, 1)
+
+        print("  Spring Constant: " + str(spring_constant))
+
+
+        
+
         # Convert coordingate values back to values ready to be stored in 3 bytes
         node_one_x_new = int(node_one_x_unit * (2**24 - 1))
         node_one_y_new = int(node_one_y_unit * (2**24 - 1))
