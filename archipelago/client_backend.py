@@ -296,7 +296,7 @@ def main_loop():
         print("  Organism's First Selected Node: " + str(selected_node_one))
         selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
         print("  Organism's Second Selected Node: " + str(selected_node_two))
-        for j in range(0, len(muscle_state_list[i])):  # Cycle through the muscles to check if any have connections that match the 1st selected node and 2nd selected node
+        for j in range(0, len(muscles_state_list[i])):  # Cycle through the muscles to check if any have connections that match the 1st selected node and 2nd selected node
           muscle_index = read_byte(muscles_state_list[i][j], 0, 1)
           muscle_node_one = read_byte(muscles_state_list[i][j], 1, 1)
           muscle_node_two = read_byte(muscles_state_list[i][j], 2, 1)
