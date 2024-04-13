@@ -142,7 +142,9 @@ def main_loop():
   while True:
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
       org_id = read_byte(organisms_state_list[i], 0, 6)
-      print(org_id)
+      print("Organism ID: " + str(org_id))
+      org_fam_id = read_byte(organism_state_list[i], 6, 5)
+      print("Organism Family ID: " + str(org_fam_id))
     time.sleep(10)
 
 main_loop()
