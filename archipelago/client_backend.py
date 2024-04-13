@@ -301,7 +301,7 @@ def main_loop():
           muscle_node_one = read_byte(muscles_state_list[i][j], 1, 1)
           muscle_node_two = read_byte(muscles_state_list[i][j], 2, 1)
           print("    Muscle " + str(muscle_index) + " Connected to Nodes " + str(muscle_node_one) + " and " + str(muscle_node_two))
-          if(muscle_node_one == selected_node_one And muscle_node_two == selected_node_two Or muscle_node_two == selected_node_one And muscle_node_one == selected_node_two):
+          if(muscle_node_one == selected_node_one && muscle_node_two == selected_node_two || muscle_node_two == selected_node_one && muscle_node_one == selected_node_two):
             print("      Muscle is selected!")
         
         
