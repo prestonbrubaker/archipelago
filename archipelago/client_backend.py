@@ -473,7 +473,7 @@ def main_loop():
     print("\n\n\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
       print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 1, 6)))
-      for j in range(0, len(muscles_state_list[i]):
+      for j in range(0, len(muscles_state_list[i])):
         print("  Calculating Physics for Muscle: " + str(read_byte(muscles_state_list[i][j], 1, 1)))
         node_one_index = read_byte(muscles_state_list[i][j], 2, 1)
         node_two_index = read_byte(muscles_state_list[i][j], 3, 1)
