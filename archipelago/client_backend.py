@@ -260,7 +260,9 @@ def main_loop():
         print("    Mass Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 2, 1, node_type)  # Add node type to the new node
         print("    Node Type Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
-        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 3, 1, 0)  # Add Mutable Data to the new node
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 3, 1, 0)  # Add Immutable Data to the new node
+        print("    Immutable Data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 4, 1, 0)  # Add Mutable Data to the new node
         print("    Mutable Data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
 
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
@@ -284,12 +286,12 @@ def main_loop():
         x_value_new = int(x_value_new_unit * (2**24 - 1))
         y_value_new = int(y_value_new_unit * (2**24 - 1))
         
-        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 4, 3, x_value_new)  # Add X-value to the new node
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 5, 3, x_value_new)  # Add X-value to the new node
         print("    X-Value data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
-        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 7, 3, y_value_new)  # Add Y-value to the new node
+        nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 8, 3, y_value_new)  # Add Y-value to the new node
         print("    Y-Value data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
 
-        # Make the 2nd Selected Node the new Node 13
+        # Make the 2nd Selected Node the new Node
         organisms_state_list[i] = write_byte(organisms_state_list[i], 13, 1, j)
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
         print("Organism's First Selected Node: " + str(selected_node_one))
