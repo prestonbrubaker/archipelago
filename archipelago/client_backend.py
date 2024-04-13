@@ -225,7 +225,7 @@ def main_loop():
 
       print("\n~~~~~~~~~~~~~~~~~~~~~~EXECUTING AN ACTION~~~~~~~~~~~~~~~~~~~~~~~~\n")
       # EXECUTE GENE AT THE CURRENT INDEX
-      if(index >= len(organisms_gene_list[i]):  # Reset the index if it passes the last action
+      if(index >= len(organisms_gene_list[i])):  # Reset the index if it passes the last action
         index = 0
       action = read_byte(organisms_gene_list[i], index, 1)
       print("Current Action of Organism: " + str(action))
