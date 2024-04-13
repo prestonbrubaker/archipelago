@@ -42,9 +42,9 @@ Energy: |Energy|
 
 NODE TYPES:
 0: Soul/Heart. Only has mass. Required as the first node of an organism, and it is what is shot off from another during reproduction
-0: Structual. Only has mass. No activation function
-1: Gripper. Mutable data corresponds to how tightly it grips to the environment, increasing the drag force
-2: Photosynthesis. Harvests energy from the sunlight
+1: Structual. Only has mass. No activation function
+2: Gripper. Mutable data corresponds to how tightly it grips to the environment, increasing the drag force
+3: Photosynthesis. Harvests energy from the sunlight
 
 
 
@@ -111,9 +111,9 @@ If a new node is created, 2nd selected node will be made to have the index of th
 
 NODE TYPES:
 0: Soul/Heart. Only has mass. Required as the first node of an organism, and it is what is shot off from another during reproduction
-0: Structual. Only has mass. No activation function
-1: Gripper. Mutable data corresponds to how tightly it grips to the environment, increasing the drag force
-2: Photosynthesis. Harvests energy from the sunlight
+1: Structual. Only has mass. No activation function
+2: Gripper. Mutable data corresponds to how tightly it grips to the environment, increasing the drag force
+3: Photosynthesis. Harvests energy from the sunlight
 
 
 
