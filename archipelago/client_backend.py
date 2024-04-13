@@ -178,6 +178,7 @@ def main_loop():
   while True:
     print("\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     age_of_world_dec = read_byte(age_of_world, 0, 6)
+    print(age_of_world)
     print("AGE OF WORLD: " + str(age_of_world_dec))
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
       
