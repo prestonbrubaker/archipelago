@@ -143,7 +143,7 @@ def main_loop():
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms
       org_id = read_byte(organisms_state_list[i], 0, 6)    # Retrieve the organism's ID
       print("Organism ID: " + str(org_id))
-      org_fam_id = read_byte(organisms_state_list[i], 5, 6)  # Retrieve the organism's family ID
+      org_fam_id = read_byte(organisms_state_list[i], 6, 5)  # Retrieve the organism's family ID
       print("Organism Family ID: " + str(org_fam_id))
     time.sleep(10)
 
