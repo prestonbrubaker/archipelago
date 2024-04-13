@@ -208,7 +208,7 @@ def main_loop():
           print("Node Type Name: Photosynthesis")
         x_offset = read_byte(organisms_gene_list[i], index + 3, 1)  # X-Offset
         print("X-Offset: " + str(x_offset))
-        y_offset = read_byte(organsims_gene_list[i], index + 4, 1)  # Y-Offset
+        y_offset = read_byte(organisms_gene_list[i], index + 4, 1)  # Y-Offset
         print("Y-Offset: " + str(y_offset))
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
         print("Contracted Muscle Length: " + str(contracted_muscle_len))
