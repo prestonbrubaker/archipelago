@@ -45,6 +45,7 @@ spring_multiplier = 0.01  # Multiplier for the maximum spring constant
 def seed_organism():
   initial_state = [
 
+
     
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
@@ -321,6 +322,8 @@ def main_loop():
         print("  Action to be Executed: Store a random value up to Data in register 1")
         data = read_byte(organisms_gene_list[i], index + 1, 3)
         print("    Value found in Data: " + str(data))
+        r = random.randint(0, data)
+        
         
         
         
