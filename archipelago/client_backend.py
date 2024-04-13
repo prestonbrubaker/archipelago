@@ -47,7 +47,7 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
-    0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
+    0, 0, 0, 0,  1, 0, 0, 1,  # Family Name
     0, 1, 0, 0,  0, 0, 0, 0,  # Energy
     0, 0, 0, 0,  0, 0, 0, 0,  # Selected Node 1
     0, 0, 0, 0,  0, 0, 0, 0,  # Selected Node 2
