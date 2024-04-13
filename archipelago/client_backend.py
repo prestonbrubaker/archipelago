@@ -453,7 +453,7 @@ def main_loop():
       
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
-    time.sleep(5)
+    time.sleep(10)
     # Random Willoh Shoutout
 
 main_loop()
