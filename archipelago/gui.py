@@ -1,3 +1,5 @@
+#Eventually, this will soon handle a loop which displays the information passed from processing :)
+
 import sys
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QWidget, QLabel, QSpacerItem, QSizePolicy, QOpenGLWidget)
 from PyQt5.QtGui import QFont
