@@ -56,7 +56,7 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
-    0, 0, 0, 0,  0, 1, 1, 0,  # Organism ID
+    0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
     0, 0, 0, 0,  0, 0, 0, 0,  # Family Name
@@ -480,10 +480,10 @@ def main_loop():
         
     print("\n\n~~~~~~~~~~~~~~~~~~~~CHECK FOR LISTS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     
-    print("Organism State List: " + str(organisms_state_list))
-    print("Node State List: " + str(nodes_state_list))
-    print("Node Velocity List: " + str(nodes_velocity_list))
-    print(" Muscle State List: " + str(muscles_state_list))
+    print("  Organism State List: " + str(organisms_state_list))
+    print("  Node State List: " + str(nodes_state_list))
+    print("  Node Velocity List: " + str(nodes_velocity_list))
+    print("  Muscle State List: " + str(muscles_state_list))
     
     print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
