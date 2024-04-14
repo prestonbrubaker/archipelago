@@ -53,6 +53,8 @@ mass_multiplier = 0.01
 dt = 0.02  # Time Step for Physics
 drag_m = 0.01    # Velocities will be multiplied by (1-drag_m) each turn
 
+sleep_time = 1  # Time between iterations
+
 def make_world(world_res_in, light_max_in):  # Makes a 2_D list of the light values
   list_out = []
   for i in range(0, world_res_in):
@@ -519,8 +521,17 @@ def main_loop():
     print("  Muscle State List: " + str(muscles_state_list))
 
     print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ITERATE METABOLISM
-      
+    for i in range(len(organisms_state_list) - 1, -1, 1):    # Iterate through organisms for ITERATE METABOLISM 11 backwards to avoid problems when/if organisms are removed
+      energy = read_byte(organisms_state_list[i], 11, 1)
+      print("Organism " + str(read_byte(organism_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
+      energy -= 1
+      if(energy < 0):
+        print("Organism has been executed...")
+        organism_state_list.pop(i)
+        organism_gene_list.pop(i)
+        node_state_list.pop(i)
+        muscles_state_list.pop(i)
+        nodes_velocity_list.pop(i)
     
     print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
@@ -635,7 +646,7 @@ def main_loop():
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
     with open('locations.txt', 'w') as file:
       file.write(str(get_positions_of_nodes()))
-    time.sleep(.1)
+    time.sleep(sleep_time)
     # Random Willoh Shoutout heyyyy bestie 
 
 main_loop()
