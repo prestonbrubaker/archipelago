@@ -665,7 +665,7 @@ def main_loop():
           nodes_state_list[-1][0] = write_byte(nodes_state_list[-1][0], 8, 3, node_y)
 
           # Start organism off at Index 0
-          organisms_state_list[-1] = write_byte(organisms_state_list[-1], 21, 2, 0)
+          organisms_state_list[-1] = write_byte(organisms_state_list[-1], 23, 2, 0)
           
           if( r < 0.02):
             r = random.uniform(0, 1)
