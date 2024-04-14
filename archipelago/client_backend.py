@@ -576,8 +576,16 @@ def main_loop():
           nodes_velocity_list.append(nodes_velocity_state)
           muscles_state_list.append(muscles_state)
 
+          node_x = read_byte(nodes_state_list[i][0], 5, 3)
+          node_y = read_byte(nodes_state_list[i][0], 8, 3)
+
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 0, 6, new_org_index)
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 11, 1, energy_transfer)
+
+          # Originate Soul Node at Soul Node of Parent
+          nodes_state_list[-1][0] = write_byte(nodes_state_list[-1][0], 5, 3, node_x)
+          nodes_state_list[-1][0] = write_byte(nodes_state_list[-1][0], 8, 3, node_y)
+          
           if( r < 0.05):
             r = random.uniform(0, 1)
             print("  Adding a Random Mutation by Setting a Random Bit of Offspring's Geneome to a Random Value")
