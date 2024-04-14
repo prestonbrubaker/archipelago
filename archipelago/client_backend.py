@@ -539,7 +539,10 @@ def main_loop():
           print("  The New Organism's ID is: " + str(new_org_index))
           new_org_genes = []
           for k in range(0, len(organisms_gene_list[i])):
-            new_org_genes.append(organisms_gene_list[i][j])
+            new_org_genes.append(organisms_gene_list[i][k])
+          new_org_state = []
+          for k in range(0, len(organisms_state_list[i])):
+            new_org_state.append(organisms_state_list[i][k]
           node_state = [
             0, 0, 0, 0,  0, 0, 0, 0,  # Node ID
             1, 0, 0, 0,  0, 0, 0, 0,  # Mass of Node
@@ -566,6 +569,7 @@ def main_loop():
           
           r = random.uniform(0, 1)
           organisms_gene_list.append(new_org_genes)
+          organisms_state_list.append(new_org_state)
           nodes_state_list.append(nodes_state)
           nodes_velocity_list.append(nodes_velocity_state)
           muscles_state_list.append(muscles_state)
