@@ -561,7 +561,7 @@ def main_loop():
           print("  Light In This Cell: " + str(light))
           if(light > 0):
             energy = read_byte(organisms_state_list[i], 11, 1)
-            nodes_state_list[i][j] = write_byte(organisms_state_list[i][j], 11, 1, energy + 1)
+            organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy + 1)
             world_light_values[cell_index_x][cell_index_y] -= 1
             print("  Organism's Energy Level Increased to: " + str(energy + 1))
 
