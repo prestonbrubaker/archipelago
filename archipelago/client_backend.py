@@ -709,7 +709,7 @@ def main_loop():
       r = random.uniform(0, 1)
       r2 = random.uniform(0, 1)
       if( r < 0.1):
-        energy -= int(1 * num_nodes * 0.2 + 1)
+        energy -= int(1 * num_nodes * 0.5 + 1)
       if(energy < 0 or (age > 12000 and r2 < .0001)):
         print("Organism has been executed...")
         organisms_state_list.pop(i)
@@ -764,7 +764,7 @@ def main_loop():
         light = world_light_values[i][j]
         if(light < light_max):
           r = random.uniform(0, 1)
-          if( r < 0.07):
+          if( r < 0.13):
             light += 1
         world_light_values[i][j] = light
           
