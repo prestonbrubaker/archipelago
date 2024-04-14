@@ -555,8 +555,8 @@ def main_loop():
           print("  Node Unit Y: " + str(node_y_unit))
           cell_index_x = int(node_x_unit * world_res)
           cell_index_y = int(node_y_unit * world_res)
-          print("  Node World Cell X-Index: " + + str(cell_index_x))
-          print("  Node World Cell Y-Index: " + + str(cell_index_y))
+          print("  Node World Cell X-Index: " + str(cell_index_x))
+          print("  Node World Cell Y-Index: " + str(cell_index_y))
           light = world_light_values[cell_index_x][cell_index_y]
           print("  Light In This Cell: " + str(light))
           if(light > 0):
