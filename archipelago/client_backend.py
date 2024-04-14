@@ -646,6 +646,14 @@ def main_loop():
           node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
           node_x_unit = node_x  / (2**24 - 1)
           node_y_unit = node_y  / (2**24 - 1)
+          if(node_x_unit < 0):
+            node_x_unit = 0
+          elif(node_x_unit > 1):
+            node_x_unit = 1
+          if(node_y_unit < 0):
+            node_y_unit = 0
+          elif(node_y_unit > 1):
+            node_y_unit = 1
           print("  Node Unit X: " + str(node_x_unit))
           print("  Node Unit Y: " + str(node_y_unit))
           cell_index_x = int(node_x_unit * world_res)
