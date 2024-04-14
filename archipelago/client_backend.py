@@ -538,7 +538,7 @@ def main_loop():
         print("    Spring Constant: " + str(spring_constant))
 
         toggle_state = read_byte(muscle_state_list[i][j], 6, 1)  # 0 = expanded, 1 = contracted
-        if(toggle_state = 0):
+        if(toggle_state == 0):
           print("    Muscle is in Expanded State")
           muscle_length = read_byte(muscle_state_list[i][j], 4, 1)  # Pull the expanded length
         else:
