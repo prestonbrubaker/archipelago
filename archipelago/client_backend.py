@@ -542,7 +542,7 @@ def main_loop():
             new_org_genes.append(organisms_gene_list[i][k])
           new_org_state = []
           for k in range(0, len(organisms_state_list[i])):
-            new_org_state.append(organisms_state_list[i][k]
+            new_org_state.append(organisms_state_list[i][k])
           node_state = [
             0, 0, 0, 0,  0, 0, 0, 0,  # Node ID
             1, 0, 0, 0,  0, 0, 0, 0,  # Mass of Node
