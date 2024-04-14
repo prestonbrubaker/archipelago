@@ -43,7 +43,7 @@ world_light_values = [  # 2-D list of light values in the cell. For now it will 
 
 ]
 world_res = 30  # Number of rows/columns of the world. Number of cells will be world_res squared.
-light_max = 1  # The maximum amount of light. Also the initial amount.
+light_max = 3  # The maximum amount of light. Also the initial amount.
 
 org_counter = 0  # Counter of organisms ever to exist in this world. Iterated for each birth to assign new ID's that have never been used
 
