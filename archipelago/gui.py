@@ -1,4 +1,5 @@
 import sys
+import ast
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QPainter, QPen, QColor
 from PyQt5.QtCore import QTimer, Qt
@@ -18,10 +19,9 @@ class MyApp(QMainWindow):
         nodes = []
         try:
             with open("locations.txt", "r") as file:
-                for line in file:
-                    parts = line.strip().split(',')
-                    if len(parts) == 3:
-                        nodes.append((int(parts[0]), float(parts[1]), float(parts[2])))
+                data = file.read()
+                # Assuming the entire file is one valid Python literal (e.g., a list of tuples)
+                nodes = ast.literal_eval(data)
         except Exception as e:
             print(f"Failed to load data: {e}")
         return nodes
@@ -56,9 +56,9 @@ class MyApp(QMainWindow):
         elif type_ == 1:
             color = QColor(255, 0, 0)  # Red
         elif type_ == 2:
-            color = QColor(0, 0, 0)    # Black
+            color = QColor(0, 255, 0)  # Green
         elif type_ == 3:
-            color = QColor(0, 255, 0)  # Photosynthesis
+            color = QColor(0, 0, 0)  # Black
 
         painter.setPen(QPen(color, 2, Qt.SolidLine))
         painter.drawRect(x, y, 10, 10)  # Draw rectangle representing the node
