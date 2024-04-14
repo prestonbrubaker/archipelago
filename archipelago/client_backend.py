@@ -664,7 +664,7 @@ def main_loop():
           # Start organism off at Index 0
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 21, 2, 0)
           
-          if( r < 0.05):
+          if( r < 0.20):
             r = random.uniform(0, 1)
             print("  Adding a Random Mutation by Setting a Random Bit of Offspring's Geneome to a Random Value")
             random_gene_index = random.randint(0, len(organisms_gene_list[-1]) - 1)
