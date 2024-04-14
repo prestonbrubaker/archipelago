@@ -1,6 +1,3 @@
-# Draw squares on the screen!
-
-from client_backend import get_positions_of_nodes
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QPainter, QPen, QColor
@@ -10,48 +7,63 @@ class MyApp(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.data_generator = get_positions_of_nodes()
+        self.nodes = []
+        self.current_index = 0  # To keep track of the current node pair
         self.initUI()
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update)  
-        self.timer.start(100)
+        self.timer.timeout.connect(self.refresh_and_update)
+        self.timer.start(100)  # Update and redraw every 100 ms
+
+    def load_nodes(self):
+        nodes = []
+        try:
+            with open("locations.txt", "r") as file:
+                for line in file:
+                    parts = line.strip().split(',')
+                    if len(parts) == 3:
+                        nodes.append((int(parts[0]), float(parts[1]), float(parts[2])))
+        except Exception as e:
+            print(f"Failed to load data: {e}")
+        return nodes
 
     def initUI(self):
         self.setWindowTitle('Archipelago')
         self.showMaximized()
 
+    def refresh_and_update(self):
+        # Reload data from file in case it has been updated
+        self.nodes = self.load_nodes()
+        self.current_index = 0  # Reset index to redraw from start
+        self.update()  # Trigger repaint
+
     def paintEvent(self, event):
         painter = QPainter(self)
-        try:
-            orgs = next(self.data_generator)
-            if len(orgs) >= 1: 
-                self.drawNode(painter, orgs[0])
-                self.drawNode(painter, orgs[1])
-        except StopIteration:
+        if self.current_index + 1 < len(self.nodes):
+            self.drawNode(painter, self.nodes[self.current_index])
+            self.drawNode(painter, self.nodes[self.current_index + 1])
+            self.current_index += 2
+        else:
             self.timer.stop()
-        finally:
-            painter.end()
-
+        painter.end()
 
     def drawNode(self, painter, node):
         type_, x, y = node
         x = int(x * self.width())
         y = int(y * self.height())
-    
+
         if type_ == 0:
             color = QColor(0, 0, 255)  # Blue
         elif type_ == 1:
             color = QColor(255, 0, 0)  # Red
         elif type_ == 2:
-            color = QColor(0, 0, 0)  # Green
+            color = QColor(0, 0, 0)    # Black
         elif type_ == 3:
             color = QColor(0, 255, 0)  # Photosynthesis
 
         painter.setPen(QPen(color, 2, Qt.SolidLine))
-        painter.drawRect(x, y, 10, 10)
+        painter.drawRect(x, y, 10, 10)  # Draw rectangle representing the node
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = MyApp()
-    ex.show()
     sys.exit(app.exec_())
