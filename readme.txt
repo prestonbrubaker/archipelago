@@ -145,6 +145,6 @@ INSTRUCTIONS:
 | 23 | 0 | Increment the 2nd Selected Node ID by 1. If it goes over the max, it cycles back to the first node
 | 24 | 0 | Activate the first selected node, with the data being used in accordance with the node type
 | 25 | 0 | Activate the second selected node, with the data being used in accordance with the node type
-| 26 | 3 | Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child. The second is the angular addition to the angle between the first and second selected nodes it will be shot out from, and the third is the speed the baby is shot out at (energy associated with this will be subtracted from the energy store of the parent)
+| 26 | 1 | Attempt reproduction. The first byte is the fraction out of 255 of the stored energy transferred to the child.
 | 27 | 0 | Die instantly
 
