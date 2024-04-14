@@ -3,8 +3,8 @@ import ast
 import threading
 
 pygame.init()
-
-window = pygame.display.set_mode((800, 800))
+size = 1200
+window = pygame.display.set_mode((size, size))
 clock = pygame.time.Clock()
 
 data_array = []
@@ -44,8 +44,8 @@ while running:
         window.fill((0, 0, 0))
         for item in data_array:
             obj_type, x_unit, y_unit = item
-            x = x_unit * 800
-            y = y_unit * 800
+            x = x_unit * size
+            y = y_unit * size
             color = (255, 0, 0) if obj_type == 0 else (0, 255, 0)
             pygame.draw.rect(window, color, (x, y, 5, 5))
         pygame.display.flip()
