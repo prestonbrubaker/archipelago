@@ -51,9 +51,9 @@ org_counter = 0  # Counter of organisms ever to exist in this world. Iterated fo
 
 max_node_offset = 0.1    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 1  # Multiplier for the maximum spring constant
-mass_multiplier = 0.01
+mass_multiplier = 0.001
 dt = 0.03  # Time Step for Physics
-drag_m = 0.001    # Velocities will be multiplied by (1-drag_m) each turn
+drag_m = 0.0001    # Velocities will be multiplied by (1-drag_m) each turn
 
 sleep_time = 0  # Time between iterations
 
@@ -585,6 +585,9 @@ def main_loop():
           # Originate Soul Node at Soul Node of Parent
           nodes_state_list[-1][0] = write_byte(nodes_state_list[-1][0], 5, 3, node_x)
           nodes_state_list[-1][0] = write_byte(nodes_state_list[-1][0], 8, 3, node_y)
+
+          # Start organism off at Index 0
+          organisms_state_list[-1] = write_byte(organisms_state_list[-1], 21, 2, 0)
           
           if( r < 0.05):
             r = random.uniform(0, 1)
@@ -617,10 +620,11 @@ def main_loop():
     print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(len(organisms_state_list) - 1, -1, -1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
       energy = read_byte(organisms_state_list[i], 11, 1)
+      num_nodes = len(nodes_state_list[i])
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       r = random.uniform(0, 1)
       if( r < 0.5):
-        energy -= 1
+        energy -= 1 * num_nodes
       if(energy < 0):
         print("Organism has been executed...")
         organisms_state_list.pop(i)
