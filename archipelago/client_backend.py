@@ -515,7 +515,7 @@ def main_loop():
 
       
       if(action == 26):
-        print("  Action to be Executed: Attempt Reproduction
+        print("  Action to be Executed: Attempt Reproduction")
               
         
     print("\n\n~~~~~~~~~~~~~~~~~~~~CHECK FOR LISTS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
