@@ -189,7 +189,7 @@ def get_positions_of_nodes():
       node_y_unit = node_y  / (2**24 - 1)
       inner_list.append(node_x_unit)
       inner_list.append(node_y_unit)
-    list_out.append(inner_list)
+      list_out.append(inner_list)
   return list_out
       
 
