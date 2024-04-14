@@ -201,8 +201,6 @@ def main_loop():
     age_of_world_dec = read_byte(age_of_world, 0, 6)
     print(age_of_world)
     print("AGE OF WORLD: " + str(age_of_world_dec))
-
-    print("\n\n\n~~~~~~~~~~~~~~~~~~~~ACTIONS SECTION~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ACTIONS
       
@@ -480,10 +478,16 @@ def main_loop():
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
         
-
+    print("\n\n~~~~~~~~~~~~~~~~~~~~CHECK FOR LISTS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    
+    print("Organism State List: " + str(organisms_state_list))
+    print("Node State List: " + str(nodes_state_list))
+    print("Node Velocity List: " + str(nodes_velocity_list))
+    print(" Muscle State List: " + str(muscles_state_list))
+    
     print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
-      print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 1, 6)))
+      print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 0, 6)))
       for j in range(0, len(muscles_state_list[i])):
         print("  Calculating Physics for Muscle: " + str(read_byte(muscles_state_list[i][j], 1, 1)))
         node_one_index = read_byte(muscles_state_list[i][j], 1, 1)
@@ -524,18 +528,18 @@ def main_loop():
         dx = node_two_x_unit - node_one_x_unit
         dy = node_two_y_unit - node_one_y_unit
         distance = ((dx)**2 + (dy)**2)**0.5
-        print("  X-Distance: " + str(dx))
-        print("  Y-Distance: " + str(dy))
-        print("  Distance Between Nodes: " + str(distance))
+        print("    X-Distance: " + str(dx))
+        print("    Y-Distance: " + str(dy))
+        print("    Distance Between Nodes: " + str(distance))
 
         spring_constant = read_byte(muscles_state_list[i][j], 5, 1)
 
-        print("  Spring Constant: " + str(spring_constant))
+        print("    Spring Constant: " + str(spring_constant))
 
 
         
 
-        # Convert coordingate values back to values ready to be stored in 3 bytes
+        # Convert coordinate values back to values ready to be stored in 3 bytes
         node_one_x_new = int(node_one_x_unit * (2**24 - 1))
         node_one_y_new = int(node_one_y_unit * (2**24 - 1))
         node_two_x_new = int(node_two_x_unit * (2**24 - 1))
