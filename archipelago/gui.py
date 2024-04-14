@@ -1,57 +1,48 @@
-# Draw squares on the screen!
-
-from client_backend import get_positions_of_nodes
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtGui import QPainter, QPen, QColor
-from PyQt5.QtCore import QTimer, Qt
+import ast
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtGui import QPainter, QColor, QPen
+from PyQt5.QtCore import QTimer
 
-class MyApp(QMainWindow):
-
+class DataDisplay(QWidget):
     def __init__(self):
-        super().__init__()
-        self.data_generator = get_positions_of_nodes()
-        self.initUI()
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update)  
-        self.timer.start(100)
+        super().__init__()                                      # No idea what this does but necessary
+        self.data_array = []                                    #This creates an array out of data pulled from txt file
+        self.setWindowTitle("Archipelago")                      #Window title
+        self.showMaximized()                                    #Sizes window to max window size without being fullscreened
+        self.timer = QTimer(self)                               #This timer forces the screen to update/reload data
+        self.timer.timeout.connect(self.loadData)               #See above
+        self.timer.start(100)                                   #Refresh rate
 
-    def initUI(self):
-        self.setWindowTitle('Archipelago')
-        self.showMaximized()
+    def loadData(self):                                         #Read text file
+        try:
+            with open('locations.txt', 'r') as file:
+                data_string = file.read()
+                self.data_array = ast.literal_eval(data_string)
+        except Exception as e:
+            print(f"Error loading data: {e}")
+        self.repaint()                                          #Make sure points are displayed on top
 
     def paintEvent(self, event):
-        painter = QPainter(self)
-        try:
-            orgs = next(self.data_generator)
-            if len(orgs) >= 1: 
-                self.drawNode(painter, orgs[0])
-                self.drawNode(painter, orgs[1])
-        except StopIteration:
-            self.timer.stop()
-        finally:
-            painter.end()
+        painter = QPainter(self)                                #Set POV
+        painter.setRenderHint(QPainter.Antialiasing)            #This smooths. Really just aesthetic
+        for node in self.data_array:                            #Find all lil nodes in array!
+            self.drawNode(painter, *node)
 
+    def drawNode(self, painter, type_, x_unit, y_unit):
+        color_dict = {                                          #Dictionary defines colors corresponding to node types
+            0: QColor(255, 0, 0),
+            1: QColor(0, 255, 0),
+            2: QColor(0, 0, 255),
+            3: QColor(255, 0, 255)
+        }
+        color = color_dict.get(type_, QColor(255, 255, 255))    #Set color based on node type dictionary
+        x = int(x_unit * self.width())                          #Normalized X
+        y = int(y_unit * self.height())                         #Normalized Y
+        painter.setPen(QPen(color, 10))                         #Set pen to color previously defined, also give it a weight
+        painter.drawPoint(x, y)                                 #Draw node!
 
-    def drawNode(self, painter, node):
-        type_, x, y = node
-        x = int(x * self.width())
-        y = int(y * self.height())
-    
-        if type_ == 0:
-            color = QColor(0, 0, 255)  # Blue
-        elif type_ == 1:
-            color = QColor(255, 0, 0)  # Red
-        elif type_ == 2:
-            color = QColor(0, 0, 0)  # Green
-        elif type_ == 3:
-            color = QColor(0, 255, 0)  # Photosynthesis
-
-        painter.setPen(QPen(color, 2, Qt.SolidLine))
-        painter.drawRect(x, y, 10, 10)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    ex = MyApp()
-    ex.show()
+    window = DataDisplay()
     sys.exit(app.exec_())
