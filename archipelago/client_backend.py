@@ -42,9 +42,10 @@ muscles_state_list = [    #3-D list of muscles (organism index, muscle index, mu
 # Parameters for the environment or general rules
 
 max_node_offset = 0.1    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
-spring_multiplier = 1  # Multiplier for the maximum spring constant
+spring_multiplier = .5  # Multiplier for the maximum spring constant
 mass_multiplier = 0.01
 dt = 0.02  # Time Step for Physics
+drag_m = 0.01    # Velocities will be multiplied by (1-drag_m) each turn
 
 
 
@@ -572,16 +573,24 @@ def main_loop():
         node_two_mass = read_byte(nodes_state_list[i][node_two_index], 1, 1)
         print("    Node 1 Mass: " + str(node_one_mass))
         print("    Node 2 Mass: " + str(node_two_mass))
-        
+
+        # Apply the foces to alter the velocities in accordance with Newton's Second Law
         nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier) * dt
         nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier) * dt
         nodes_velocity_list[i][node_two_index][0] += -1 * force_x / (node_two_mass * mass_multiplier) * dt
         nodes_velocity_list[i][node_two_index][1] += -1 * force_y / (node_two_mass * mass_multiplier) * dt
 
+        # Iterate the positions of the nodes by their velocities
         node_one_x_unit += nodes_velocity_list[i][node_one_index][0] * dt
         node_one_y_unit += nodes_velocity_list[i][node_one_index][1] * dt
         node_two_x_unit += nodes_velocity_list[i][node_two_index][0] * dt
         node_two_y_unit += nodes_velocity_list[i][node_two_index][1] * dt
+
+        # Drag force applied to slow all speeds by an amount proportional to their current speed
+        nodes_velocity_list[i][node_one_index][0] *= 1 - drag_m
+        nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m
+        nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m
+        nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m
         
         
 
