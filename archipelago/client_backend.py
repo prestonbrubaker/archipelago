@@ -41,7 +41,7 @@ muscles_state_list = [    #3-D list of muscles (organism index, muscle index, mu
 
 # Parameters for the environment or general rules
 
-max_node_offset = 0.05    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
+max_node_offset = 0.1    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 1  # Multiplier for the maximum spring constant
 mass_multiplier = 0.01
 dt = 0.03  # Time Step for Physics
