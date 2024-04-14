@@ -235,6 +235,7 @@ print("Initial Muscles States: " + str(muscles_state_list))
 
 def main_loop():
   global age_of_world
+  global org_counter
   
   while True:
     print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
