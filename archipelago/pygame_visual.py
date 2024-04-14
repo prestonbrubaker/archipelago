@@ -43,6 +43,8 @@ while running:
     if data_array:
         window.fill((70, 70, 70))
         for item in data_array:
+            window.fill((70, 70, 70))
+        for item in data_array:
             obj_type, x_unit, y_unit = item
             x = x_unit * size
             y = y_unit * size
@@ -52,7 +54,6 @@ while running:
                 2: (0, 255, 255),
                 3: (255, 0, 0),
             }.get(obj_type, (255, 255, 0))  # Default color if type is not known
-            
             pygame.draw.rect(window, color, (x, y, 5, 5))
         pygame.display.flip()
     
