@@ -656,6 +656,7 @@ def main_loop():
 
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 0, 6, new_org_index)
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 11, 1, energy_transfer)
+          organisms_state_list[-1] = write_byte(organisms_state_list[-1], 14, 9, 0)
 
           # Originate Soul Node at Soul Node of Parent
           nodes_state_list[-1][0] = write_byte(nodes_state_list[-1][0], 5, 3, node_x)
