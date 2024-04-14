@@ -700,6 +700,9 @@ def main_loop():
           print("    Node One Y-Value: " + str(node_one_y))
           print("    Node Two X-Value: " + str(node_two_x))
           print("    Node Two Y-Value: " + str(node_two_y))
+
+          if(node_one_x == node_two_x and node_one_y == node_two_y):
+            continue
   
           # Convert coordinate values to a unit scale
           node_one_x_unit = node_one_x  / (2**24 - 1)
