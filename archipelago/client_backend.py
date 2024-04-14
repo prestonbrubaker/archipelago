@@ -177,6 +177,22 @@ def write_byte(list_in, index_in, num_lines_in, value_in):  # Takes in a list an
       value_in -= value
   return list_in
 
+def get_positions_of_nodes():
+  list_out = []  #Node Type, Unit X, Unit Y
+  for i in range(0, organisms_state_list):
+    for j in range(0, nodes_state_list[i]):
+      inner_list = []
+      inner_list.append(read_byte(nodes_state_list[i][j], 3, 1))
+      node_x = read_byte(nodes_state_list[i][j], 5, 3)
+      node_y = read_byte(nodes_state_list[i][j], 8, 3)
+      node_x_unit = node_x  / (2**24 - 1)
+      node_y_unit = node_y  / (2**24 - 1)
+      inner_list.append(node_x_unit)
+      inner_list.append(node_y_unit)
+    list_out.append(inner_list)
+  return list_out
+      
+
 seed_organism()
 
 print("\n~~~~~~~~~~~~~~~~~~~~COMPUTER AND WORLD STATE~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
@@ -585,7 +601,9 @@ def main_loop():
         nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 8, 3, node_one_y_new)
         nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_new)
         nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_new)
-        
+
+    print("\n\n~~~~~~~~~~~~~~~~~~~~OUTPUT TO VISUAL~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    print("Output (node type, x, y): " + str(get_positions_of_nodes()))
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
     time.sleep(1)
