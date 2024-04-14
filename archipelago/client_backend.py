@@ -698,7 +698,7 @@ def main_loop():
       print("  Organism Age: " + str(age))
       if(age < 2**24 - 1):
         age += 1
-      organisms_state_list[i] = write_byte(organism_state_list[i], 25, 3, age)
+      organisms_state_list[i] = write_byte(organisms_state_list[i], 25, 3, age)
 
     print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(len(organisms_state_list) - 1, -1, -1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
