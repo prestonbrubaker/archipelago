@@ -521,7 +521,7 @@ def main_loop():
     print("  Muscle State List: " + str(muscles_state_list))
 
     print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-    for i in range(len(organisms_state_list) - 1, -1, 1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
+    for i in range(len(organisms_state_list) - 1, -1, -1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
       energy = read_byte(organisms_state_list[i], 11, 1)
       print("Organism " + str(read_byte(organism_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       energy -= 1
