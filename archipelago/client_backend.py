@@ -68,6 +68,8 @@ def make_world(world_res_in, light_max_in):  # Makes a 2_D list of the light val
       
 
 def seed_organism():
+  global org_counter
+  
   initial_state = [
 
     
