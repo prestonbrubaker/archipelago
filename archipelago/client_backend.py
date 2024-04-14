@@ -604,7 +604,7 @@ def main_loop():
       energy = read_byte(organisms_state_list[i], 11, 1)
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       r = random.uniform(0, 1)
-      if( r < 0.9):
+      if( r < 0.5):
         energy -= 1
       if(energy < 0):
         print("Organism has been executed...")
