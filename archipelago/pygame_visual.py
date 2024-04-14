@@ -13,7 +13,7 @@ while True:
       data_string = file.read()
   data_array = ast.literal_eval(data_string)
   window.fill((0, 0, 0))
-  for i in range(0, len(data.array)):
+  for i in range(0, len(data_array)):
     type = data_array[i][0]
     x_unit = data_array[i][1]
     y_unit = data_array[i][2]
