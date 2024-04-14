@@ -551,10 +551,10 @@ def main_loop():
         print("    Node Two New Y-Value: " + str(node_two_y_new))
         
         # Store new values
-        nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 5, 3, node_one_x_unit)
-        nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 8, 3, node_one_y_unit)
-        nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_unit)
-        nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_unit)
+        nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 5, 3, node_one_x_new)
+        nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 8, 3, node_one_y_new)
+        nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_new)
+        nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_new)
         
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
