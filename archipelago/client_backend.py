@@ -753,6 +753,10 @@ def main_loop():
               organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy + 1)
             world_light_values[cell_index_x][cell_index_y] -= 1
             print("  Organism's Energy Level Increased to: " + str(energy + 1))
+    print("\n\n~~~~~~~~~~~~~~~~~~~~SEED ORGANISM IF ALL LIFE IS EXTINCT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    if(len(organisms_state_list) == 0):
+      seed_organism()
+      print("Seeded Organism")
 
     print("\n\n~~~~~~~~~~~~~~~~~~~~ADD LIGHT TO WORLD CELLS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, world_res):
