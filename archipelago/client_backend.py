@@ -512,6 +512,11 @@ def main_loop():
         print("  Action to be Executed: Do Nothing")
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+
+      
+      if(action == 26):
+        print("  Action to be Executed: Attempt Reproduction
+              
         
     print("\n\n~~~~~~~~~~~~~~~~~~~~CHECK FOR LISTS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     
@@ -534,6 +539,40 @@ def main_loop():
         nodes_velocity_list.pop(i)
       else:
         organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy)
+    
+    print("\n\n~~~~~~~~~~~~~~~~~~~~ALLOW FOR COLLECTION OF LIGHT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ALLOW FOR COLLECTION OF LIGHT
+      for j in range(0, len(nodes_state_list[i])):
+        node_type = read_byte(nodes_state_list[i][j], 2, 1)
+        if(node_type == 3):
+          print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Photosynthesis Cell")
+          node_index = read_byte(nodes_state_list[i][j], 0, 1)
+          node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
+          node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
+          node_x_unit = node_one_x  / (2**24 - 1)
+          node_y_unit = node_one_y  / (2**24 - 1)
+          print("  Node Unit X: " + str(node_x_unit))
+          print("  Node Unit Y: " + str(node_y_unit))
+          cell_index_x = int(node_x_unit * world_res)
+          cell_index_y = int(node_y_unit * world_res)
+          print("  Node World Cell X-Index: " + + str(cell_index_x))
+          print("  Node World Cell Y-Index: " + + str(cell_index_y))
+          light = world_light_values[cell_index_x][cell_index_y]
+          print("  Light In This Cell: " + str(light))
+          if(light > 0):
+            energy = read_byte(organisms_state_list[i], 11, 1)
+            nodes_state_list[i] = write_byte(nodes_state_list[i], 11, 1, energy + 1)
+            world_light_values[cell_index_x][cell_index_y] -= 1
+            print("  Organism's Energy Level Increased to: " + str(energy + 1))
+
+    print("\n\n~~~~~~~~~~~~~~~~~~~~ADD LIGHT TO WORLD CELLS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    for i in range(0, world_res):
+      for j in range(0, world_res):
+        light = world_light_values[i][j]
+        if(light < light_max):
+          light += 1
+        world_light_values[i][j] = light
+          
     
     print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
