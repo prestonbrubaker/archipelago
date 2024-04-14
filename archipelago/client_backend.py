@@ -45,6 +45,8 @@ world_light_values = [  # 2-D list of light values in the cell. For now it will 
 world_res = 10  # Number of rows/columns of the world. Number of cells will be world_res squared.
 light_max = 2  # The maximum amount of light. Also the initial amount.
 
+org_counter = 0  # Counter of organisms ever to exist in this world. Iterated for each birth to assign new ID's that have never been used
+
 # Parameters for the environment or general rules
 
 max_node_offset = 0.1    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
@@ -139,6 +141,8 @@ def seed_organism():
     0, 1, 0, 0,  0, 0, 0, 0,      # Contracted muscle length
     1, 1, 1, 1,  1, 1, 1, 1,      # Expanded muscle length
     1, 1, 1, 1,  1, 1, 1, 1,      # Spring constant of the muscle
+    0, 0, 0, 1,  1, 0, 1, 0,  # Action 26: Attempt Reproduction
+    0, 1, 1, 0,  0, 0, 0, 0,    # Data 1
     0, 0, 0, 1,  0, 1, 0, 1,  # ACTION 21: Toggle muscle
     0, 0, 0, 0,  1, 1, 1, 0,  # ACTION 14: Store a random value up to Data
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1
@@ -154,7 +158,7 @@ def seed_organism():
     0, 0, 0, 0,  1, 0, 0, 0,  # ACTION 8: Check to see if the value in register 2 is more than the value in register 1, and change the index by the following is this is true
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 2
-    0, 0, 0, 0,  1, 1, 0, 0,    # Data 3 (12)
+    0, 0, 0, 0,  1, 1, 1, 0,    # Data 3 (14)
     0, 0, 0, 0,  0, 0, 1, 0,  # ACTION 2: Swap the values in registers 1 and 3
     0, 0, 0, 0,  1, 1, 1, 1,  # ACTION 15: Change the index by Data
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
@@ -167,6 +171,7 @@ def seed_organism():
   nodes_state_list.append(nodes_state)
   nodes_velocity_list.append(nodes_velocity_state)
   muscles_state_list.append(muscles_state)
+  org_counter += 1
 
 
 
@@ -516,6 +521,60 @@ def main_loop():
       
       if(action == 26):
         print("  Action to be Executed: Attempt Reproduction")
+        id = read_byte(organisms_state_list[i], 0, 6)
+        energy = read_byte(organisms_state_list[i], 11, 1)
+        data = read_byte(organisms_gene_list[i], index + 1, 1)
+        fraction = data / 255
+        print("  Organism " + str(id) + " Has Energy Level: " + str(energy) + " And is Willing to Share " + str(fraction) + " Of Itself With Potential Offspring")
+        if(energy >= 32):  # Will Act As a Current Setpoint for allowing reproduction
+          print("  Organism Has Sufficient energy for Reproduction. Commencing")
+          energy_transfer = energy * fraction
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy - energy_transfer)
+          print("  Parent Organism is Left With " + str(energy - energy_transfer) + " Enegy Units")
+          new_org_index = org_counter - 1
+          org_counter += 1
+          print("  The New Organism's ID is: " + str(new_org_index))
+          new_org_genes = []
+          for k in range(0, len(organisms_gene_list[i]):
+            new_org_genes.append(organisms_gene_list[i][j])
+          node_state = [
+            0, 0, 0, 0,  0, 0, 0, 0,  # Node ID
+            1, 0, 0, 0,  0, 0, 0, 0,  # Mass of Node
+            0, 0, 0, 0,  0, 0, 0, 0,  # Type of node (SOUL)
+            0, 0, 0, 0,  0, 0, 0, 0,  # Immutable Data
+            0, 0, 0, 0,  0, 0, 0, 0,  # Mutable data
+            0, 1, 0, 0,  0, 0, 0 ,0,  # X-coordinate
+            0, 0, 0, 0,  0, 0, 0 ,0,  # X-coordinate
+            0, 0, 0, 0,  0, 0, 0 ,0,  # X-coordinate
+            0, 1, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
+            0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
+            0, 0, 0, 0,  0, 0, 0 ,0,  # Y-coordinate
+          ]
+          nodes_state = []
+          nodes_state.append(node_state)
+          
+          muscle_state = []
+          muscles_state = []
+          muscles_state.append(muscle_state)
+
+          node_velocity_state = [0, 0]
+          nodes_velocity_state = []
+          nodes_velocity_state.append(node_velocity_state)
+          
+          r = random.uniform(0, 1)
+          organisms_gene_list.append(new_org_genes)
+          nodes_state_list.append(nodes_state)
+          nodes_velocity_list.append(nodes_velocity_state)
+          muscles_state_list.append(muscles_state)
+
+          organisms_gene_list[-1] = write_byte(organisms_state_list[-1], 0, 6, new_org_index)
+          
+        else:
+          print("  Organism Does Not Have Enough Energy For Reproduction. Skipping.")
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 2)
+        
+        
               
         
     print("\n\n~~~~~~~~~~~~~~~~~~~~CHECK FOR LISTS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
