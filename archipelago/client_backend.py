@@ -50,10 +50,10 @@ org_counter = 0  # Counter of organisms ever to exist in this world. Iterated fo
 # Parameters for the environment or general rules
 
 max_node_offset = 0.1    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
-spring_multiplier = .5  # Multiplier for the maximum spring constant
+spring_multiplier = 1  # Multiplier for the maximum spring constant
 mass_multiplier = 0.01
-dt = 0.02  # Time Step for Physics
-drag_m = 0.01    # Velocities will be multiplied by (1-drag_m) each turn
+dt = 0.03  # Time Step for Physics
+drag_m = 0.001    # Velocities will be multiplied by (1-drag_m) each turn
 
 sleep_time = 1  # Time between iterations
 
