@@ -182,7 +182,7 @@ def get_positions_of_nodes():
   for i in range(0, len(organisms_state_list)):
     for j in range(0, len(nodes_state_list[i])):
       inner_list = []
-      inner_list.append(read_byte(nodes_state_list[i][j], 3, 1))
+      inner_list.append(read_byte(nodes_state_list[i][j], 2, 1))
       node_x = read_byte(nodes_state_list[i][j], 5, 3)
       node_y = read_byte(nodes_state_list[i][j], 8, 3)
       node_x_unit = node_x  / (2**24 - 1)
