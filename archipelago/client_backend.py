@@ -561,7 +561,7 @@ def main_loop():
           print("  Light In This Cell: " + str(light))
           if(light > 0):
             energy = read_byte(organisms_state_list[i], 11, 1)
-            nodes_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy + 1)
+            nodes_state_list[i][j] = write_byte(organisms_state_list[i][j], 11, 1, energy + 1)
             world_light_values[cell_index_x][cell_index_y] -= 1
             print("  Organism's Energy Level Increased to: " + str(energy + 1))
 
@@ -583,7 +583,6 @@ def main_loop():
         node_two_index = read_byte(muscles_state_list[i][j], 2, 1)
         print("    Node One index: " + str(node_one_index))
         print("    Node Two index: " + str(node_two_index))
-        print(str(nodes_state_list))
         node_one_x = read_byte(nodes_state_list[i][node_one_index], 5, 3)
         node_one_y = read_byte(nodes_state_list[i][node_one_index], 8, 3)
         node_two_x = read_byte(nodes_state_list[i][node_two_index], 5, 3)
