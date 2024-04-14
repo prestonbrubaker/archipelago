@@ -1,8 +1,8 @@
 import sys
 import ast
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtGui import QPainter, QColor, QPen
-from PyQt5.QtCore import QTimer
+from PyQt5.QtGui import QPainter, QColor, QPen, QBrush
+from PyQt5.QtCore import QTimer, Qt
 
 class DataDisplay(QWidget):
     def __init__(self):
@@ -40,7 +40,8 @@ class DataDisplay(QWidget):
         x = int(x_unit * self.width())                          #Normalized X
         y = int(y_unit * self.height())                         #Normalized Y
         painter.setPen(QPen(color, 10))                         #Set pen to color previously defined, also give it a weight
-        painter.drawPoint(x, y)                                 #Draw node!
+        painter.setBrush(QBrush(color, Qt.SolidPattern))       #This fills circles
+        painter.drawEllipse(x, y, 5, 5)                         #Draw node!
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
