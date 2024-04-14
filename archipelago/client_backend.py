@@ -179,8 +179,8 @@ def write_byte(list_in, index_in, num_lines_in, value_in):  # Takes in a list an
 
 def get_positions_of_nodes():
   list_out = []  #Node Type, Unit X, Unit Y
-  for i in range(0, organisms_state_list):
-    for j in range(0, nodes_state_list[i]):
+  for i in range(0, len(organisms_state_list)):
+    for j in range(0, len(nodes_state_list[i])):
       inner_list = []
       inner_list.append(read_byte(nodes_state_list[i][j], 3, 1))
       node_x = read_byte(nodes_state_list[i][j], 5, 3)
