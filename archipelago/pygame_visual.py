@@ -41,12 +41,22 @@ while running:
             running = False
     
     if data_array:
-        window.fill((0, 0, 0))
+        window.fill((70, 70, 70))
         for item in data_array:
             obj_type, x_unit, y_unit = item
             x = x_unit * size
             y = y_unit * size
-            color = (255, 0, 0) if obj_type == 0 else (0, 255, 0)
+            if(obj_type == 0):
+                color = (255, 0, 0)
+            elif(obj_type == 1):
+                color = (0, 0, 255)
+            elif(obj_type == 2):
+                color = (0, 255, 255)
+            elif(obj_type == 3):
+                color = (255, 0, 0)
+            else:
+                color = (255, 255, 0)
+            
             pygame.draw.rect(window, color, (x, y, 5, 5))
         pygame.display.flip()
     
