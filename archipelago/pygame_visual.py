@@ -52,7 +52,7 @@ while running:
                 0: (255, 0, 0),
                 1: (0, 0, 255),
                 2: (0, 255, 255),
-                3: (255, 0, 0),
+                3: (0, 255, 0),
             }.get(obj_type, (255, 255, 0))  # Default color if type is not known
             pygame.draw.rect(window, color, (x, y, 5, 5))
         pygame.display.flip()
