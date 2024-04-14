@@ -608,7 +608,7 @@ def main_loop():
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
     with open('locations.txt', 'w') as file:
       file.write(str(get_positions_of_nodes()))
-    time.sleep(1)
+    time.sleep(.1)
     # Random Willoh Shoutout heyyyy bestie 
 
 main_loop()
