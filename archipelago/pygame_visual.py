@@ -20,6 +20,9 @@ while True:
       y_unit = data_array[i][2]
       x = x_unit * 800
       y = y_unit * 800
-      pygame.draw.rect(window, (255, 0, 0), (x, y, 5, 5))
+      if(type == 0):
+        pygame.draw.rect(window, (255, 0, 0), (x, y, 5, 5))
+      elif(type == 3):
+        pygame.draw.rect(window, (0, 255, 0), (x, y, 5, 5))
     pygame.display.flip()
   time.sleep(.5)
