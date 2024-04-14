@@ -533,7 +533,7 @@ def main_loop():
         muscles_state_list.pop(i)
         nodes_velocity_list.pop(i)
       else:
-        organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1)
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy)
     
     print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
