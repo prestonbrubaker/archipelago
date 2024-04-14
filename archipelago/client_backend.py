@@ -648,12 +648,12 @@ def main_loop():
           node_y_unit = node_y  / (2**24 - 1)
           if(node_x_unit < 0):
             node_x_unit = 0
-          elif(node_x_unit > 1):
-            node_x_unit = 1
+          elif(node_x_unit >= 1):
+            node_x_unit = .999999
           if(node_y_unit < 0):
             node_y_unit = 0
-          elif(node_y_unit > 1):
-            node_y_unit = 1
+          elif(node_y_unit >= 1):
+            node_y_unit = .999999
           print("  Node Unit X: " + str(node_x_unit))
           print("  Node Unit Y: " + str(node_y_unit))
           cell_index_x = int(node_x_unit * world_res)
@@ -790,12 +790,16 @@ def main_loop():
           nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_new)
           nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_new)
 
-    print("\n\n~~~~~~~~~~~~~~~~~~~~OUTPUT TO VISUAL~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    print("\n\n~~~~~~~~~~~~~~~~~~~~OUTPUT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     print("Output (node type, x, y): " + str(get_positions_of_nodes()))
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
     with open('locations.txt', 'w') as file:
       file.write(str(get_positions_of_nodes()))
+    with open('genes.txt', 'w') as file:
+      file.write(str(organisms_gene_list))
+    with open('states.txt', 'w') as file:
+      file.write(str(organisms_state_list))
     time.sleep(sleep_time)
     # Random Willoh Shoutout heyyyy bestie 
 
