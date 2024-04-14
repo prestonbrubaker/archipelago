@@ -27,7 +27,7 @@ def update_data():
             print(f"Value error: {e}")
         except Exception as e:
             print(f"Unexpected error: {e}")
-        pygame.time.wait(.1) 
+        pygame.time.wait(1) 
 
 # Start the thread that updates data_array
 thread = threading.Thread(target=update_data)
