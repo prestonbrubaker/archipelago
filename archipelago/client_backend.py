@@ -43,6 +43,7 @@ muscles_state_list = [    #3-D list of muscles (organism index, muscle index, mu
 
 max_node_offset = 0.05    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 0.01  # Multiplier for the maximum spring constant
+mass_multiplier = 0.01
 
 
 
@@ -536,7 +537,26 @@ def main_loop():
 
         print("    Spring Constant: " + str(spring_constant))
 
+        toggle_state = read_byte(muscle_state_list[i][j], 6, 1)  # 0 = expanded, 1 = contracted
+        if(toggle_state = 0):
+          print("    Muscle is in Expanded State")
+          muscle_length = read_byte(muscle_state_list[i][j], 4, 1)  # Pull the expanded length
+        else:
+          print("    Muscle is in Contracted State")
+          muscle_length = read_byte(muscle_state_list[i][j], 3, 1)  # Pull the contracted length
+        print("    Muscle length: " + str(muscle_length))
+        force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
+        force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
 
+        node_one_mass = read_byte(nodes_state_list[i][node_one_index], 1, 1)
+        node_two_mass = read_byte(nodes_state_list[i][node_two_index], 1, 1)
+        print("    Node 1 Mass: " + str(node_one_mass))
+        print("    Node 2 Mass: " + str(node_two_mass))
+        nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier)
+        nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier)
+        nodes_velocity_list[i][node_two_index][0] += force_x / (node_two_mass * mass_multiplier)
+        nodes_velocity_list[i][node_two_index][1] += force_y / (node_two_mass * mass_multiplier)
+        
         
 
         # Convert coordinate values back to values ready to be stored in 3 bytes
