@@ -46,16 +46,12 @@ while running:
             obj_type, x_unit, y_unit = item
             x = x_unit * size
             y = y_unit * size
-            if(obj_type == 0):
-                color = (255, 0, 0)
-            elif(obj_type == 1):
-                color = (0, 0, 255)
-            elif(obj_type == 2):
-                color = (0, 255, 255)
-            elif(obj_type == 3):
-                color = (255, 0, 0)
-            else:
-                color = (255, 255, 0)
+            color = {
+                0: (255, 0, 0),
+                1: (0, 0, 255),
+                2: (0, 255, 255),
+                3: (255, 0, 0),
+            }.get(obj_type, (255, 255, 0))  # Default color if type is not known
             
             pygame.draw.rect(window, color, (x, y, 5, 5))
         pygame.display.flip()
