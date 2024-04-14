@@ -567,7 +567,7 @@ def main_loop():
           nodes_velocity_state = []
           nodes_velocity_state.append(node_velocity_state)
           
-          r = random.uniform(0, 1)
+          
           organisms_gene_list.append(new_org_genes)
           organisms_state_list.append(new_org_state)
           nodes_state_list.append(nodes_state)
@@ -576,6 +576,13 @@ def main_loop():
 
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 0, 6, new_org_index)
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 11, 1, energy_transfer)
+          if( r < 0.05):
+            r = random.uniform(0, 1)
+            print("  Adding a Random Mutation by Setting a Random Bit of Offspring's Geneome to a Random Value")
+            random_gene_index = random.randint(0, len(organisms_gene_list[-1]) - 1)
+            random_bit_value = random.randint(0, 1)
+            organisms_gene_list[-1][random_gene_index] = random_bit_value
+            
           
         else:
           print("  Organism Does Not Have Enough Energy For Reproduction. Skipping.")
