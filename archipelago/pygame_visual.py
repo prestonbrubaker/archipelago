@@ -27,7 +27,7 @@ def update_data():
             print(f"Value error: {e}")
         except Exception as e:
             print(f"Unexpected error: {e}")
-        pygame.time.wait(1) 
+        pygame.time.wait(10) 
 
 # Start the thread that updates data_array
 thread = threading.Thread(target=update_data)
@@ -60,6 +60,6 @@ while running:
             pygame.draw.rect(window, color, (x, y, 5, 5))
         pygame.display.flip()
     
-    clock.tick(20)  # This caps the frame rate at 20 FPS
+    clock.tick(60)  # This caps the frame rate at 60 FPS
 
 pygame.quit()
