@@ -377,7 +377,7 @@ def main_loop():
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 8)
       
-      if(action == 21):
+      elif(action == 21):
         print("  Action to be Executed: Toggle Muscle")
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
         print("  Organism's First Selected Node: " + str(selected_node_one))
@@ -416,7 +416,7 @@ def main_loop():
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
 
       
-      if(action == 4):
+      elif(action == 4):
         print("  Action to be Executed: Swap register 1 and 2")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
@@ -433,7 +433,7 @@ def main_loop():
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       
-      if(action == 1):
+      elif(action == 1):
         print("  Action to be Executed: Store Data in Register 1")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         print("  Register One Value: " + str(register_one_value))
@@ -444,7 +444,7 @@ def main_loop():
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
 
       
-      if(action == 12):
+      elif(action == 12):
         print("  Action to be Executed: Subtract Register 2 from Register 1, and Store the Result in Register 3. Any result less than 0 is made to be zero")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
@@ -459,7 +459,7 @@ def main_loop():
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       
-      if(action == 8):
+      elif(action == 8):
         print("  Action to be Executed: Check if the value in register 2 is more than the value in register 1, and change the index by data if that is the case and proceed otherwise")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
@@ -483,7 +483,7 @@ def main_loop():
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
 
       
-      if(action == 2):
+      elif(action == 2):
         print("  Action to be Executed: Swap the Values in Registers 1 and 3")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_three_value = read_byte(organisms_state_list[i], 20, 3)
@@ -500,7 +500,7 @@ def main_loop():
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       
-      if(action == 15):
+      elif(action == 15):
         print("  Action to be Executed: Change the Index by Data")
         data = read_byte(organisms_gene_list[i], index + 1, 3)
         print("  Data Value including jump direction bit: " + str(data))
@@ -516,13 +516,10 @@ def main_loop():
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
 
       
-      if(action == 0):
-        print("  Action to be Executed: Do Nothing")
-        # Increment Genetic Index
-        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+      
 
       
-      if(action == 26):
+      elif(action == 26):
         print("  Action to be Executed: Attempt Reproduction")
         id = read_byte(organisms_state_list[i], 0, 6)
         energy = read_byte(organisms_state_list[i], 11, 1)
@@ -582,12 +579,17 @@ def main_loop():
             random_gene_index = random.randint(0, len(organisms_gene_list[-1]) - 1)
             random_bit_value = random.randint(0, 1)
             organisms_gene_list[-1][random_gene_index] = random_bit_value
-            
+        
           
         else:
           print("  Organism Does Not Have Enough Energy For Reproduction. Skipping.")
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 2)
+      
+      else:
+        print("  Action to be Executed: Do Nothing")
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
         
         
               
