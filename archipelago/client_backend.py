@@ -710,7 +710,7 @@ def main_loop():
       r2 = random.uniform(0, 1)
       if( r < 0.1):
         energy -= int(1 * num_nodes * 0.2 + 1)
-      if(energy < 0 or (age > 1200 and r2 < .0001)):
+      if(energy < 0 or (age > 12000 and r2 < .0001)):
         print("Organism has been executed...")
         organisms_state_list.pop(i)
         organisms_gene_list.pop(i)
