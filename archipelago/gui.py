@@ -8,11 +8,11 @@ class MyApp(QMainWindow):
     def __init__(self):
         super().__init__()
         self.nodes = []
-        self.current_index = 0  # To keep track of the current node pair
+        self.current_index = 0
         self.initUI()
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.refresh_and_update)
-        self.timer.start(100)  # Update and redraw every 100 ms
+        self.timer.start(100) 
 
     def load_nodes(self):
         nodes = []
