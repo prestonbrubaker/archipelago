@@ -22,4 +22,4 @@ while True:
       y = y_unit * 800
       pygame.draw.rect(window, (255, 0, 0), (x, y, 5, 5))
     pygame.display.flip()
-  time.sleep(.2)
+  time.sleep(.5)
