@@ -606,7 +606,7 @@ def main_loop():
         data = read_byte(organisms_gene_list[i], index + 1, 1)
         fraction = data / 255
         print("  Organism " + str(id) + " Has Energy Level: " + str(energy) + " And is Willing to Share " + str(fraction) + " Of Itself With Potential Offspring")
-        if(energy >= 32):  # Will Act As a Current Setpoint for allowing reproduction
+        if(energy >= random.randint(32, 100)):  # Will Act As a Current Setpoint for allowing reproduction
           print("  Organism Has Sufficient energy for Reproduction. Commencing")
           energy_transfer = int(energy * fraction)
           organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy - energy_transfer)
