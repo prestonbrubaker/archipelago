@@ -707,9 +707,10 @@ def main_loop():
       age = read_byte(organisms_state_list[i], 25, 3)
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       r = random.uniform(0, 1)
+      r2 = random.uniform(0, 1)
       if( r < 0.1):
         energy -= 1 * num_nodes
-      if(energy < 0 or age > 300):
+      if(energy < 0 or (age > 600 and r2 < .1)):
         print("Organism has been executed...")
         organisms_state_list.pop(i)
         organisms_gene_list.pop(i)
