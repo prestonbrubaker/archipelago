@@ -72,6 +72,10 @@ def seed_organism():
   
   initial_state = [
 
+
+
+
+    
     
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
@@ -688,15 +692,24 @@ def main_loop():
     print("  Node Velocity List: " + str(nodes_velocity_list))
     print("  Muscle State List: " + str(muscles_state_list))
 
+    print("\n\n~~~~~~~~~~~~~~~~~~~~AGE ORGANISMS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for AGE
+      age = read_byte(organisms_state_list[i], 25, 3)
+      print("  Organism Age: " + str(age))
+      if(age < 2**24 - 1)
+        age += 1
+      organisms_state_list[i] = write_byte(organism_state_list[i], 25, 3, age)
+
     print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(len(organisms_state_list) - 1, -1, -1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
       energy = read_byte(organisms_state_list[i], 11, 1)
       num_nodes = len(nodes_state_list[i])
+      age = read_byte(organisms_state_list[i], 25, 3)
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       r = random.uniform(0, 1)
       if( r < 0.1):
         energy -= 1 * num_nodes
-      if(energy < 0):
+      if(energy < 0 or age > 300):
         print("Organism has been executed...")
         organisms_state_list.pop(i)
         organisms_gene_list.pop(i)
