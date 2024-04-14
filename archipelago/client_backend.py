@@ -535,7 +535,7 @@ def main_loop():
           org_counter += 1
           print("  The New Organism's ID is: " + str(new_org_index))
           new_org_genes = []
-          for k in range(0, len(organisms_gene_list[i]):
+          for k in range(0, len(organisms_gene_list[i])):
             new_org_genes.append(organisms_gene_list[i][j])
           node_state = [
             0, 0, 0, 0,  0, 0, 0, 0,  # Node ID
