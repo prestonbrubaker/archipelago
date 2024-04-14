@@ -696,7 +696,7 @@ def main_loop():
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for AGE
       age = read_byte(organisms_state_list[i], 25, 3)
       print("  Organism Age: " + str(age))
-      if(age < 2**24 - 1)
+      if(age < 2**24 - 1):
         age += 1
       organisms_state_list[i] = write_byte(organism_state_list[i], 25, 3, age)
 
