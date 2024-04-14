@@ -44,6 +44,7 @@ muscles_state_list = [    #3-D list of muscles (organism index, muscle index, mu
 max_node_offset = 0.05    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 0.01  # Multiplier for the maximum spring constant
 mass_multiplier = 0.01
+dt = 0.01  # Time Step for Physics
 
 
 
@@ -548,14 +549,23 @@ def main_loop():
         force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
         force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
 
+        print("    Force Between Nodes in X-direction: " + str(force_x))
+        print("    Force Between Nodes in Y-direction: " + str(force_y))
+
         node_one_mass = read_byte(nodes_state_list[i][node_one_index], 1, 1)
         node_two_mass = read_byte(nodes_state_list[i][node_two_index], 1, 1)
         print("    Node 1 Mass: " + str(node_one_mass))
         print("    Node 2 Mass: " + str(node_two_mass))
-        nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier)
-        nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier)
-        nodes_velocity_list[i][node_two_index][0] += force_x / (node_two_mass * mass_multiplier)
-        nodes_velocity_list[i][node_two_index][1] += force_y / (node_two_mass * mass_multiplier)
+        
+        nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier) * dt
+        nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier) * dt
+        nodes_velocity_list[i][node_two_index][0] += -1 * force_x / (node_two_mass * mass_multiplier) * dt
+        nodes_velocity_list[i][node_two_index][1] += -1 * force_y / (node_two_mass * mass_multiplier) * dt
+
+        node_one_x_unit += nodes_velocity_list[i][node_one_index][0] * dt
+        node_one_y_unit += nodes_velocity_list[i][node_one_index][1] * dt
+        node_two_x_unit += nodes_velocity_list[i][node_two_index][0] * dt
+        node_two_y_unit += nodes_velocity_list[i][node_two_index][1] * dt
         
         
 
