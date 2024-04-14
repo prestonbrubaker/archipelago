@@ -537,13 +537,13 @@ def main_loop():
 
         print("    Spring Constant: " + str(spring_constant))
 
-        toggle_state = read_byte(muscle_state_list[i][j], 6, 1)  # 0 = expanded, 1 = contracted
+        toggle_state = read_byte(muscles_state_list[i][j], 6, 1)  # 0 = expanded, 1 = contracted
         if(toggle_state == 0):
           print("    Muscle is in Expanded State")
-          muscle_length = read_byte(muscle_state_list[i][j], 4, 1)  # Pull the expanded length
+          muscle_length = read_byte(muscles_state_list[i][j], 4, 1)  # Pull the expanded length
         else:
           print("    Muscle is in Contracted State")
-          muscle_length = read_byte(muscle_state_list[i][j], 3, 1)  # Pull the contracted length
+          muscle_length = read_byte(muscles_state_list[i][j], 3, 1)  # Pull the contracted length
         print("    Muscle length: " + str(muscle_length))
         force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
         force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
