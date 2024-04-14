@@ -531,7 +531,7 @@ def main_loop():
         print("  Organism " + str(id) + " Has Energy Level: " + str(energy) + " And is Willing to Share " + str(fraction) + " Of Itself With Potential Offspring")
         if(energy >= 32):  # Will Act As a Current Setpoint for allowing reproduction
           print("  Organism Has Sufficient energy for Reproduction. Commencing")
-          energy_transfer = energy * fraction
+          energy_transfer = int(energy * fraction)
           organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy - energy_transfer)
           print("  Parent Organism is Left With " + str(energy - energy_transfer) + " Enegy Units")
           new_org_index = org_counter
@@ -574,7 +574,8 @@ def main_loop():
           nodes_velocity_list.append(nodes_velocity_state)
           muscles_state_list.append(muscles_state)
 
-          organisms_gene_list[-1] = write_byte(organisms_state_list[-1], 0, 6, new_org_index)
+          organisms_state_list[-1] = write_byte(organisms_state_list[-1], 0, 6, new_org_index)
+          organisms_state_list[-1] = write_byte(organisms_state_list[-1], 11, 1, energy_transfer)
           
         else:
           print("  Organism Does Not Have Enough Energy For Reproduction. Skipping.")
@@ -595,7 +596,9 @@ def main_loop():
     for i in range(len(organisms_state_list) - 1, -1, -1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
       energy = read_byte(organisms_state_list[i], 11, 1)
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
-      energy -= 1
+      r = random.uniform(0, 1)
+      if( r < 0.9):
+        energy -= 1
       if(energy < 0):
         print("Organism has been executed...")
         organisms_state_list.pop(i)
