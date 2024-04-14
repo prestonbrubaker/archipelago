@@ -55,7 +55,7 @@ mass_multiplier = 0.01
 dt = 0.03  # Time Step for Physics
 drag_m = 0.001    # Velocities will be multiplied by (1-drag_m) each turn
 
-sleep_time = 1  # Time between iterations
+sleep_time = 0  # Time between iterations
 
 def make_world(world_res_in, light_max_in):  # Makes a 2_D list of the light values
   list_out = []
