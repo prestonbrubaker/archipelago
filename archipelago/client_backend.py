@@ -523,17 +523,17 @@ def main_loop():
     print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(len(organisms_state_list) - 1, -1, -1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
       energy = read_byte(organisms_state_list[i], 11, 1)
-      print("Organism " + str(read_byte(organism_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
+      print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       energy -= 1
       if(energy < 0):
         print("Organism has been executed...")
-        organism_state_list.pop(i)
-        organism_gene_list.pop(i)
-        node_state_list.pop(i)
+        organisms_state_list.pop(i)
+        organisms_gene_list.pop(i)
+        nodes_state_list.pop(i)
         muscles_state_list.pop(i)
         nodes_velocity_list.pop(i)
       else:
-        organism_state_list[i] = write_byte(organism_state_list[i], 11, 1)
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1)
     
     print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
