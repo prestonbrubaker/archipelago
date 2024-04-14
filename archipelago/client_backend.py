@@ -534,7 +534,7 @@ def main_loop():
           energy_transfer = energy * fraction
           organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy - energy_transfer)
           print("  Parent Organism is Left With " + str(energy - energy_transfer) + " Enegy Units")
-          new_org_index = org_counter - 1
+          new_org_index = org_counter
           org_counter += 1
           print("  The New Organism's ID is: " + str(new_org_index))
           new_org_genes = []
