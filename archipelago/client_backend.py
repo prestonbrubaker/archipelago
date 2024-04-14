@@ -39,6 +39,12 @@ muscles_state_list = [    #3-D list of muscles (organism index, muscle index, mu
 
 ]
 
+world_light_values = [  # 2-D list of light values in the cell. For now it will be 10x10,and they will have an initial and max of 2
+
+]
+world_res = 10  # Number of rows/columns of the world. Number of cells will be world_res squared.
+light_max = 2  # The maximum amount of light. Also the initial amount.
+
 # Parameters for the environment or general rules
 
 max_node_offset = 0.1    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
@@ -47,11 +53,18 @@ mass_multiplier = 0.01
 dt = 0.02  # Time Step for Physics
 drag_m = 0.01    # Velocities will be multiplied by (1-drag_m) each turn
 
-
+def make_world(world_res_in, light_max_in):  # Makes a 2_D list of the light values
+  list_out = []
+  for i in range(0, world_res_in):
+    temp_l = []
+    for j in range(0, world_res_in):
+      temp_l.append(light_max_in)
+    list_out.append(temp_l)
+  return list_out
+      
 
 def seed_organism():
   initial_state = [
-
 
     
     0, 0, 0, 0,  0, 0, 0, 0,  # Organism ID
@@ -195,6 +208,7 @@ def get_positions_of_nodes():
       
 
 seed_organism()
+world_light_values = make_world(world_res, light_max)  # Initialize world light values
 
 print("\n~~~~~~~~~~~~~~~~~~~~COMPUTER AND WORLD STATE~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
@@ -503,6 +517,10 @@ def main_loop():
     print("  Node State List: " + str(nodes_state_list))
     print("  Node Velocity List: " + str(nodes_velocity_list))
     print("  Muscle State List: " + str(muscles_state_list))
+
+    print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ITERATE METABOLISM
+      
     
     print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
