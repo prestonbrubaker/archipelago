@@ -570,7 +570,9 @@ def main_loop():
       for j in range(0, world_res):
         light = world_light_values[i][j]
         if(light < light_max):
-          light += 1
+          r = random.uniform(0, 1)
+          if( r < 0.5):
+            light += 1
         world_light_values[i][j] = light
           
     
