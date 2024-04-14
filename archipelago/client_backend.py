@@ -623,7 +623,7 @@ def main_loop():
       num_nodes = len(nodes_state_list[i])
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       r = random.uniform(0, 1)
-      if( r < 0.2):
+      if( r < 0.1):
         energy -= 1 * num_nodes
       if(energy < 0):
         print("Organism has been executed...")
