@@ -4,7 +4,7 @@ def format_bits(data):
         for i in range(0, len(sublist), 8):  # Process every 8 elements
             # Get next slice of 8 bits or fewer if not enough elements left
             chunk = sublist[i:i+8]
-            line = ' '.join(str(bit) for bit in chunk[:4]) + "     " + ' '.join(str(bit) for bit in chunk[4:])
+            line = ' '.join(str(bit) for bit in chunk[:4]) + "  " + ' '.join(str(bit) for bit in chunk[4:])
             formatted_data += line + "\n"
         formatted_data += "\n\n\n\n\n"  # Add 5 empty lines after each list
     return formatted_data
