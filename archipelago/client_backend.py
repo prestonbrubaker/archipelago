@@ -672,11 +672,11 @@ def main_loop():
             
             r2 = 0
             while(r2 < 0.5):
-            print("  Adding a Random Mutation by Setting a Random Bit of Offspring's Geneome to a Random Value")
-            random_gene_index = random.randint(0, len(organisms_gene_list[-1]) - 1)
-            random_bit_value = random.randint(0, 1)
-            organisms_gene_list[-1][random_gene_index] = random_bit_value
-            r2 = random.uniform(0,1)
+              print("  Adding a Random Mutation by Setting a Random Bit of Offspring's Geneome to a Random Value")
+              random_gene_index = random.randint(0, len(organisms_gene_list[-1]) - 1)
+              random_bit_value = random.randint(0, 1)
+              organisms_gene_list[-1][random_gene_index] = random_bit_value
+              r2 = random.uniform(0,1)
         
           
         else:
