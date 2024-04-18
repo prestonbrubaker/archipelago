@@ -24,22 +24,23 @@ class DataDisplay(QWidget):
                 print("Warning: Data string is empty.")
         except Exception as e:
             print(f"Unexpected error: {e}")
-        self.repaint()                                    #Make sure points are displayed on top
+        self.repaint()                                          #Make sure points are displayed on top
 
     def paintEvent(self, event):
         painter = QPainter(self)                                #Set POV
         painter.setRenderHint(QPainter.Antialiasing)            #This smooths. Really just aesthetic
-        for node in self.data_array:                            #Find all lil nodes in array!
+        
+        for node in self.data_array:                            #Find all lil nodes in array! This is where I need my thinking cap for some logic. 
             self.drawNode(painter, *node)
 
     def drawNode(self, painter, type_, x_unit, y_unit):
         x = int(x_unit * self.width())
         y = int(y_unit * self.height())
         color_dict = {
-            0: QColor(255, 0, 0),
-            1: QColor(0, 255, 255),
-            2: QColor(0, 0, 255),
-            3: QColor(0, 255, 0)
+            0: QColor(255, 224, 189),   # Soul color ;)
+            1: QColor(128, 128, 128),   # Structural 
+            2: QColor(79, 79, 79),      # Gripper
+            3: QColor(34, 139, 34)      # Photosynthesis
         }
         color = color_dict.get(type_, QColor(255, 255, 0))
         painter.setPen(QPen(color, 5))
