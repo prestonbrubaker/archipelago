@@ -12,6 +12,7 @@ line_data = []
 
 def update_data():
     global data_array
+    global line_data
     while True:
         try:
             with open('locations.txt', 'r') as file:
