@@ -161,6 +161,9 @@ def seed_organism():
     1, 1, 1, 1,  1, 1, 1, 1,      # Spring constant of the muscle
     0, 0, 0, 1,  0, 1, 1, 0,  # ACTION 26: Increment the 1st selected nodes index by one. It should set it to the value of the first photosynthesis cell
     0, 0, 0, 1,  0, 1, 0, 0,  # ACTION 20: Create a muscle between the first and second selected nodes. It should make a muscle between the two photosynthesis cells
+    0, 0, 1, 0,  0, 0, 0, 0,    # Contracted muscle length
+    1, 1, 1, 1,  1, 1, 1, 1,    # Expanded muscle length
+    1, 1, 1, 1,  1, 1, 1, 1,    # Spring constant of the muscle
     0, 0, 0, 0,  0, 0, 0, 0,
     0, 0, 0, 0,  0, 0, 0, 0,
     0, 0, 0, 0,  0, 0, 0, 0,
@@ -525,7 +528,43 @@ def main_loop():
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 8)
 
-      elif(action == 
+      elif(action == 26):
+        print("  Action to be Executed: Increment 1st Selected Node by One")
+        selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
+        print("  Organism's First Selected Node: " + str(selected_node_one))
+        selected_node_one += 1
+        if(selected_node_one >= len(nodes_state_list[i])):  # Reset the selected node if it overflows
+          selected_node_one = 0
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 12, 1, selected_node_one)
+        print("  Organism's New First Selected Node: " + str(selected_node_one))
+
+      elif(action == 20):
+        print("  Action to be executed: Form a new muscle between the first and second selected nodes")
+        contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
+        print("  Contracted Muscle Length: " + str(contracted_muscle_len))
+        expanded_muscle_len = read_byte(organisms_gene_list[i], index + 6, 1)  # Expanded Muscle Length
+        print("  Expanded Muscle Length: " + str(expanded_muscle_len))
+        spring_constant = read_byte(organisms_gene_list[i], index + 7, 1)  # Spring Constant
+        print("  Spring Constant of Muscle: " + str(spring_constant))
+
+        # Add muscle to muscles_state_list
+        muscles_state_list[i].append([])
+        j = len(muscles_state_list[i]) - 1  # Index of the new muscle in muscles_state_list
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 0, 1, j)  # Add a muscle index to the new muscle, incremented by one over the last muscle
+        print("    Index Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 1, 1, selected_node_one)  # Add first index of which the muscle is connected to
+        print("    1st Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 2, 1, selected_node_two)  # Add second index of which the muscle is connected to
+        print("    2nd Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 3, 1, contracted_muscle_len)  # Add the contracted muscle length
+        print("    Contracted Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 4, 1, expanded_muscle_len)  # Add the expanded muscle length
+        print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 5, 1, spring_constant)  # Add the spring constant
+        print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Add Mutable Data. Set to expanded state to start. 0 = expanded, 1 = contracted. Other bits reserved for future features.
+        print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        
       
       elif(action == 21):
         print("  Action to be Executed: Toggle Muscle")
