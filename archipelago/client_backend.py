@@ -300,7 +300,7 @@ def get_positions_of_muscles():
   for i in range(0, len(organisms_state_list)):
     if(len(muscles_state_list[i]) == 0 ):  # Skip the organism if it has no muscles
        continue
-    for j in range(0, muscles_state_list[i]):
+    for j in range(0, len(muscles_state_list[i])):
       inner_list = []
       node_one_index = read_byte(muscles_state_list[i][j], 1, 1)
       node_two_index = read_byte(muscles_state_list[i][j], 2, 1)
