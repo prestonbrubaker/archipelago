@@ -6,7 +6,8 @@ pygame.init()
 size = 1200
 window = pygame.display.set_mode((size, size))
 clock = pygame.time.Clock()
-node_size = 8
+node_size = 2
+line_w = 1
 
 data_array = []
 line_data = []
@@ -58,7 +59,7 @@ while running:
     for line in line_data:
         x1, y1, x2, y2, line_type = line
         color = (255, 0, 0) if line_type == 1 else (0, 0, 255)
-        pygame.draw.line(window, color, (x1*size, y1*size), (x2*size, y2*size), 2)
+        pygame.draw.line(window, color, (x1*size, y1*size), (x2*size, y2*size), line_w)
     
     # Draw rectangles from data_array
     for item in data_array:
