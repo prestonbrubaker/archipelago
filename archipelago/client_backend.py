@@ -159,7 +159,7 @@ def seed_organism():
     0, 0, 1, 0,  0, 0, 0, 0,      # Contracted muscle length
     1, 1, 1, 1,  1, 1, 1, 1,      # Expanded muscle length
     1, 1, 1, 1,  1, 1, 1, 1,      # Spring constant of the muscle
-    0, 0, 0, 1,  1, 0, 1, 0,  # ACTION 26: Increment the 1st selected nodes index by one. It should set it to the value of the first photosynthesis cell
+    0, 0, 0, 1,  0, 1, 1, 0,  # ACTION 22: Increment the 1st selected nodes index by one. It should set it to the value of the first photosynthesis cell
     0, 0, 0, 1,  0, 1, 0, 0,  # ACTION 20: Create a muscle between the first and second selected nodes. It should make a muscle between the two photosynthesis cells
     0, 0, 1, 0,  0, 0, 0, 0,    # Contracted muscle length
     1, 1, 1, 1,  1, 1, 1, 1,    # Expanded muscle length
@@ -528,7 +528,7 @@ def main_loop():
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 8)
 
-      elif(action == 26):
+      elif(action == 22):
         print("  Action to be Executed: Increment 1st Selected Node by One")
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
         print("  Organism's First Selected Node: " + str(selected_node_one))
