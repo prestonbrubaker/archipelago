@@ -537,14 +537,22 @@ def main_loop():
           selected_node_one = 0
         organisms_state_list[i] = write_byte(organisms_state_list[i], 12, 1, selected_node_one)
         print("  Organism's New First Selected Node: " + str(selected_node_one))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       elif(action == 20):
+        
         print("  Action to be executed: Form a new muscle between the first and second selected nodes")
-        contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
+        
+        selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
+        print("  Organism's First Selected Node: " + str(selected_node_one))
+        selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
+        print("  Organism's Second Selected Node: " + str(selected_node_two))
+        contracted_muscle_len = read_byte(organisms_gene_list[i], index + 1, 1)  # Contracted Muscle Length
         print("  Contracted Muscle Length: " + str(contracted_muscle_len))
-        expanded_muscle_len = read_byte(organisms_gene_list[i], index + 6, 1)  # Expanded Muscle Length
+        expanded_muscle_len = read_byte(organisms_gene_list[i], index + 2, 1)  # Expanded Muscle Length
         print("  Expanded Muscle Length: " + str(expanded_muscle_len))
-        spring_constant = read_byte(organisms_gene_list[i], index + 7, 1)  # Spring Constant
+        spring_constant = read_byte(organisms_gene_list[i], index + 3, 1)  # Spring Constant
         print("  Spring Constant of Muscle: " + str(spring_constant))
 
         # Add muscle to muscles_state_list
