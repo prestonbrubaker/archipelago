@@ -351,6 +351,12 @@ def get_positions_of_muscles():
       inner_list.append(mutable_info)
       list_out.append(inner_list)
   return list_out
+  
+def get_statistics():
+  list_out = [] # 0: world age, 1: number of organisms
+  list_out.append(read_byte(age_of_world, 0, 6))
+  list_out.append(len(organisms_gene_list))
+  return list_out
       
 
 seed_organism()
@@ -950,6 +956,8 @@ def main_loop():
     print("Output (node type, x, y): " + str(get_positions_of_nodes()))
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
+    with open('statistics.txt', 'w') as file:
+      file.write(str(get_statistics()))
     with open('muscles.txt', 'w') as file:
       file.write(str(get_positions_of_muscles()))
     with open('locations.txt', 'w') as file:
