@@ -6,6 +6,7 @@ pygame.init()
 size = 1200
 window = pygame.display.set_mode((size, size))
 clock = pygame.time.Clock()
+node_size = 8
 
 data_array = []
 line_data = []
@@ -70,7 +71,7 @@ while running:
             2: (0, 255, 255),
             3: (0, 255, 0),
         }.get(obj_type, (255, 255, 0))  # Default color if type is not known
-        pygame.draw.rect(window, color, (x, y, 5, 5))
+        pygame.draw.rect(window, color, (x - 0.5 * node_size, y - 0.5 * node_size, node_size, node_size))
     
     pygame.display.flip()
     clock.tick(60)
