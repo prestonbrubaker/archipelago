@@ -49,11 +49,11 @@ org_counter = 0  # Counter of organisms ever to exist in this world. Iterated fo
 
 # Parameters for the environment or general rules
 
-max_node_offset = 0.03    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
+max_node_offset = 0.04    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 1  # Multiplier for the maximum spring constant
 mass_multiplier = 0.05
 dt = 0.03  # Time Step for Physics
-drag_m = 0.001    # Velocities will be multiplied by (1-drag_m) each turn
+drag_m = 0.0001    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 100  # Maximum organisms allowed before reproduction is banned
 
 sleep_time = 0  # Time between iterations
