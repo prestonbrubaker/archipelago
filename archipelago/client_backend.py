@@ -54,8 +54,8 @@ spring_multiplier = 1  # Multiplier for the maximum spring constant
 mass_multiplier = 0.05
 dt = 0.03  # Time Step for Physics
 drag_m = 0.0001    # Velocities will be multiplied by (1-drag_m) each turn
-max_org_c = 100  # Maximum organisms allowed before reproduction is banned
-metabolism_c = 0.1  # Chance that the organism goes through an iteration of metabolism
+max_org_c = 500  # Maximum organisms allowed before reproduction is banned
+metabolism_c = 0.2  # Chance that the organism goes through an iteration of metabolism
 
 sleep_time = 0  # Time between iterations
 
