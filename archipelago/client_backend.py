@@ -742,7 +742,7 @@ def main_loop():
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       r = random.uniform(0, 1)
       r2 = random.uniform(0, 1)
-      if( r < 0.01):
+      if( r < 0.05):
         energy -= int(1 * num_nodes * 0.3 + 1)
       if(energy < 0 or (age > 900 and r2 < .001)):
         print("Organism has been executed...")
