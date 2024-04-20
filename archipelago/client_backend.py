@@ -179,11 +179,10 @@ def seed_organism():
     0, 0, 0, 0,  0, 0, 0, 0,
     0, 0, 0, 0,  0, 0, 0, 0,
     0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
     0, 0, 0, 1,  1, 0, 1, 0,  # Action 26: Attempt Reproduction
     0, 1, 1, 0,  0, 0, 0, 0,    # Data 1
     0, 0, 0, 1,  0, 1, 0, 1,  # ACTION 21: Toggle muscle
+    0, 0, 0, 1,  0, 1, 1, 0,  # ACTION 22: Increment the 1st selected nodes index by one.
     0, 0, 0, 0,  1, 1, 1, 0,  # ACTION 14: Store a random value up to Data
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1
     0 ,0, 0, 0,  0, 0, 0, 0,    # Data 2
@@ -198,7 +197,7 @@ def seed_organism():
     0, 0, 0, 0,  1, 0, 0, 0,  # ACTION 8: Check to see if the value in register 2 is more than the value in register 1, and change the index by the following is this is true
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 2
-    0, 0, 0, 0,  1, 1, 1, 0,    # Data 3 (14)
+    0, 0, 0, 0,  1, 1, 1, 1,    # Data 3 (15)
     0, 0, 0, 0,  0, 0, 1, 0,  # ACTION 2: Swap the values in registers 1 and 3
     0, 0, 0, 0,  1, 1, 1, 1,  # ACTION 15: Change the index by Data
     0, 0, 0, 0,  0, 0, 0, 0,    # Data 1 (first bit of this line indicates backwards travel)
