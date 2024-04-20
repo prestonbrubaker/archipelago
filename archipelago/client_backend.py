@@ -159,7 +159,7 @@ def seed_organism():
     0, 0, 1, 0,  0, 0, 0, 0,      # Contracted muscle length
     1, 1, 1, 1,  1, 1, 1, 1,      # Expanded muscle length
     1, 1, 1, 1,  1, 1, 1, 1,      # Spring constant of the muscle
-    0, 0, 0, 1,  0, 1, 1, 0,  # ACTION 26: Increment the 1st selected nodes index by one. It should set it to the value of the first photosynthesis cell
+    0, 0, 0, 1,  1, 0, 1, 0,  # ACTION 26: Increment the 1st selected nodes index by one. It should set it to the value of the first photosynthesis cell
     0, 0, 0, 1,  0, 1, 0, 0,  # ACTION 20: Create a muscle between the first and second selected nodes. It should make a muscle between the two photosynthesis cells
     0, 0, 1, 0,  0, 0, 0, 0,    # Contracted muscle length
     1, 1, 1, 1,  1, 1, 1, 1,    # Expanded muscle length
