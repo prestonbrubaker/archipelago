@@ -294,6 +294,32 @@ def get_positions_of_nodes():
       inner_list.append(node_y_unit)
       list_out.append(inner_list)
   return list_out
+
+def get_positions_of_muscles():
+  list_out = [] #x1, y1, x2, y2, mutable info (0 = expanded, 1 = contracted)
+  for i in range(0, len(organisms_state_list)):
+    if(len(muscles_state_list[i] == 0):  # Skip the organism if it has no muscles
+       continue
+    for j in range(muscles_state_list[i])):
+      inner_list = []
+      node_one_index = read_byte(muscles_state_list[i][j], 1, 1)
+      node_two_index = read_byte(muscles_state_list[i][j], 2, 1)
+      mutable_info = read_byte(muscles_state_list[i][j], 6, 1)
+      node_1_x = read_byte(nodes_state_list[i][node_one_index], 5, 3)
+      node_1_y = read_byte(nodes_state_list[i][node_one_index], 8, 3)
+      node_2_x = read_byte(nodes_state_list[i][node_two_index], 5, 3)
+      node_2_y = read_byte(nodes_state_list[i][node_two_index], 8, 3)
+      node_1_x_unit = node_1_x  / (2**24 - 1)
+      node_1_y_unit = node_1_y  / (2**24 - 1)
+      node_2_x_unit = node_2_x  / (2**24 - 1)
+      node_2_y_unit = node_2_y  / (2**24 - 1)
+      inner_list.append(node_1_x_unit)
+      inner_list.append(node_1_y_unit)
+      inner_list.append(node_2_x_unit)
+      inner_list.append(node_2_y_unit)
+      inner_list.append(mutable_info)
+      list_out.append(inner_list)
+  return list_out
       
 
 seed_organism()
@@ -893,6 +919,8 @@ def main_loop():
     print("Output (node type, x, y): " + str(get_positions_of_nodes()))
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
+    with open('muscles.txt', 'w') as file:
+      file.write(str(get_positions_of_muscles()))
     with open('locations.txt', 'w') as file:
       file.write(str(get_positions_of_nodes()))
     with open('genes.txt', 'w') as file:
