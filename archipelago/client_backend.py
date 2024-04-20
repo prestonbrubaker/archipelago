@@ -43,7 +43,7 @@ world_light_values = [  # 2-D list of light values in the cell. For now it will 
 
 ]
 world_res = 30  # Number of rows/columns of the world. Number of cells will be world_res squared.
-light_max = 5  # The maximum amount of light. Also the initial amount.
+light_max = 2  # The maximum amount of light. Also the initial amount.
 
 org_counter = 0  # Counter of organisms ever to exist in this world. Iterated for each birth to assign new ID's that have never been used
 
@@ -51,7 +51,7 @@ org_counter = 0  # Counter of organisms ever to exist in this world. Iterated fo
 
 max_node_offset = 0.1    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 1  # Multiplier for the maximum spring constant
-mass_multiplier = 0.001
+mass_multiplier = 0.005
 dt = 0.03  # Time Step for Physics
 drag_m = 0.0001    # Velocities will be multiplied by (1-drag_m) each turn
 
