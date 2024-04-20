@@ -538,6 +538,18 @@ def main_loop():
         print("  Organism's New First Selected Node: " + str(selected_node_one))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+        
+      elif(action == 23):
+        print("  Action to be Executed: Increment 2nd Selected Node by One")
+        selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
+        print("  Organism's Second Selected Node: " + str(selected_node_two))
+        selected_node_two += 1
+        if(selected_node_two >= len(nodes_state_list[i])):  # Reset the selected node if it overflows
+          selected_node_two = 0
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 13, 1, selected_node_two)
+        print("  Organism's New Second Selected Node: " + str(selected_node_two))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       elif(action == 20):
         
