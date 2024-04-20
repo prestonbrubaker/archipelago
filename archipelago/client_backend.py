@@ -56,6 +56,8 @@ dt = 0.03  # Time Step for Physics
 drag_m = 0.0001    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 500  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.2  # Chance that the organism goes through an iteration of metabolism
+max_age = 1000  # Maximum age until organism has a chance of random death each iteration
+post_age_death_c = 0.01  # Chance of death each iteration after the organism has reached the max age
 
 sleep_time = 0  # Time between iterations
 
@@ -772,7 +774,7 @@ def main_loop():
       r2 = random.uniform(0, 1)
       if( r < metabolism_c):
         energy -= int(1 * num_nodes * 0.3 + 1)
-      if(energy < 0 or (age > 900 and r2 < .001)):
+      if(energy < 0 or (age > max_age and r2 < post_age_death_c)):
         print("Organism has been executed...")
         organisms_state_list.pop(i)
         organisms_gene_list.pop(i)
