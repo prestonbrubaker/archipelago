@@ -8,6 +8,7 @@ window = pygame.display.set_mode((size, size))
 clock = pygame.time.Clock()
 
 data_array = []
+line_data = []
 
 def update_data():
     global data_array
@@ -15,21 +16,30 @@ def update_data():
         try:
             with open('locations.txt', 'r') as file:
                 data_string = file.read().strip()
-            if data_string:  # Ensures that the string is not empty
+            if data_string:
                 new_data_array = ast.literal_eval(data_string)
                 if new_data_array != data_array:
                     data_array = new_data_array
             else:
                 print("Warning: Data string is empty.")
-        except SyntaxError as e:
-            print(f"Syntax error in data file: {e}")
-        except ValueError as e:
-            print(f"Value error: {e}")
         except Exception as e:
-            print(f"Unexpected error: {e}")
-        pygame.time.wait(10) 
+            print(f"Error reading locations.txt: {e}")
 
-# Start the thread that updates data_array
+        try:
+            with open('muscles.txt', 'r') as file:
+                line_string = file.read().strip()
+            if line_string:
+                new_line_data = ast.literal_eval(line_string)
+                if new_line_data != line_data:
+                    line_data = new_line_data
+            else:
+                print("Warning: Line data string is empty.")
+        except Exception as e:
+            print(f"Error reading muscles.txt: {e}")
+        
+        pygame.time.wait(10)
+
+# Start the thread that updates data_array and line_data
 thread = threading.Thread(target=update_data)
 thread.daemon = True
 thread.start()
@@ -40,23 +50,28 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
-    if data_array:
-        window.fill((70, 70, 70))
-        for item in data_array:
-            window.fill((70, 70, 70))
-        for item in data_array:
-            obj_type, x_unit, y_unit = item
-            x = x_unit * size
-            y = y_unit * size
-            color = {
-                0: (255, 0, 0),
-                1: (0, 0, 255),
-                2: (0, 255, 255),
-                3: (0, 255, 0),
-            }.get(obj_type, (255, 255, 0))  # Default color if type is not known
-            pygame.draw.rect(window, color, (x, y, 5, 5))
-        pygame.display.flip()
+    window.fill((70, 70, 70))
     
-    clock.tick(60)  # This caps the frame rate at 60 FPS
+    # Draw lines from line_data
+    for line in line_data:
+        x1, y1, x2, y2, line_type = line
+        color = (255, 0, 0) if line_type == 1 else (0, 0, 255)
+        pygame.draw.line(window, color, (x1*size, y1*size), (x2*size, y2*size), 2)
+    
+    # Draw rectangles from data_array
+    for item in data_array:
+        obj_type, x_unit, y_unit = item
+        x = x_unit * size
+        y = y_unit * size
+        color = {
+            0: (255, 0, 0),
+            1: (0, 0, 255),
+            2: (0, 255, 255),
+            3: (0, 255, 0),
+        }.get(obj_type, (255, 255, 0))  # Default color if type is not known
+        pygame.draw.rect(window, color, (x, y, 5, 5))
+    
+    pygame.display.flip()
+    clock.tick(60)
 
 pygame.quit()
