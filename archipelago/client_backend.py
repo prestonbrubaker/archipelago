@@ -548,6 +548,7 @@ def main_loop():
         print("  Organism's First Selected Node: " + str(selected_node_one))
         selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
         print("  Organism's Second Selected Node: " + str(selected_node_two))
+        
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 1, 1)  # Contracted Muscle Length
         print("  Contracted Muscle Length: " + str(contracted_muscle_len))
         expanded_muscle_len = read_byte(organisms_gene_list[i], index + 2, 1)  # Expanded Muscle Length
