@@ -58,7 +58,7 @@ while running:
     # Draw lines from line_data
     for line in line_data:
         x1, y1, x2, y2, line_type = line
-        color = (255, 0, 0) if line_type == 1 else (0, 0, 255)
+        color = (0, 0, 255) if line_type == 1 else (255, 0, 0)    # Contracting is blue, expanding is red
         pygame.draw.line(window, color, (x1*size, y1*size), (x2*size, y2*size), line_w)
     
     # Draw rectangles from data_array
