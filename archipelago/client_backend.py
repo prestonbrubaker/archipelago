@@ -298,7 +298,7 @@ def get_positions_of_nodes():
 def get_positions_of_muscles():
   list_out = [] #x1, y1, x2, y2, mutable info (0 = expanded, 1 = contracted)
   for i in range(0, len(organisms_state_list)):
-    if(len(muscles_state_list[i] == 0):  # Skip the organism if it has no muscles
+    if(len(muscles_state_list[i] == 0)):  # Skip the organism if it has no muscles
        continue
     for j in range(muscles_state_list[i])):
       inner_list = []
