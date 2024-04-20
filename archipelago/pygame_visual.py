@@ -17,8 +17,8 @@ statistics = []
 # Descriptions for the statistics
 stats_descriptions = [
     "World age: ",
-    "Growth rate: ",
-    "Population: "
+    "Population: ",
+    "Total Food: "
 ]
 
 def update_data():
