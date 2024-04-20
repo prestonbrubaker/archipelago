@@ -356,6 +356,11 @@ def get_statistics():
   list_out = [] # 0: world age, 1: number of organisms
   list_out.append(read_byte(age_of_world, 0, 6))
   list_out.append(len(organisms_gene_list))
+  total_food = 0
+  for i in range(0, world_res):
+    for j in range(0, world_res):
+      total_food += world_light_values[i][j]
+  list_out.append(total_food)
   return list_out
       
 
