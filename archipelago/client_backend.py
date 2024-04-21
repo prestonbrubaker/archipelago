@@ -900,12 +900,17 @@ def main_loop():
     for i in range(len(organisms_state_list) - 1, -1, -1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
       energy = read_byte(organisms_state_list[i], 11, 1)
       num_nodes = len(nodes_state_list[i])
+      num_non_structual_nodes = 0
+      for j in range(0, len(nodes_state_list[i])):
+        node_type = read_byte(nodes_state_list[i][j], 2, 1)
+        if(node_type != 1):
+          num_non_structual_nodes += 1
       age = read_byte(organisms_state_list[i], 25, 3)
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       r = random.uniform(0, 1)
       r2 = random.uniform(0, 1)
       if( r < metabolism_c):
-        energy -= int(1 * num_nodes * 0.3 + 1)
+        energy -= int(1 * num_non_structual_nodes * 0.3 + 1)
       if(energy < 0 or (age > max_age and r2 < post_age_death_c)):
         print("Organism has been executed...")
         organisms_state_list.pop(i)
