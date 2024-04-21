@@ -56,7 +56,7 @@ mass_multiplier = 0.05
 dt = 0.33  # Time Step for Physics
 drag_m = 0.0001    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 100  # Maximum organisms allowed before reproduction is banned
-metabolism_c = 0.123  # Chance that the organism goes through an iteration of metabolism
+metabolism_c = 0.3  # Chance that the organism goes through an iteration of metabolism
 max_age = 1000  # Maximum age until organism has a chance of random death each iteration
 post_age_death_c = 0.01  # Chance of death each iteration after the organism has reached the max age
 mutation_c = 0.2
@@ -152,14 +152,6 @@ def seed_organism():
     1, 1, 1, 1,  1, 1, 1, 1,    # X-offset as a fraction of maximum
     0, 0, 0, 0,  0, 0, 0, 0,    # Y-offset as a fraction of maximum
     0, 0, 1, 0,  0, 0, 0, 0,      # Contracted muscle length
-    1, 1, 1, 1,  1, 1, 1, 1,      # Expanded muscle length
-    1, 1, 1, 1,  1, 1, 1, 1,      # Spring constant of the muscle
-    0, 0, 0, 1,  0, 0, 1, 1,  # ACTION 19: Create a Node. The following with further indented comments is relevant data for node, and 2 indents for muscle info
-    0, 0, 1, 1,  1, 1, 1, 1,    # Mass
-    0, 0, 0, 0,  0, 0, 1, 1,    # Type Photosynthesis
-    1, 1, 1, 1,  1, 1, 1, 1,    # X-offset as a fraction of maximum
-    0, 1, 0, 0,  0, 0, 0, 0,    # Y-offset as a fraction of maximum
-    0, 0, 0, 0,  0, 0, 0, 0,      # Contracted muscle length
     1, 1, 1, 1,  1, 1, 1, 1,      # Expanded muscle length
     1, 1, 1, 1,  1, 1, 1, 1,      # Spring constant of the muscle
     0, 0, 0, 1,  0, 0, 1, 1,  # ACTION 19: Create a Node. The following with further indented comments is relevant data for node, and 2 indents for muscle info
