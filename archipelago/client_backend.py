@@ -385,9 +385,9 @@ def send_organism_out():
 
 def import_organisms():
   global org_counter
-  if os.path.exists('organisms_in.txt'):
+  if os.path.exists('organism_in.txt'):
     # Step 1: Open the file and read the content
-    with open('organisms_in.txt', 'r') as file:
+    with open('organism_in.txt', 'r') as file:
       data = file.read().strip()
       
       # Step 2: Use eval to convert the string to a list
@@ -407,7 +407,7 @@ def import_organisms():
           muscles_state_list.append(muscles_list)
           nodes_velocity_list.append(nodes_v_list)
           org_counter += 1
-          with open('organisms_in.txt', 'w') as file:
+          with open('organism_in.txt', 'w') as file:
             file.write("[]")
         
         
