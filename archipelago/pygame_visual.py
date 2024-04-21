@@ -3,7 +3,7 @@ import ast
 import threading
 
 pygame.init()
-size = 1200
+size = 1000
 window = pygame.display.set_mode((size, size))
 clock = pygame.time.Clock()
 node_size = 2
