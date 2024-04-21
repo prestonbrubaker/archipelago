@@ -410,6 +410,8 @@ def import_organisms():
       
     else:
       raise ValueError("The content of the file is not a list.")
+  except SyntaxError as e:
+        print(f"Error: {e}")
   
       
 
