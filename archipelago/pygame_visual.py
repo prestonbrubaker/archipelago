@@ -24,9 +24,6 @@ stats_descriptions = [
     "Total Food: "
 ]
 
-# Flag to check if nodes and muscles are fully drawn
-all_drawn = False
-
 def update_data():
     global data_array, line_data, statistics, light_values
     while True:
@@ -66,8 +63,7 @@ thread.daemon = True
 thread.start()
 
 def draw_light_values(light_values):
-    global all_drawn
-    if not all_drawn or not light_values:
+    if not light_values:
         return
 
     rows = len(light_values)
@@ -75,7 +71,7 @@ def draw_light_values(light_values):
     rect_width = size / cols
     rect_height = size / rows
     min_val = min(min(row) for row in light_values) if light_values else 0
-    max_val = max(max(row) for row in light_values) if light_values else min_val + 1
+    max_val = max(max(row) for row in light_values) if light_values and min_val != max(max(row) for row in light_values) else min_val + 1
 
     for y in range(rows):
         for x in range(cols):
@@ -91,9 +87,10 @@ while running:
             running = False
 
     window.fill((70, 70, 70))
-    all_drawn = True  # Assume all will be drawn successfully
-
+    
     with data_lock:
+        draw_light_values(light_values)  # Draw light values first as the background
+        # Then draw muscles and nodes on top of the light values
         for line in line_data:
             x1, y1, x2, y2, line_type = line
             color = (0, 0, 255) if line_type == 1 else (255, 0, 0)
@@ -108,9 +105,6 @@ while running:
             description = stats_descriptions[index] if index < len(stats_descriptions) else "Stat: "
             text = font.render(f"{description}{stat}", True, (255, 255, 255))
             window.blit(text, (10, 10 + 30 * index))
-
-        # Draw light values if all other elements were successfully drawn
-        draw_light_values(light_values)
     
     pygame.display.flip()
     clock.tick(20)
