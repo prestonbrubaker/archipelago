@@ -9,7 +9,6 @@ clock = pygame.time.Clock()
 node_size = 2
 line_w = 1
 font = pygame.font.Font(None, 24)  # Using a default font at size 24
-max_val = 2
 
 data_array = []
 line_data = []
@@ -72,13 +71,15 @@ def draw_light_values(light_values):
     rect_width = size / cols
     rect_height = size / rows
 
+    # Determine the min and max values from the light_values 2D array
     min_val = min(min(row) for row in light_values)
-    max_val = max(max(row) for row in light_values) if max_val > min_val else min_val + 1
+    max_val = max(max(row) for row in light_values) if light_values else min_val  # Ensuring there is a fallback
 
     for y in range(rows):
         for x in range(cols):
             value = light_values[y][x]
-            intensity = int(128 * (value - min_val) / (max_val - min_val))  # Scale from 0 to 128
+            # Scale the intensity from 0 (black) to 128 (medium grey) based on min_val and max_val
+            intensity = int(128 * (value - min_val) / (max_val - min_val)) if max_val > min_val else 0
             color = (intensity, intensity, intensity)
             pygame.draw.rect(window, color, (x * rect_width, y * rect_height, rect_width, rect_height))
 
