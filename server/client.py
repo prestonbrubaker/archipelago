@@ -28,4 +28,4 @@ def send_file(target_ip, port, file_path):
     print("File sent")
 
 if __name__ == "__main__":
-    send_file('server_address', 5000, 'organism_out.txt')
+    send_file('server_address', 5001, 'organism_out.txt')
