@@ -18,6 +18,9 @@ light_values = []
 # Lock for synchronizing access to shared data
 data_lock = threading.Lock()
 
+# Flag to indicate when it's safe to draw light values
+draw_light_values_flag = False
+
 stats_descriptions = [
     "World age: ",
     "Population: ",
@@ -63,7 +66,7 @@ thread.daemon = True
 thread.start()
 
 def draw_light_values(light_values):
-    if not light_values:
+    if not draw_light_values_flag or not light_values:
         return
 
     rows = len(light_values)
@@ -87,10 +90,9 @@ while running:
             running = False
 
     window.fill((70, 70, 70))
+    draw_light_values_flag = False  # Reset the flag
     
     with data_lock:
-        draw_light_values(light_values)  # Draw light values first as the background
-        # Then draw muscles and nodes on top of the light values
         for line in line_data:
             x1, y1, x2, y2, line_type = line
             color = (0, 0, 255) if line_type == 1 else (255, 0, 0)
@@ -101,10 +103,12 @@ while running:
             y = y_unit * size
             color = {0: (255, 0, 0), 1: (0, 0, 255), 2: (0, 255, 255), 3: (0, 255, 0)}.get(obj_type, (255, 255, 0))
             pygame.draw.rect(window, color, (x - 0.5 * node_size, y - 0.5 * node_size, node_size, node_size))
-        for index, stat in enumerate(statistics):
-            description = stats_descriptions[index] if index < len(stats_descriptions) else "Stat: "
-            text = font.render(f"{description}{stat}", True, (255, 255, 255))
-            window.blit(text, (10, 10 + 30 * index))
+
+        # All nodes and muscles have been drawn, now it's safe to draw the light values
+        draw_light_values_flag = True
+
+    if draw_light_values_flag:
+        draw_light_values(light_values)
     
     pygame.display.flip()
     clock.tick(20)
