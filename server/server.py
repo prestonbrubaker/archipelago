@@ -2,25 +2,25 @@ import socket
 import threading
 import logging
 
-connections = {}
-
 def handle_client(conn, addr):
     try:
+        # Read the first line as destination address
+        destination = conn.recv(1024).decode().strip()
+        destination_ip, destination_port = destination.split(':')
+        destination_port = int(destination_port)
+
         with open("received_file", "wb") as f:
             while True:
                 data = conn.recv(1024)
                 if not data:
                     break
-                world_id = data.decode().strip()
-                connections[world_id] = conn
                 f.write(data)
-        forward_file("received_file", addr)
+        
+        forward_file("received_file", destination_ip, destination_port)
     except Exception as e:
-        logging.error(f"Error handling client {addr}: {e}...        oops :(")
+        logging.error(f"Error handling client {addr}: {e}")
     finally:
         conn.close()
-        if world_id in connections:
-            del connections[world_id]
 
 def forward_file(file_path, addr):
     destination_ip = 'destination_device_ip'
@@ -41,7 +41,7 @@ def server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))
     server_socket.listen()
-    logging.info(f"Server listening on {host}:{port}!")
+    logging.info(f"Server listening on {host}:{port}")
 
     try:
         while True:
