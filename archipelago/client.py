@@ -1,9 +1,6 @@
 import socket
 import time
 
-target_ip = '192.168.1.31'
-port = 5001
-
 def send_file(target_ip, port, file_path):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((target_ip, port))
@@ -28,4 +25,6 @@ def send_file(target_ip, port, file_path):
     print("File sent")
 
 if __name__ == "__main__":
-    send_file('server_address', 5001, 'organism_out.txt')
+    target_ip = '192.168.1.31'  # Replace this with the actual server IP address
+    port = 5001
+    send_file(target_ip, port, 'organism_out.txt')
