@@ -58,6 +58,7 @@ max_org_c = 500  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.1  # Chance that the organism goes through an iteration of metabolism
 max_age = 1000  # Maximum age until organism has a chance of random death each iteration
 post_age_death_c = 0.01  # Chance of death each iteration after the organism has reached the max age
+mutation_c = 0.2
 
 sleep_time = 0  # Time between iterations
 
@@ -799,7 +800,7 @@ def main_loop():
           # Start organism off at Index 0
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 23, 2, 0)
           
-          if( r < 0.1):
+          if( r < mutation_c):
             r = random.uniform(0, 1)
             
             r2 = 0
