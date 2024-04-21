@@ -81,7 +81,7 @@ def draw_light_values(light_values):
             # Scale the intensity from 0 (black) to 128 (medium grey) based on min_val and max_val
             intensity = int(128 * (value - min_val) / (max_val - min_val)) if max_val > min_val else 0
             color = (intensity, intensity, intensity)
-            pygame.draw.rect(window, color, (x * rect_width, y * rect_height, rect_width, rect_height))
+            pygame.draw.rect(window, color, (y * rect_height, x * rect_width, rect_width, rect_height))
 
 
 running = True
