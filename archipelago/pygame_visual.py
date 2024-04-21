@@ -9,6 +9,7 @@ clock = pygame.time.Clock()
 node_size = 2
 line_w = 1
 font = pygame.font.Font(None, 24)  # Using a default font at size 24
+max_val = 2
 
 data_array = []
 line_data = []
