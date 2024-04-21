@@ -920,9 +920,43 @@ def main_loop():
         nodes_velocity_list.pop(i)
       else:
         organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy)
+    print("\n\n~~~~~~~~~~~~~~~~~~~~COUNT THE NUMBER OF ORGANISMS IN EACH CELL~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    cell_populations = []
+    for i in range(0, world_res):
+      temp_arr = []
+      for j in range(0, world_res):
+        temp_arr.append(0)
+      cell_populations.append(temp_arr)
+    
+    for i in range(0, len(organisms_state_list)):
+        for j in range(0, len(nodes_state_list[i])):
+          node_type = read_byte(nodes_state_list[i][j], 2, 1)
+          if(node_type == 3):
+            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Photosynthesis Cell")
+            node_index = read_byte(nodes_state_list[i][j], 0, 1)
+            node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
+            node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
+            node_x_unit = node_x  / (2**24 - 1)
+            node_y_unit = node_y  / (2**24 - 1)
+            if(node_x_unit < 0):
+              node_x_unit = 0
+            elif(node_x_unit >= 1):
+              node_x_unit = .999999
+            if(node_y_unit < 0):
+              node_y_unit = 0
+            elif(node_y_unit >= 1):
+              node_y_unit = .999999
+            print("  Node Unit X: " + str(node_x_unit))
+            print("  Node Unit Y: " + str(node_y_unit))
+            cell_index_x = int(node_x_unit * world_res)
+            cell_index_y = int(node_y_unit * world_res)
+            print("  Node World Cell X-Index: " + str(cell_index_x))
+            print("  Node World Cell Y-Index: " + str(cell_index_y))
+            cell_populations[cell_index_x][cell_index_y] += 1
+    
     
     print("\n\n~~~~~~~~~~~~~~~~~~~~ALLOW FOR COLLECTION OF LIGHT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ALLOW FOR COLLECTION OF LIGHT
+    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ALLOW FOR COLLECTION OF LIGHT. If a cell has at least one organism, a single unit of light is able to be consumed by all who inhabit
       for j in range(0, len(nodes_state_list[i])):
         node_type = read_byte(nodes_state_list[i][j], 2, 1)
         if(node_type == 3):
@@ -948,7 +982,8 @@ def main_loop():
           print("  Node World Cell Y-Index: " + str(cell_index_y))
           light = world_light_values[cell_index_x][cell_index_y]
           print("  Light In This Cell: " + str(light))
-          if(light > 0):
+          r1 = random.uniform(0, 1)
+          if(light > 0 and r1 <= 1 / cell_populations[cell_index_x][cell_index_y]):  # Using the random variable, the chance of getting light is inversely proportional to the number of photosynthesis cells inhabiting the cell
             energy = read_byte(organisms_state_list[i], 11, 1)
             if( energy + 1 <= 255):
               organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy + 1)
