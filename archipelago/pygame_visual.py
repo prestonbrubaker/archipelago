@@ -75,7 +75,7 @@ def draw_light_values(light_values):
             value = light_values[y][x]
             intensity = int(128 * (value - min_val) / (max_val - min_val)) if max_val > min_val else 0
             color = (intensity, intensity, intensity)
-            pygame.draw.rect(window, color, (x * rect_width, y * rect_height, rect_width, rect_height))
+            pygame.draw.rect(window, color, (y * rect_width, x * rect_height, rect_width, rect_height))
 
 running = True
 while running:
@@ -102,6 +102,6 @@ while running:
             window.blit(text, (10, 10 + 30 * index))
     
     pygame.display.flip()
-    clock.tick(30)
+    clock.tick(20)
 
 pygame.quit()
