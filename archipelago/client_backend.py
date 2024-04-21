@@ -1132,6 +1132,8 @@ def main_loop():
       file.write(str(organisms_gene_list))
     with open('states.txt', 'w') as file:
       file.write(str(organisms_state_list))
+    with open('light_values.txt', 'w') as file:
+      file.write(str(world_light_values))
     import_organisms()
     time.sleep(sleep_time)
     # Random Willoh Shoutout heyyyy bestie 
