@@ -2,40 +2,22 @@ import sys
 import ast
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QFrame, QPushButton
 from PyQt5.QtGui import QPainter, QColor, QPen, QBrush
-from PyQt5.QtCore import QTimer, Qt, QPropertyAnimation
+from PyQt5.QtCore import QTimer, Qt
 
 class DataDisplay(QWidget):
     def __init__(self):
-        super().__init__()
-        self.data_array = []
+        super().__init__()                                      # No idea what this does but necessary
+        self.data_array = []                                    #This creates an array out of data pulled from txt file
 
         self.layout = QHBoxLayout(self)
         self.contentArea = QFrame(self)  # Main content area
-        self.infoPanel = QFrame(self)    # Info panel
-        self.infoPanel.setFixedWidth(0)  # Start with panel closed
         self.layout.addWidget(self.contentArea, 1)
-        self.layout.addWidget(self.infoPanel)
 
-        self.toggleButton = QPushButton("Toggle Info", self)
-        self.toggleButton.clicked.connect(self.toggleInfoPanel)
-        self.layout.addWidget(self.toggleButton)
-
-        self.setWindowTitle("Archipelago")                      # Window title
-        self.showMaximized()                                    # Sizes window to max window size without being fullscreened
-        self.timer = QTimer(self)                               # This timer forces the screen to update/reload data
-        self.timer.timeout.connect(self.loadData)               # Connect loadData to the timer
-        self.timer.start(50)                                    # Refresh rate
-
-    def toggleInfoPanel(self):
-        width = self.infoPanel.width()
-        new_width = 200 if width == 0 else 0  # Toggle between 0 and 200 pixels
-        
-        # Animation for smoother transition
-        self.animation = QPropertyAnimation(self.infoPanel, b"maximumWidth")
-        self.animation.setDuration(500)
-        self.animation.setStartValue(width)
-        self.animation.setEndValue(new_width)
-        self.animation.start()
+        self.setWindowTitle("Archipelago")                      #Window title
+        self.showMaximized()                                    #Sizes window to max window size without being fullscreened
+        self.timer = QTimer(self)                               #This timer forces the screen to update/reload data
+        self.timer.timeout.connect(self.loadData)               #See above
+        self.timer.start(50)                                    #Refresh rate
 
     def loadData(self):
         try:
@@ -71,7 +53,6 @@ class DataDisplay(QWidget):
         painter.setPen(QPen(color, 5))
         painter.setBrush(QBrush(color, Qt.SolidPattern))
         painter.drawEllipse(x, y, 5, 5)
-
 if __name__ == "__main__":
     app = QApplication([])
     window = DataDisplay()
