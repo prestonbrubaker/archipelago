@@ -1,9 +1,12 @@
 import socket
 import time
 
-def send_file(server_ip, port, file_path):
+target_ip = '192.168.1.31'
+port = 5001
+
+def send_file(target_ip, port, file_path):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect((server_ip, port))
+    client_socket.connect((target_ip, port))
     print("Connected to server")
 
     file_content = ""
