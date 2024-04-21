@@ -3,7 +3,7 @@ import logging
 import threading
 
 def tcp_server():
-    host = '192.168.1.32'
+    host = '0.0.0.0'
     port = 5001
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((host, port))
