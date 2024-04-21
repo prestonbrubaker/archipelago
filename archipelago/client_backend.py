@@ -384,6 +384,7 @@ def send_organism_out():
   return list_out
 
 def import_organisms():
+  global org_counter
   if os.path.exists('organisms_in.txt'):
     # Step 1: Open the file and read the content
     with open('organisms_in.txt', 'r') as file:
