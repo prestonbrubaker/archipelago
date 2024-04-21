@@ -59,6 +59,7 @@ metabolism_c = 0.1  # Chance that the organism goes through an iteration of meta
 max_age = 1000  # Maximum age until organism has a chance of random death each iteration
 post_age_death_c = 0.01  # Chance of death each iteration after the organism has reached the max age
 mutation_c = 0.2
+out_c = 0.01  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
 
 sleep_time = 0  # Time between iterations
 
@@ -365,6 +366,22 @@ def get_statistics():
       total_food += world_light_values[i][j]
   list_out.append(total_food)
   return list_out
+
+def send_organism_out():
+  list_out = []
+  i = len(organisms_gene_list) - 1
+  list_out.append(organisms_gene_list[i])
+  list_out.append(organisms_state_list[i])
+  list_out.append(nodes_state_list[i])
+  list_out.append(muscles_state_list[i])
+  list_out.append(nodes_velocity_list[i])
+  organisms_gene_list.pop(i)
+  organisms_state_list.pop(i)
+  nodes_state_list.pop(i)
+  muscles_state_list.pop(i)
+  nodes_velocity_list.pop(i)
+  return list_out
+  
       
 
 seed_organism()
@@ -799,7 +816,7 @@ def main_loop():
 
           # Start organism off at Index 0
           organisms_state_list[-1] = write_byte(organisms_state_list[-1], 23, 2, 0)
-          
+          r = random.uniform(0, 1)
           if( r < mutation_c):
             r = random.uniform(0, 1)
             
@@ -810,6 +827,11 @@ def main_loop():
               random_bit_value = random.randint(0, 1)
               organisms_gene_list[-1][random_gene_index] = random_bit_value
               r2 = random.uniform(0,1)
+              
+          r1 = random.uniform(0, 1)
+          if(r1 < out_c):  # Send organism to organism_out.txt
+            with open('organism_out.txt', 'w') as file:
+              file.write(str(send_organism_out()))
         
           
         else:
