@@ -4,7 +4,7 @@ import logging
 
 def handle_client(conn, addr):
     try:
-        # Read the first line as destination address
+        # Read the first line as identifying ip address
         destination = conn.recv(1024).decode().strip()
         destination_ip, destination_port = destination.split(':')
         destination_port = int(destination_port)
