@@ -43,7 +43,7 @@ muscles_state_list = [    #3-D list of muscles (organism index, muscle index, mu
 world_light_values = [  # 2-D list of light values in the cell. For now it will be 10x10,and they will have an initial and max of 2
 
 ]
-world_res = 15  # Number of rows/columns of the world. Number of cells will be world_res squared.
+world_res = 40  # Number of rows/columns of the world. Number of cells will be world_res squared.
 light_max = 2  # The maximum amount of light. Also the initial amount.
 
 org_counter = 0  # Counter of organisms ever to exist in this world. Iterated for each birth to assign new ID's that have never been used
@@ -54,7 +54,7 @@ max_node_offset = 0.08    # Maximum horizontal or vertical distance (as a fracti
 spring_multiplier = 1  # Multiplier for the maximum spring constant
 mass_multiplier = 0.05
 dt = 0.03  # Time Step for Physics
-drag_m = 0.01    # Velocities will be multiplied by (1-drag_m) each turn
+drag_m = 0.05    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 100  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.2  # Chance that the organism goes through an iteration of metabolism
 max_age = 1000  # Maximum age until organism has a chance of random death each iteration
