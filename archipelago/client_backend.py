@@ -381,6 +381,34 @@ def send_organism_out():
   muscles_state_list.pop(i)
   nodes_velocity_list.pop(i)
   return list_out
+
+def import_organisms():
+  # Step 1: Open the file and read the content
+  with open(file_path, 'r') as file:
+    data = file.read().strip()
+    
+    # Step 2: Use eval to convert the string to a list
+  try:
+    result_list = eval(data)  # Use eval to parse the string
+    if isinstance(result_list, list):  # Check if the result is a list
+      # Contents are a list. Proceed
+      gene_list = result_list[0]
+      state_list = result_list[1]
+      nodes_list = result_list[2]
+      muscles_list = result_list[3]
+      nodes_v_list = result_list[4]
+      organisms_gene_list.append(gene_list)
+      organisms_state_list.append(state_list)
+      nodes_state_list.append(nodes_list)
+      muscles_state_list.append(muscles_list)
+      nodes_velocity_list.append(nodes_v_list)
+      org_counter += 1
+      
+      
+    else:
+      raise ValueError("The content of the file is not a list.")
+  except SyntaxError as e:
+    #print(f"Error: {e}")
   
       
 
