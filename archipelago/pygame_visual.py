@@ -21,46 +21,38 @@ stats_descriptions = [
     "Total Food: "
 ]
 
+light_values = []
+
 def update_data():
-    global data_array
-    global line_data
-    global statistics
+    global data_array, line_data, statistics, light_values
     while True:
         try:
             with open('locations.txt', 'r') as file:
                 data_string = file.read().strip()
-            if data_string:
-                new_data_array = ast.literal_eval(data_string)
-                if new_data_array != data_array:
-                    data_array = new_data_array
-            else:
-                print("Warning: Data string is empty.")
-        except Exception as e:
-            print(f"Error reading locations.txt: {e}")
+            new_data_array = ast.literal_eval(data_string) if data_string else []
+            if new_data_array != data_array:
+                data_array = new_data_array
 
-        try:
             with open('muscles.txt', 'r') as file:
                 line_string = file.read().strip()
-            if line_string:
-                new_line_data = ast.literal_eval(line_string)
-                if new_line_data != line_data:
-                    line_data = new_line_data
-            else:
-                print("Warning: Line data string is empty.")
-        except Exception as e:
-            print(f"Error reading muscles.txt: {e}")
-        
-        try:
+            new_line_data = ast.literal_eval(line_string) if line_string else []
+            if new_line_data != line_data:
+                line_data = new_line_data
+
             with open('statistics.txt', 'r') as file:
                 stats_string = file.read().strip()
-            if stats_string:
-                new_stats = ast.literal_eval(stats_string)
-                if new_stats != statistics:
-                    statistics = new_stats
-            else:
-                print("Warning: Statistics data string is empty.")
+            new_stats = ast.literal_eval(stats_string) if stats_string else []
+            if new_stats != statistics:
+                statistics = new_stats
+
+            with open('light_values.txt', 'r') as file:
+                light_string = file.read().strip()
+            new_light_values = ast.literal_eval(light_string) if light_string else []
+            if new_light_values != light_values:
+                light_values = new_light_values
+
         except Exception as e:
-            print(f"Error reading statistics.txt: {e}")
+            print(f"Error reading file: {e}")
         
         pygame.time.wait(10)
 
@@ -69,13 +61,35 @@ thread = threading.Thread(target=update_data)
 thread.daemon = True
 thread.start()
 
+
+def draw_light_values(light_values):
+    if not light_values:
+        return
+
+    rows = len(light_values)
+    cols = len(light_values[0]) if rows > 0 else 0
+    rect_width = size / cols
+    rect_height = size / rows
+
+    min_val = min(min(row) for row in light_values)
+    max_val = max(max(row) for row in light_values) if max_val > min_val else min_val + 1
+
+    for y in range(rows):
+        for x in range(cols):
+            value = light_values[y][x]
+            intensity = int(128 * (value - min_val) / (max_val - min_val))  # Scale from 0 to 128
+            color = (intensity, intensity, intensity)
+            pygame.draw.rect(window, color, (x * rect_width, y * rect_height, rect_width, rect_height))
+
+
 running = True
 while running:
     for event in pygame.event.get():
         if event.type is pygame.QUIT:
             running = False
     
-    window.fill((70, 70, 70))
+    window.fill((70, 70, 70))  # Set the general background color
+    draw_light_values(light_values)  # Draw the background based on light values
     
     # Draw lines from line_data
     for line in line_data:
