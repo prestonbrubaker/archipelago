@@ -36,6 +36,7 @@ NODE TYPES:
 1: Structual. Only has mass. No activation function
 2: Gripper. Mutable data corresponds to how tightly it grips to the environment, increasing the drag force
 3: Photosynthesis. Harvests energy from the sunlight
+4: Carnivore. Harvests energy from other organisms in the same cell.
 
 
 
