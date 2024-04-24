@@ -1,6 +1,7 @@
 import pygame
 import ast
 import threading
+import sys
 
 pygame.init()
 size = 1000
@@ -27,6 +28,16 @@ stats_descriptions = [
     "Total Food: "
 ]
 
+def safely_evaluate_data(file_path, default):
+    """Safely read and evaluate data from a file, returning the default if an error occurs."""
+    try:
+        with open(file_path, 'r') as file:
+            data_string = file.read().strip()
+        return ast.literal_eval(data_string) if data_string else default
+    except Exception as e:
+        print(f"Error reading or parsing {file_path}: {e}", file=sys.stderr)
+        return default
+
 def update_data():
     global data_array, line_data, statistics, light_values, draw_light_values_flag
     while True:
@@ -34,30 +45,22 @@ def update_data():
             with data_lock:
                 data_updated = False
 
-                with open('locations.txt', 'r') as file:
-                    data_string = file.read().strip()
-                new_data_array = ast.literal_eval(data_string) if data_string else []
+                new_data_array = safely_evaluate_data('locations.txt', data_array)
                 if new_data_array != data_array:
                     data_array = new_data_array
                     data_updated = True
 
-                with open('muscles.txt', 'r') as file:
-                    line_string = file.read().strip()
-                new_line_data = ast.literal_eval(line_string) if line_string else []
+                new_line_data = safely_evaluate_data('muscles.txt', line_data)
                 if new_line_data != line_data:
                     line_data = new_line_data
                     data_updated = True
 
-                with open('statistics.txt', 'r') as file:
-                    stats_string = file.read().strip()
-                new_stats = ast.literal_eval(stats_string) if stats_string else []
+                new_stats = safely_evaluate_data('statistics.txt', statistics)
                 if new_stats != statistics:
                     statistics = new_stats
                     data_updated = True
 
-                with open('light_values.txt', 'r') as file:
-                    light_string = file.read().strip()
-                new_light_values = ast.literal_eval(light_string) if light_string else []
+                new_light_values = safely_evaluate_data('light_values.txt', light_values)
                 if new_light_values != light_values:
                     light_values = new_light_values
                     data_updated = True
@@ -66,7 +69,7 @@ def update_data():
                     draw_light_values_flag = True
 
         except Exception as e:
-            print(f"Error reading file: {e}")
+            print(f"Unhandled error in update_data: {e}", file=sys.stderr)
         
         pygame.time.wait(10)
 
@@ -77,6 +80,8 @@ thread.start()
 def draw_light_values(light_values):
     rows = len(light_values)
     cols = len(light_values[0]) if rows > 0 else 0
+    if cols == 0:  # Prevent division by zero
+        return
     rect_width = size / cols
     rect_height = size / rows
     min_val = min(min(row) for row in light_values) if light_values else 0
