@@ -59,7 +59,7 @@ max_org_c = 700  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.25  # Chance that the organism goes through an iteration of metabolism
 max_age = 5000  # Maximum age until organism has a chance of random death each iteration
 post_age_death_c = 0.01  # Chance of death each iteration after the organism has reached the max age
-mutation_c = 0.3
+mutation_c = 0.2
 out_c = 0.01  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
 
 sleep_time = 0  # Time between iterations
