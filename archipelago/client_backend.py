@@ -1043,16 +1043,17 @@ def main_loop():
             print("  Node World Cell X-Index: " + str(cell_index_x))
             print("  Node World Cell Y-Index: " + str(cell_index_y))
             energy_predator = read_byte(organisms_state_list[i], 11, 1)
-            for k in organism_tile_locations:
+            for k in organism_tile_locations[cell_index_x][cell_index_y]:
               if(k == 1):
                 continue
-              energy_prey = read_byte(organisms_state_list[k], 11, 1)
-              energy_transfer = math.ceil( energy_prey * carn_m)
-              if(energy_transfer > 0):
-                energy_predator += energy_transfer
-                energy_prey -= energy_transfer
-                organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
-                organisms_state_list[k] = write_byte(organisms_state_list[i], 11, 1, energy_prey)
+              if(k >= 0):
+                energy_prey = read_byte(organisms_state_list[k], 11, 1)
+                energy_transfer = math.ceil( energy_prey * carn_m)
+                if(energy_transfer > 0):
+                  energy_predator += energy_transfer
+                  energy_prey -= energy_transfer
+                  organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
+                  organisms_state_list[k] = write_byte(organisms_state_list[i], 11, 1, energy_prey)
     print("\n\n~~~~~~~~~~~~~~~~~~~~SEED ORGANISM IF ALL LIFE IS EXTINCT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     if(len(organisms_state_list) == 0):
       seed_organism()
