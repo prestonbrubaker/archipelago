@@ -1053,8 +1053,8 @@ def main_loop():
                 if(energy_transfer > 0):
                   energy_predator += energy_transfer
                   energy_prey -= energy_transfer
-                  organisms_state_list[i] = write_byte(organisms_state_list[i*1000], 11, 1, energy_predator)
-                  organisms_state_list[k] = write_byte(organisms_state_list[i], 11, 1, energy_prey)
+                  organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
+                  organisms_state_list[k] = write_byte(organisms_state_list[k], 11, 1, energy_prey)
     print("\n\n~~~~~~~~~~~~~~~~~~~~SEED ORGANISM IF ALL LIFE IS EXTINCT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     if(len(organisms_state_list) == 0):
       seed_organism()
