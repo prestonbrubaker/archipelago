@@ -87,7 +87,7 @@ def draw_light_values(light_values):
             value = light_values[y][x]
             intensity = int(128 * (value - min_val) / (max_val - min_val)) if max_val > min_val else 0
             color = (intensity, intensity, intensity)
-            pygame.draw.rect(window, color, (x * rect_width, y * rect_height, rect_width, rect_height))
+            pygame.draw.rect(window, color, (y * rect_width, x * rect_height, rect_width, rect_height))
 
 def draw_statistics(statistics):
     y_offset = 10
