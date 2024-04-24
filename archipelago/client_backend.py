@@ -1080,7 +1080,7 @@ def main_loop():
           node_two_index = read_byte(muscles_state_list[i][j], 2, 1)
           print("    Node One index: " + str(node_one_index))
           print("    Node Two index: " + str(node_two_index))
-          if(node_one_index == node_two_index):
+          if(node_one_index == node_two_index or node_one_index < 0 or node_two_index < 0 or node_one_index >= len(nodes_state_list[i]) or node_two_index >= len(nodes_state_list[i])):
             continue
           node_one_x = read_byte(nodes_state_list[i][node_one_index], 5, 3)
           node_one_y = read_byte(nodes_state_list[i][node_one_index], 8, 3)
