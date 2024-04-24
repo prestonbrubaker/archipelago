@@ -28,33 +28,43 @@ stats_descriptions = [
 ]
 
 def update_data():
-    global data_array, line_data, statistics, light_values
+    global data_array, line_data, statistics, light_values, draw_light_values_flag
     while True:
         try:
             with data_lock:
+                # Attempt to update all data, set flag when new data is available
+                data_updated = False
+
                 with open('locations.txt', 'r') as file:
                     data_string = file.read().strip()
                 new_data_array = ast.literal_eval(data_string) if data_string else []
                 if new_data_array != data_array:
                     data_array = new_data_array
+                    data_updated = True
 
                 with open('muscles.txt', 'r') as file:
                     line_string = file.read().strip()
                 new_line_data = ast.literal_eval(line_string) if line_string else []
                 if new_line_data != line_data:
                     line_data = new_line_data
+                    data_updated = True
 
                 with open('statistics.txt', 'r') as file:
                     stats_string = file.read().strip()
                 new_stats = ast.literal_eval(stats_string) if stats_string else []
                 if new_stats != statistics:
                     statistics = new_stats
+                    data_updated = True
 
                 with open('light_values.txt', 'r') as file:
                     light_string = file.read().strip()
                 new_light_values = ast.literal_eval(light_string) if light_string else []
                 if new_light_values != light_values:
                     light_values = new_light_values
+                    data_updated = True
+
+                if data_updated:
+                    draw_light_values_flag = True
 
         except Exception as e:
             print(f"Error reading file: {e}")
@@ -66,9 +76,6 @@ thread.daemon = True
 thread.start()
 
 def draw_light_values(light_values):
-    if not draw_light_values_flag or not light_values:
-        return
-
     rows = len(light_values)
     cols = len(light_values[0]) if rows > 0 else 0
     rect_width = size / cols
@@ -89,29 +96,25 @@ while running:
         if event.type is pygame.QUIT:
             running = False
 
-    window.fill((70, 70, 70))
-
-    # Check if it's safe to draw the light values first
     if draw_light_values_flag:
-        draw_light_values(light_values)
-        draw_light_values_flag = False  # Reset the flag after drawing light values
+        window.fill((70, 70, 70))
 
-    with data_lock:
-        # Drawing muscles
-        for line in line_data:
-            x1, y1, x2, y2, line_type = line
-            color = (0, 0, 255) if line_type == 1 else (255, 0, 0)
-            pygame.draw.line(window, color, (x1 * size, y1 * size), (x2 * size, y2 * size), line_w)
+        # Locking while drawing ensures all data is updated and synchronized
+        with data_lock:
+            draw_light_values(light_values)
+            for line in line_data:
+                x1, y1, x2, y2, line_type = line
+                color = (0, 0, 255) if line_type == 1 else (255, 0, 0)
+                pygame.draw.line(window, color, (x1 * size, y1 * size), (x2 * size, y2 * size), line_w)
+            for item in data_array:
+                obj_type, x_unit, y_unit = item
+                x = x_unit * size
+                y = y_unit * size
+                color = {0: (255, 0, 0), 1: (0, 0, 255), 2: (0, 255, 255), 3: (0, 255, 0)}.get(obj_type, (255, 255, 0))
+                pygame.draw.rect(window, color, (x - 0.5 * node_size, y - 0.5 * node_size, node_size, node_size))
         
-        # Drawing nodes
-        for item in data_array:
-            obj_type, x_unit, y_unit = item
-            x = x_unit * size
-            y = y_unit * size
-            color = {0: (255, 0, 0), 1: (0, 0, 255), 2: (0, 255, 255), 3: (0, 255, 0)}.get(obj_type, (255, 255, 0))
-            pygame.draw.rect(window, color, (x - 0.5 * node_size, y - 0.5 * node_size, node_size, node_size))
-
-    pygame.display.flip()
-    clock.tick(20)
+            pygame.display.flip()
+            clock.tick(20)
+            draw_light_values_flag = False  # Reset the flag after the complete frame is drawn
 
 pygame.quit()
