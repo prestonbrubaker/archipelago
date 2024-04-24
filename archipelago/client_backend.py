@@ -930,7 +930,7 @@ def main_loop():
       temp_arr_2 = []
       for j in range(0, world_res):
         temp_arr.append(0)
-        temp_arr.append([])
+        temp_arr_2.append([])
       cell_populations.append(temp_arr)
       organism_tile_locations.append(temp_arr_2)
     
