@@ -6,8 +6,8 @@ pygame.init()
 size = 1000
 window = pygame.display.set_mode((size, size))
 clock = pygame.time.Clock()
-node_size = 2
-line_w = 1
+node_size = 4
+line_w = 2
 font = pygame.font.Font(None, 24)
 
 data_array = []
