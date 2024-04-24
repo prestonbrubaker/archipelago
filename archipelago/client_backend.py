@@ -1043,7 +1043,7 @@ def main_loop():
             print("  Node World Cell X-Index: " + str(cell_index_x))
             print("  Node World Cell Y-Index: " + str(cell_index_y))
             energy_predator = read_byte(organisms_state_list[i], 11, 1)
-            for k in organism_tile_locations[cell_index_x][cell_index_y]:
+            for k in range(0, len(organism_tile_locations[cell_index_x][cell_index_y])):
               if(k == 1):
                 continue
               if(k >= 0):
