@@ -90,7 +90,6 @@ while running:
             running = False
 
     window.fill((70, 70, 70))
-    draw_light_values_flag = False  # Reset the flag
     
     with data_lock:
         for line in line_data:
@@ -109,7 +108,8 @@ while running:
 
     if draw_light_values_flag:
         draw_light_values(light_values)
-    
+        draw_light_values_flag = False  # Reset the flag after drawing light values
+
     pygame.display.flip()
     clock.tick(20)
 
