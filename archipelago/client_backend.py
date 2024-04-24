@@ -723,6 +723,30 @@ def main_loop():
         print("  Result Stored in Register 3: " + str(subtraction_result))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+        
+      elif(action == 11):
+        print("  Action to be Executed: Add Register 1 and Register 2, and Store the Result in Register 3.")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
+        addition_result = register_one_value + register_two_value
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, addition_result)
+        print("  Result Stored in Register 3: " + str(addition_result))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+        
+      elif(action == 13):
+        print("  Action to be Executed: Take the modulus of Register 1 with respect to Register 2, and Store the Result in Register 3.")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
+        modulus_result = register_one_value % register_two_value
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, modulus_result)
+        print("  Result Stored in Register 3: " + str(modulus_result))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       
       elif(action == 8):
@@ -749,6 +773,76 @@ def main_loop():
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
 
       
+      elif(action == 7):
+        print("  Action to be Executed: Check if the value in register 2 is equal to register 1, and change the index by data if that is the case and proceed otherwise")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
+        data = read_byte(organisms_gene_list[i], index + 1, 3)
+        print("  Data Value including jump direction bit: " + str(data))
+        if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
+          forward_index_jump = 1
+          print("  Jump Direction: Forward")
+          data -= 2**(8*24 - 1)
+        else:
+          forward_index_jump = -1
+          print("  Jump Direction: Backward")
+        print("  Data Value not including jump direction bit: " + str(data))        
+        if(register_two_value == register_one_value):
+          print("  Register 2 is Equal to Register 1")
+          print("  Changing Index by: " + str(data * forward_index_jump))
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
+        else:
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
+          
+      elif(action == 9):
+        print("  Action to be Executed: Check if the value in register 2 is less than register 1, and change the index by data if that is the case and proceed otherwise")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
+        data = read_byte(organisms_gene_list[i], index + 1, 3)
+        print("  Data Value including jump direction bit: " + str(data))
+        if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
+          forward_index_jump = 1
+          print("  Jump Direction: Forward")
+          data -= 2**(8*24 - 1)
+        else:
+          forward_index_jump = -1
+          print("  Jump Direction: Backward")
+        print("  Data Value not including jump direction bit: " + str(data))        
+        if(register_two_value < register_one_value):
+          print("  Register 2 is Less Than Register 1")
+          print("  Changing Index by: " + str(data * forward_index_jump))
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
+        else:
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
+          
+      elif(action == 7):
+        print("  Action to be Executed: Check if the value in register 2 is NOT equal to register 1, and change the index by data if that is the case and proceed otherwise")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
+        data = read_byte(organisms_gene_list[i], index + 1, 3)
+        print("  Data Value including jump direction bit: " + str(data))
+        if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
+          forward_index_jump = 1
+          print("  Jump Direction: Forward")
+          data -= 2**(8*24 - 1)
+        else:
+          forward_index_jump = -1
+          print("  Jump Direction: Backward")
+        print("  Data Value not including jump direction bit: " + str(data))        
+        if(register_two_value != register_one_value):
+          print("  Register 2 is NOT Equal to Register 1")
+          print("  Changing Index by: " + str(data * forward_index_jump))
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
+        else:
+          organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
+
+      
       elif(action == 2):
         print("  Action to be Executed: Swap the Values in Registers 1 and 3")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
@@ -759,12 +853,71 @@ def main_loop():
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, register_one_value)
         print("    Registers Swapped!")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
-        register_two_value = read_byte(organisms_state_list[i], 20, 3)
+        register_three_value = read_byte(organisms_state_list[i], 20, 3)
         print("  Register One Value: " + str(register_one_value))
         print("  Register Three Value: " + str(register_three_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+      
+      elif(action == 3):
+        print("  Action to be Executed: Swap the Values in Registers 2 and 3")
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        register_three_value = read_byte(organisms_state_list[i], 20, 3)
+        print("  Register Two Value: " + str(register_two_value))
+        print("  Register Three Value: " + str(register_three_value))
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 17, 3, register_three_value)
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, register_two_value)
+        print("    Registers Swapped!")
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        register_three_value = read_byte(organisms_state_list[i], 20, 3)
+        print("  Register Two Value: " + str(register_two_value))
+        print("  Register Three Value: " + str(register_three_value))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
+      elif(action == 5):
+        print("  Action to be Executed: Clear Register 1")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        print("  Register One Value: " + str(register_one_value))
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, 0)
+        print("    Register Cleared!")
+        register_one_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+      
+      elif(action == 17):
+        print("  Action to be Executed: Store the Organism's Energy Value in Register 1.")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        print("  Register One Value: " + str(register_one_value))
+        org_energy = read_byte(organisms_state_list[i], 11, 1)  # Retrieve the organism's energy level
+        print("  Energy Level of Organism: " + str(org_energy))
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, org_energy)
+        print("    Energy Value Stored!")
+        register_one_value = read_byte(organisms_state_list[i], 17, 3)
+        print("  Register One Value: " + str(register_one_value))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
+      elif(action == 6):
+        print("  Action to be Executed: Clear All Registers")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        register_three_value = read_byte(organisms_state_list[i], 20, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
+        print("  Register Three Value: " + str(register_three_value))
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, 0)
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 17, 3, 0)
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, 0)
+        print("    Registers Cleared!")
+        register_one_value = read_byte(organisms_state_list[i], 14, 3)
+        register_two_value = read_byte(organisms_state_list[i], 17, 3)
+        register_three_value = read_byte(organisms_state_list[i], 20, 3)
+        print("  Register One Value: " + str(register_one_value))
+        print("  Register Two Value: " + str(register_two_value))
+        print("  Register Three Value: " + str(register_three_value))
+        # Increment Genetic Index
+        organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
       
       elif(action == 15):
         print("  Action to be Executed: Change the Index by Data")
