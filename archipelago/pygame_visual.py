@@ -90,25 +90,26 @@ while running:
             running = False
 
     window.fill((70, 70, 70))
-    
+
+    # Check if it's safe to draw the light values first
+    if draw_light_values_flag:
+        draw_light_values(light_values)
+        draw_light_values_flag = False  # Reset the flag after drawing light values
+
     with data_lock:
+        # Drawing muscles
         for line in line_data:
             x1, y1, x2, y2, line_type = line
             color = (0, 0, 255) if line_type == 1 else (255, 0, 0)
             pygame.draw.line(window, color, (x1 * size, y1 * size), (x2 * size, y2 * size), line_w)
+        
+        # Drawing nodes
         for item in data_array:
             obj_type, x_unit, y_unit = item
             x = x_unit * size
             y = y_unit * size
             color = {0: (255, 0, 0), 1: (0, 0, 255), 2: (0, 255, 255), 3: (0, 255, 0)}.get(obj_type, (255, 255, 0))
             pygame.draw.rect(window, color, (x - 0.5 * node_size, y - 0.5 * node_size, node_size, node_size))
-
-        # All nodes and muscles have been drawn, now it's safe to draw the light values
-        draw_light_values_flag = True
-
-    if draw_light_values_flag:
-        draw_light_values(light_values)
-        draw_light_values_flag = False  # Reset the flag after drawing light values
 
     pygame.display.flip()
     clock.tick(20)
