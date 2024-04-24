@@ -905,7 +905,7 @@ def main_loop():
       num_non_structual_nodes = 0
       for j in range(0, len(nodes_state_list[i])):
         node_type = read_byte(nodes_state_list[i][j], 2, 1)
-        if(node_type != 1):
+        if(node_type != 1 and node_type != 2):
           num_non_structual_nodes += 1
       age = read_byte(organisms_state_list[i], 25, 3)
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
