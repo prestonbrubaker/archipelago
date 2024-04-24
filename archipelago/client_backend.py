@@ -1094,11 +1094,23 @@ def main_loop():
           node_two_y_unit += nodes_velocity_list[i][node_two_index][1] * dt
   
           # Drag force applied to slow all speeds by an amount proportional to their current speed
-          nodes_velocity_list[i][node_one_index][0] *= 1 - drag_m
-          nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m
-          nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m
-          nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m
+
+          node_type_1 = read_byte(nodes_state_list[i][node_one_index], 2, 1)  # Pull the node type for special physics for gripper (2) nodes.
+          node_type_2 = read_byte(nodes_state_list[i][node_two_index], 2, 1)
+
+          if(node_type_1 == 2):
+            nodes_velocity_list[i][node_one_index][0] *= .3
+            nodes_velocity_list[i][node_one_index][1] *= .3
+          else:
+            nodes_velocity_list[i][node_one_index][0] *= 1 - drag_m
+            nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m
           
+          if(node_type_2 == 2):
+            nodes_velocity_list[i][node_two_index][0] *= 3
+            nodes_velocity_list[i][node_two_index][1] *= 3
+          else:
+            nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m
+            nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m
           
   
           # Convert coordinate values back to values ready to be stored in 3 bytes
@@ -1136,6 +1148,5 @@ def main_loop():
       file.write(str(world_light_values))
     import_organisms()
     time.sleep(sleep_time)
-    # Random Willoh Shoutout heyyyy bestie 
 
 main_loop()
