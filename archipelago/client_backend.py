@@ -62,7 +62,7 @@ max_age = 5000  # Maximum age until organism has a chance of random death each i
 post_age_death_c = 0.01  # Chance of death each iteration after the organism has reached the max age
 mutation_c = 0.2
 out_c = 0.01  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
-carn_m = 0.01  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
+carn_m = 0.1  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
 
 sleep_time = 0  # Time between iterations
 
