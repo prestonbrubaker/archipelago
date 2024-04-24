@@ -32,7 +32,6 @@ def update_data():
     while True:
         try:
             with data_lock:
-                # Attempt to update all data, set flag when new data is available
                 data_updated = False
 
                 with open('locations.txt', 'r') as file:
@@ -90,6 +89,14 @@ def draw_light_values(light_values):
             color = (intensity, intensity, intensity)
             pygame.draw.rect(window, color, (x * rect_width, y * rect_height, rect_width, rect_height))
 
+def draw_statistics(statistics):
+    y_offset = 10
+    for idx, stat in enumerate(statistics):
+        text = stats_descriptions[idx] + str(stat)
+        label = font.render(text, 1, (255, 255, 255))
+        window.blit(label, (10, y_offset))
+        y_offset += label.get_height() + 5
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -99,7 +106,6 @@ while running:
     if draw_light_values_flag:
         window.fill((70, 70, 70))
 
-        # Locking while drawing ensures all data is updated and synchronized
         with data_lock:
             draw_light_values(light_values)
             for line in line_data:
@@ -112,9 +118,10 @@ while running:
                 y = y_unit * size
                 color = {0: (255, 0, 0), 1: (0, 0, 255), 2: (0, 255, 255), 3: (0, 255, 0)}.get(obj_type, (255, 255, 0))
                 pygame.draw.rect(window, color, (x - 0.5 * node_size, y - 0.5 * node_size, node_size, node_size))
+            draw_statistics(statistics)
         
             pygame.display.flip()
             clock.tick(20)
-            draw_light_values_flag = False  # Reset the flag after the complete frame is drawn
+            draw_light_values_flag = False
 
 pygame.quit()
