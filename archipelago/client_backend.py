@@ -1,6 +1,7 @@
 import time
 import random
 import os
+import math
 
 computer_id = [
   0, 0, 0, 0,  0, 0, 0, 0
@@ -61,6 +62,7 @@ max_age = 5000  # Maximum age until organism has a chance of random death each i
 post_age_death_c = 0.01  # Chance of death each iteration after the organism has reached the max age
 mutation_c = 0.2
 out_c = 0.01  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
+carn_m = 0.01  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
 
 sleep_time = 0  # Time between iterations
 
@@ -920,19 +922,23 @@ def main_loop():
         nodes_velocity_list.pop(i)
       else:
         organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy)
-    print("\n\n~~~~~~~~~~~~~~~~~~~~COUNT THE NUMBER OF ORGANISMS IN EACH CELL~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    print("\n\n~~~~~~~~~~~~~~~~~~~~COUNT THE NUMBER OF ORGANISMS IN EACH CELL AND ADD THE INDEX OF THE ORGANISM TO A TRACKER~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     cell_populations = []
+    organism_tile_locations = []  # Each tile will contain the i index of the organisms in each tile if there are any
     for i in range(0, world_res):
       temp_arr = []
+      temp_arr_2 = []
       for j in range(0, world_res):
         temp_arr.append(0)
+        temp_arr.append()
       cell_populations.append(temp_arr)
+      organism_tile_locations.append(temp_arr_2)
     
     for i in range(0, len(organisms_state_list)):
         for j in range(0, len(nodes_state_list[i])):
           node_type = read_byte(nodes_state_list[i][j], 2, 1)
           if(node_type == 3):
-            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Photosynthesis Cell")
+            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Photosynthesis Node")
             node_index = read_byte(nodes_state_list[i][j], 0, 1)
             node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
             node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
@@ -953,6 +959,28 @@ def main_loop():
             print("  Node World Cell X-Index: " + str(cell_index_x))
             print("  Node World Cell Y-Index: " + str(cell_index_y))
             cell_populations[cell_index_x][cell_index_y] += 1
+          elif(node_type == 0):
+            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Soul Node")
+            node_index = read_byte(nodes_state_list[i][j], 0, 1)
+            node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
+            node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
+            node_x_unit = node_x  / (2**24 - 1)
+            node_y_unit = node_y  / (2**24 - 1)
+            if(node_x_unit < 0):
+              node_x_unit = 0
+            elif(node_x_unit >= 1):
+              node_x_unit = .999999
+            if(node_y_unit < 0):
+              node_y_unit = 0
+            elif(node_y_unit >= 1):
+              node_y_unit = .999999
+            print("  Node Unit X: " + str(node_x_unit))
+            print("  Node Unit Y: " + str(node_y_unit))
+            cell_index_x = int(node_x_unit * world_res)
+            cell_index_y = int(node_y_unit * world_res)
+            print("  Node World Cell X-Index: " + str(cell_index_x))
+            print("  Node World Cell Y-Index: " + str(cell_index_y))
+            organism_tile_locations[cell_index_x][cell_index_y].append(i)
     
     
     print("\n\n~~~~~~~~~~~~~~~~~~~~ALLOW FOR COLLECTION OF LIGHT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
@@ -989,6 +1017,42 @@ def main_loop():
               organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy + 1)
             world_light_values[cell_index_x][cell_index_y] -= 1
             print("  Organism's Energy Level Increased to: " + str(energy + 1))
+    print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE CARNIVORES FEEDING~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    for i in range(0, len(organisms_state_list)):
+        for j in range(0, len(nodes_state_list[i])):
+          node_type = read_byte(nodes_state_list[i][j], 2, 1)
+          if(node_type == 4):
+            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Carnivorous Node")
+            node_index = read_byte(nodes_state_list[i][j], 0, 1)
+            node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
+            node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
+            node_x_unit = node_x  / (2**24 - 1)
+            node_y_unit = node_y  / (2**24 - 1)
+            if(node_x_unit < 0):
+              node_x_unit = 0
+            elif(node_x_unit >= 1):
+              node_x_unit = .999999
+            if(node_y_unit < 0):
+              node_y_unit = 0
+            elif(node_y_unit >= 1):
+              node_y_unit = .999999
+            print("  Node Unit X: " + str(node_x_unit))
+            print("  Node Unit Y: " + str(node_y_unit))
+            cell_index_x = int(node_x_unit * world_res)
+            cell_index_y = int(node_y_unit * world_res)
+            print("  Node World Cell X-Index: " + str(cell_index_x))
+            print("  Node World Cell Y-Index: " + str(cell_index_y))
+            energy_predator = read_byte(organisms_state_list[i], 11, 1)
+            for k in organism_tile_locations:
+              if(k == 1):
+                continue
+              energy_prey = read_byte(organisms_state_list[k], 11, 1)
+              energy_transfer = math.ceil( energy_prey * carn_m)
+              if(energy_transfer > 0):
+                energy_predator += energy_transfer
+                energy_prey -= energy_transfer
+                organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
+                organisms_state_list[k] = write_byte(organisms_state_list[i], 11, 1, energy_prey)
     print("\n\n~~~~~~~~~~~~~~~~~~~~SEED ORGANISM IF ALL LIFE IS EXTINCT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     if(len(organisms_state_list) == 0):
       seed_organism()
