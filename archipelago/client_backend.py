@@ -63,6 +63,7 @@ post_age_death_c = 0.01  # Chance of death each iteration after the organism has
 mutation_c = 0.2
 out_c = 0.01  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
 carn_m = 0.5  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
+carn_eff = 0.8  # Fraction of eaten energy carnivores recieve
 
 sleep_time = 0  # Time between iterations
 
@@ -1112,7 +1113,7 @@ def main_loop():
             print("  Node World Cell X-Index: " + str(cell_index_x))
             print("  Node World Cell Y-Index: " + str(cell_index_y))
             cell_populations[cell_index_x][cell_index_y] += 1
-          if(node_type >= 0):
+          if(node_type == 0 or node_type == 3):
             print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " ")
             node_index = read_byte(nodes_state_list[i][j], 0, 1)
             node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
@@ -1204,7 +1205,7 @@ def main_loop():
                 energy_prey = read_byte(organisms_state_list[k], 11, 1)
                 energy_transfer = math.ceil( energy_prey * carn_m)
                 if(energy_transfer > 0):
-                  energy_predator += energy_transfer
+                  energy_predator += math.ceil(energy_transfer * carn_eff)
                   energy_prey -= energy_transfer
                   organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
                   organisms_state_list[k] = write_byte(organisms_state_list[k], 11, 1, energy_prey)
