@@ -1327,8 +1327,8 @@ def main_loop():
             nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m
           
           if(node_type_2 == 2):
-            nodes_velocity_list[i][node_two_index][0] *= 3
-            nodes_velocity_list[i][node_two_index][1] *= 3
+            nodes_velocity_list[i][node_two_index][0] *= .3
+            nodes_velocity_list[i][node_two_index][1] *= .3
           else:
             nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m
             nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m
