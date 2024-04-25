@@ -1203,9 +1203,9 @@ def main_loop():
                 continue
               if(k >= 0):
                 energy_prey = read_byte(organisms_state_list[k], 11, 1)
-                energy_transfer = math.ceil( energy_prey * carn_m)
+                energy_transfer = int( energy_prey * carn_m)
                 if(energy_transfer > 0):
-                  energy_predator += math.ceil(energy_transfer * carn_eff)
+                  energy_predator += int(energy_transfer * carn_eff)
                   energy_prey -= energy_transfer
                   organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
                   organisms_state_list[k] = write_byte(organisms_state_list[k], 11, 1, energy_prey)
