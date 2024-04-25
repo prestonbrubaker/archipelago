@@ -1112,8 +1112,8 @@ def main_loop():
             print("  Node World Cell X-Index: " + str(cell_index_x))
             print("  Node World Cell Y-Index: " + str(cell_index_y))
             cell_populations[cell_index_x][cell_index_y] += 1
-          elif(node_type == 0):
-            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Soul Node")
+          if(node_type >= 0):
+            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " ")
             node_index = read_byte(nodes_state_list[i][j], 0, 1)
             node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
             node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
