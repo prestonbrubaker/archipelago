@@ -1320,19 +1320,24 @@ def main_loop():
           node_type_1 = read_byte(nodes_state_list[i][node_one_index], 2, 1)  # Pull the node type for special physics for gripper (2) nodes.
           node_type_2 = read_byte(nodes_state_list[i][node_two_index], 2, 1)
 
+          if(node_one_y_unit > 0.7 and node_one_y_unit > 0.7):
+            drag_m_adj = 0
+          else:
+            drag_m_adj = drag_m
+          
           if(node_type_1 == 2):
             nodes_velocity_list[i][node_one_index][0] *= .3
             nodes_velocity_list[i][node_one_index][1] *= .3
           else:
-            nodes_velocity_list[i][node_one_index][0] *= 1 - drag_m
-            nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m
+            nodes_velocity_list[i][node_one_index][0] *= 1 - drag_m_adj
+            nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m_adj
           
           if(node_type_2 == 2):
             nodes_velocity_list[i][node_two_index][0] *= .3
             nodes_velocity_list[i][node_two_index][1] *= .3
           else:
-            nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m
-            nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m
+            nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m_adj
+            nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m_adj
           
   
           # Convert coordinate values back to values ready to be stored in 3 bytes
