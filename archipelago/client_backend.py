@@ -64,6 +64,7 @@ mutation_c = 0.2  #Chance, during reproduction, that any mutation(s) are made
 out_c = 0.001  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
 carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
+save_int = 5  # Number of iterations between saving to the text files
 
 sleep_time = 0  # Time between iterations
 
@@ -1355,19 +1356,20 @@ def main_loop():
     #print("Output (node type, x, y): " + str(get_positions_of_nodes()))
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
-    with open('statistics.txt', 'w') as file:
-      file.write(str(get_statistics()))
-    with open('muscles.txt', 'w') as file:
-      file.write(str(get_positions_of_muscles()))
-    with open('locations.txt', 'w') as file:
-      file.write(str(get_positions_of_nodes()))
-    with open('genes.txt', 'w') as file:
-      file.write(str(organisms_gene_list))
-    with open('states.txt', 'w') as file:
-      file.write(str(organisms_state_list))
-    with open('light_values.txt', 'w') as file:
-      file.write(str(world_light_values))
-    import_organisms()
+    if(age_of_world % save_int):
+      with open('statistics.txt', 'w') as file:
+        file.write(str(get_statistics()))
+      with open('muscles.txt', 'w') as file:
+        file.write(str(get_positions_of_muscles()))
+      with open('locations.txt', 'w') as file:
+        file.write(str(get_positions_of_nodes()))
+      with open('genes.txt', 'w') as file:
+        file.write(str(organisms_gene_list))
+      with open('states.txt', 'w') as file:
+        file.write(str(organisms_state_list))
+      with open('light_values.txt', 'w') as file:
+        file.write(str(world_light_values))
+      import_organisms()
     time.sleep(sleep_time)
 
 main_loop()
