@@ -417,26 +417,26 @@ def import_organisms():
       else:
         raise ValueError("The content of the file is not a list.")
     except SyntaxError as e:
-          print(f"Error: {e}")
+          #print(f"Error: {e}")
   
       
 
 seed_organism()
 world_light_values = make_world(world_res, light_max)  # Initialize world light values
 
-print("\n~~~~~~~~~~~~~~~~~~~~COMPUTER AND WORLD STATE~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+#print("\n~~~~~~~~~~~~~~~~~~~~COMPUTER AND WORLD STATE~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
 comp_id_dec = read_byte(computer_id, 0, 1)
-print("Computer's ID: " + str(comp_id_dec))
+#print("Computer's ID: " + str(comp_id_dec))
 world_id_dec = read_byte(world_id, 0, 1)
-print("World's ID: " + str(world_id_dec))
+#print("World's ID: " + str(world_id_dec))
 
-print("\n~~~~~~~~~~~~~~~~~~~~SEED ORANISM INITIAL CONDITIONS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+#print("\n~~~~~~~~~~~~~~~~~~~~SEED ORANISM INITIAL CONDITIONS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
-print("Genetic Code: " + str(organisms_gene_list))
-print("Initial State: " + str(organisms_state_list))
-print("Initial Nodes States: " + str(nodes_state_list))
-print("Initial Muscles States: " + str(muscles_state_list))
+#print("Genetic Code: " + str(organisms_gene_list))
+#print("Initial State: " + str(organisms_state_list))
+#print("Initial Nodes States: " + str(nodes_state_list))
+#print("Initial Muscles States: " + str(muscles_state_list))
 
 
 
@@ -445,85 +445,85 @@ def main_loop():
   global org_counter
   
   while True:
-    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     age_of_world_dec = read_byte(age_of_world, 0, 6)
-    print(age_of_world)
-    print("AGE OF WORLD: " + str(age_of_world_dec))
+    #print(age_of_world)
+    #print("AGE OF WORLD: " + str(age_of_world_dec))
     
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ACTIONS
       
       
-      print("\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF ORGANISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+      #print("\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF ORGANISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
       # READ THROUGH THE STATE OF THE ORGANISM
       org_id = read_byte(organisms_state_list[i], 0, 6)    # Retrieve the organism's ID
-      print("Organism's ID: " + str(org_id))
+      #print("Organism's ID: " + str(org_id))
       org_fam_id = read_byte(organisms_state_list[i], 6, 5)  # Retrieve the organism's family ID
-      print("Organism's Family ID: " + str(org_fam_id))
+      #print("Organism's Family ID: " + str(org_fam_id))
       org_energy = read_byte(organisms_state_list[i], 11, 1)  # Retrieve the organism's energy level
-      print("Organism's Energy Level: " + str(org_energy))
+      #print("Organism's Energy Level: " + str(org_energy))
       selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
-      print("Organism's First Selected Node: " + str(selected_node_one))
+      #print("Organism's First Selected Node: " + str(selected_node_one))
       selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
-      print("Organism's Second Selected Node: " + str(selected_node_two))
+      #print("Organism's Second Selected Node: " + str(selected_node_two))
       register_one = read_byte(organisms_state_list[i], 14, 3) # Retrieve the organism's 1st register value
-      print("Organism's First Register Value: " + str(register_one))
+      #print("Organism's First Register Value: " + str(register_one))
       register_two = read_byte(organisms_state_list[i], 17, 3) # Retrieve the organism's 2nd register value
-      print("Organism's Second Register Value: " + str(register_two))
+      #print("Organism's Second Register Value: " + str(register_two))
       register_three = read_byte(organisms_state_list[i], 20, 3) # Retrieve the organism's 3rd register value
-      print("Organism's Third Register Value: " + str(register_three))
+      #print("Organism's Third Register Value: " + str(register_three))
       index = read_byte(organisms_state_list[i], 23, 2)  # Retrieve the organism's index for it's genes
-      print("Organism's Index: " + str(index))
+      #print("Organism's Index: " + str(index))
       time_alive = read_byte(organisms_state_list[i], 25, 3) # Retrieve the time the organism has been alive
-      print("Time Organisms Has Been Alive: " + str(time_alive))
+      #print("Time Organisms Has Been Alive: " + str(time_alive))
 
 
-      print("\n~~~~~~~~~~~~~~~~~~~~~~EXECUTING AN ACTION~~~~~~~~~~~~~~~~~~~~~~~~\n")
+      #print("\n~~~~~~~~~~~~~~~~~~~~~~EXECUTING AN ACTION~~~~~~~~~~~~~~~~~~~~~~~~\n")
       # EXECUTE GENE AT THE CURRENT INDEX
       if(index >= len(organisms_gene_list[i])):  # Reset the index if it passes the last action
         index = 0
       action = read_byte(organisms_gene_list[i], index, 1)
-      print("Current Action of Organism: " + str(action))
+      #print("Current Action of Organism: " + str(action))
 
       if(action == 19):
-        print("  Action to be Executed: Creation of a New Node")
+        #print("  Action to be Executed: Creation of a New Node")
         mass = read_byte(organisms_gene_list[i], index + 1, 1)  # Mass of new node
-        print("  Mass of New Node: " + str(mass))
+        #print("  Mass of New Node: " + str(mass))
         node_type = read_byte(organisms_gene_list[i], index + 2, 1)  # Node type
-        print("  Node Type: " + str(node_type))
+        #print("  Node Type: " + str(node_type))
         if(node_type == 0):
-          print("    Node Type Name: Soul")
+          #print("    Node Type Name: Soul")
         elif(node_type == 1):
-          print("    Node Type Name: Structual")
+          #print("    Node Type Name: Structual")
         elif(node_type == 2):
-          print("    Node Type Name: Gripper")
+          #print("    Node Type Name: Gripper")
         elif(node_type == 3):
-          print("    Node Type Name: Photosynthesis")
+          #print("    Node Type Name: Photosynthesis")
         x_offset = read_byte(organisms_gene_list[i], index + 3, 1)  # X-Offset
-        print("  X-Offset: " + str(x_offset))
+        #print("  X-Offset: " + str(x_offset))
         y_offset = read_byte(organisms_gene_list[i], index + 4, 1)  # Y-Offset
-        print("  Y-Offset: " + str(y_offset))
+        #print("  Y-Offset: " + str(y_offset))
 
         # Add node to nodes_state_list for the organism
         nodes_state_list[i].append([])
         nodes_velocity_list[i].append([0, 0])  # Initialize the node at rest
         j = len(nodes_state_list[i]) - 1  # Index of the new node in nodes_state_list
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 0, 1, j)  # Add a node index to the new node, incremented by one over the last node
-        print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        #print("    Index Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 1, 1, mass)  # Add mass to the new node
-        print("    Mass Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        #print("    Mass Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 2, 1, node_type)  # Add node type to the new node
-        print("    Node Type Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        #print("    Node Type Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 3, 1, 0)  # Add Immutable Data to the new node
-        print("    Immutable Data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        #print("    Immutable Data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 4, 1, 0)  # Add Mutable Data to the new node
-        print("    Mutable Data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        #print("    Mutable Data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
 
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
         x_value_ref_unit = read_byte(nodes_state_list[i][selected_node_one], 5, 3) / (2**24 - 1)  # X-value of selected node one, in unit form
         y_value_ref_unit = read_byte(nodes_state_list[i][selected_node_one], 8, 3) / (2**24 - 1)  # Y-value of selected node one, in unit form
-        print("      X-value of selected node 1 in unit form: " + str(x_value_ref_unit))
-        print("      Y-value of selected node 1 in unit form: " + str(y_value_ref_unit))
+        #print("      X-value of selected node 1 in unit form: " + str(x_value_ref_unit))
+        #print("      Y-value of selected node 1 in unit form: " + str(y_value_ref_unit))
         x_value_new_unit = x_value_ref_unit + (x_offset / 255 - 0.5) * max_node_offset
         if(x_value_new_unit < 0):
           x_value_new_unit = 0
@@ -534,405 +534,405 @@ def main_loop():
           y_value_new_unit = 0
         elif(y_value_new_unit > 1):
           y_value_new_unit = 1
-        print("      X-value of selected new node in unit form: " + str(x_value_new_unit))
-        print("      Y-value of selected new node in unit form: " + str(y_value_new_unit))
+        #print("      X-value of selected new node in unit form: " + str(x_value_new_unit))
+        #print("      Y-value of selected new node in unit form: " + str(y_value_new_unit))
 
         x_value_new = int(x_value_new_unit * (2**24 - 1))
         y_value_new = int(y_value_new_unit * (2**24 - 1))
         
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 5, 3, x_value_new)  # Add X-value to the new node
-        print("    X-Value data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        #print("    X-Value data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
         nodes_state_list[i][j] = write_byte(nodes_state_list[i][j], 8, 3, y_value_new)  # Add Y-value to the new node
-        print("    Y-Value data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
+        #print("    Y-Value data Added to New Node. Current Contents of New Node State: " + str(nodes_state_list[i][j]))
 
         # Make the 2nd Selected Node the new Node
         organisms_state_list[i] = write_byte(organisms_state_list[i], 13, 1, j)
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
-        print("Organism's First Selected Node: " + str(selected_node_one))
+        #print("Organism's First Selected Node: " + str(selected_node_one))
         selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node, which is now updated
-        print("Organism's Second Selected Node: " + str(selected_node_two))
+        #print("Organism's Second Selected Node: " + str(selected_node_two))
         
         
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 5, 1)  # Contracted Muscle Length
-        print("  Contracted Muscle Length: " + str(contracted_muscle_len))
+        #print("  Contracted Muscle Length: " + str(contracted_muscle_len))
         expanded_muscle_len = read_byte(organisms_gene_list[i], index + 6, 1)  # Expanded Muscle Length
-        print("  Expanded Muscle Length: " + str(expanded_muscle_len))
+        #print("  Expanded Muscle Length: " + str(expanded_muscle_len))
         spring_constant = read_byte(organisms_gene_list[i], index + 7, 1)  # Spring Constant
-        print("  Spring Constant of Muscle: " + str(spring_constant))
+        #print("  Spring Constant of Muscle: " + str(spring_constant))
 
         # Add muscle to muscles_state_list
         muscles_state_list[i].append([])
         j = len(muscles_state_list[i]) - 1  # Index of the new muscle in muscles_state_list
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 0, 1, j)  # Add a muscle index to the new muscle, incremented by one over the last muscle
-        print("    Index Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Index Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 1, 1, selected_node_one)  # Add first index of which the muscle is connected to
-        print("    1st Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    1st Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 2, 1, selected_node_two)  # Add second index of which the muscle is connected to
-        print("    2nd Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    2nd Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 3, 1, contracted_muscle_len)  # Add the contracted muscle length
-        print("    Contracted Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Contracted Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 4, 1, expanded_muscle_len)  # Add the expanded muscle length
-        print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 5, 1, spring_constant)  # Add the spring constant
-        print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Add Mutable Data. Set to expanded state to start. 0 = expanded, 1 = contracted. Other bits reserved for future features.
-        print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
 
-        print("      Current Node State List for Organism: " + str(nodes_state_list[i]))
+        #print("      Current Node State List for Organism: " + str(nodes_state_list[i]))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 8)
 
       elif(action == 22):
-        print("  Action to be Executed: Increment 1st Selected Node by One")
+        #print("  Action to be Executed: Increment 1st Selected Node by One")
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
-        print("  Organism's First Selected Node: " + str(selected_node_one))
+        #print("  Organism's First Selected Node: " + str(selected_node_one))
         selected_node_one += 1
         if(selected_node_one >= len(nodes_state_list[i])):  # Reset the selected node if it overflows
           selected_node_one = 0
         organisms_state_list[i] = write_byte(organisms_state_list[i], 12, 1, selected_node_one)
-        print("  Organism's New First Selected Node: " + str(selected_node_one))
+        #print("  Organism's New First Selected Node: " + str(selected_node_one))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
         
       elif(action == 23):
-        print("  Action to be Executed: Increment 2nd Selected Node by One")
+        #print("  Action to be Executed: Increment 2nd Selected Node by One")
         selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
-        print("  Organism's Second Selected Node: " + str(selected_node_two))
+        #print("  Organism's Second Selected Node: " + str(selected_node_two))
         selected_node_two += 1
         if(selected_node_two >= len(nodes_state_list[i])):  # Reset the selected node if it overflows
           selected_node_two = 0
         organisms_state_list[i] = write_byte(organisms_state_list[i], 13, 1, selected_node_two)
-        print("  Organism's New Second Selected Node: " + str(selected_node_two))
+        #print("  Organism's New Second Selected Node: " + str(selected_node_two))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       elif(action == 20):
         
-        print("  Action to be executed: Form a new muscle between the first and second selected nodes")
+        #print("  Action to be executed: Form a new muscle between the first and second selected nodes")
         
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
-        print("  Organism's First Selected Node: " + str(selected_node_one))
+        #print("  Organism's First Selected Node: " + str(selected_node_one))
         selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
-        print("  Organism's Second Selected Node: " + str(selected_node_two))
+        #print("  Organism's Second Selected Node: " + str(selected_node_two))
         
         contracted_muscle_len = read_byte(organisms_gene_list[i], index + 1, 1)  # Contracted Muscle Length
-        print("  Contracted Muscle Length: " + str(contracted_muscle_len))
+        #print("  Contracted Muscle Length: " + str(contracted_muscle_len))
         expanded_muscle_len = read_byte(organisms_gene_list[i], index + 2, 1)  # Expanded Muscle Length
-        print("  Expanded Muscle Length: " + str(expanded_muscle_len))
+        #print("  Expanded Muscle Length: " + str(expanded_muscle_len))
         spring_constant = read_byte(organisms_gene_list[i], index + 3, 1)  # Spring Constant
-        print("  Spring Constant of Muscle: " + str(spring_constant))
+        #print("  Spring Constant of Muscle: " + str(spring_constant))
 
         # Add muscle to muscles_state_list
         muscles_state_list[i].append([])
         j = len(muscles_state_list[i]) - 1  # Index of the new muscle in muscles_state_list
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 0, 1, j)  # Add a muscle index to the new muscle, incremented by one over the last muscle
-        print("    Index Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Index Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 1, 1, selected_node_one)  # Add first index of which the muscle is connected to
-        print("    1st Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    1st Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 2, 1, selected_node_two)  # Add second index of which the muscle is connected to
-        print("    2nd Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    2nd Selected Node Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 3, 1, contracted_muscle_len)  # Add the contracted muscle length
-        print("    Contracted Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Contracted Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 4, 1, expanded_muscle_len)  # Add the expanded muscle length
-        print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Expanded Muscle Length Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 5, 1, spring_constant)  # Add the spring constant
-        print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Spring Constant Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Add Mutable Data. Set to expanded state to start. 0 = expanded, 1 = contracted. Other bits reserved for future features.
         
-        print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
+        #print("    Mutable Data Added to New Muscle. Current Contents of New Muscle State: " + str(muscles_state_list[i][j]))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 3)
         
       
       elif(action == 21):
-        print("  Action to be Executed: Toggle Muscle")
+        #print("  Action to be Executed: Toggle Muscle")
         selected_node_one = read_byte(organisms_state_list[i], 12, 1) # Retrieve the organism's 1st selected node
-        print("  Organism's First Selected Node: " + str(selected_node_one))
+        #print("  Organism's First Selected Node: " + str(selected_node_one))
         selected_node_two = read_byte(organisms_state_list[i], 13, 1) # Retrieve the organism's 2nd selected node
-        print("  Organism's Second Selected Node: " + str(selected_node_two))
+        #print("  Organism's Second Selected Node: " + str(selected_node_two))
         for j in range(0, len(muscles_state_list[i])):  # Cycle through the muscles to check if any have connections that match the 1st selected node and 2nd selected node
           muscle_index = read_byte(muscles_state_list[i][j], 0, 1)
           muscle_node_one = read_byte(muscles_state_list[i][j], 1, 1)
           muscle_node_two = read_byte(muscles_state_list[i][j], 2, 1)
-          print("    Muscle " + str(muscle_index) + " Connected to Nodes " + str(muscle_node_one) + " and " + str(muscle_node_two))
+          #print("    Muscle " + str(muscle_index) + " Connected to Nodes " + str(muscle_node_one) + " and " + str(muscle_node_two))
           if(muscle_node_one == selected_node_one and muscle_node_two == selected_node_two or muscle_node_two == selected_node_one and muscle_node_one == selected_node_two):
-            print("      Muscle is selected!")
+            #print("      Muscle is selected!")
             current_contraction_state = read_byte(muscles_state_list[i][j], 6, 1)
             if(current_contraction_state == 0):
-              print("      Muscle is currently expanded")
+              #print("      Muscle is currently expanded")
               muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 1)  # Toggle to contracted state
-              print("      Muscle toggled to contracted")
+              #print("      Muscle toggled to contracted")
             else:
-              print("      Muscle is currently contracted")
+              #print("      Muscle is currently contracted")
               muscles_state_list[i][j] = write_byte(muscles_state_list[i][j], 6, 1, 0)  # Toggle to expanded state
-              print("      Muscle toggled to expanded")
+              #print("      Muscle toggled to expanded")
         
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
             
               
       if(action == 14):
-        print("  Action to be Executed: Store a random value up to Data in register 1")
+        #print("  Action to be Executed: Store a random value up to Data in register 1")
         data = read_byte(organisms_gene_list[i], index + 1, 3)
-        print("    Value found in Data: " + str(data))
+        #print("    Value found in Data: " + str(data))
         r = random.randint(0, data)
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, r)
-        print("    Random Value " + str(r) + " Stored in Register 1")
+        #print("    Random Value " + str(r) + " Stored in Register 1")
         
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
 
       
       elif(action == 4):
-        print("  Action to be Executed: Swap register 1 and 2")
+        #print("  Action to be Executed: Swap register 1 and 2")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, register_two_value)
         organisms_state_list[i] = write_byte(organisms_state_list[i], 17, 3, register_one_value)
-        print("    Registers Swapped!")
+        #print("    Registers Swapped!")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       
       elif(action == 1):
-        print("  Action to be Executed: Store Data in Register 1")
+        #print("  Action to be Executed: Store Data in Register 1")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
-        print("  Register One Value: " + str(register_one_value))
+        #print("  Register One Value: " + str(register_one_value))
         data = read_byte(organisms_gene_list[i], index + 1, 3)
-        print("  Data to be Stored in Register 1: " + str(data))
+        #print("  Data to be Stored in Register 1: " + str(data))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, data)
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
 
       
       elif(action == 12):
-        print("  Action to be Executed: Subtract Register 2 from Register 1, and Store the Result in Register 3. Any result less than 0 is made to be zero")
+        #print("  Action to be Executed: Subtract Register 2 from Register 1, and Store the Result in Register 3. Any result less than 0 is made to be zero")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         subtraction_result = register_one_value - register_two_value
         if(subtraction_result < 0):
           subtraction_result = 0
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, subtraction_result)
-        print("  Result Stored in Register 3: " + str(subtraction_result))
+        #print("  Result Stored in Register 3: " + str(subtraction_result))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
         
       elif(action == 11):
-        print("  Action to be Executed: Add Register 1 and Register 2, and Store the Result in Register 3.")
+        #print("  Action to be Executed: Add Register 1 and Register 2, and Store the Result in Register 3.")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         addition_result = register_one_value + register_two_value
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, addition_result)
-        print("  Result Stored in Register 3: " + str(addition_result))
+        #print("  Result Stored in Register 3: " + str(addition_result))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
         
       elif(action == 13):
-        print("  Action to be Executed: Take the modulus of Register 1 with respect to Register 2, and Store the Result in Register 3.")
+        #print("  Action to be Executed: Take the modulus of Register 1 with respect to Register 2, and Store the Result in Register 3.")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         modulus_result = register_one_value % register_two_value
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, modulus_result)
-        print("  Result Stored in Register 3: " + str(modulus_result))
+        #print("  Result Stored in Register 3: " + str(modulus_result))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       
       elif(action == 8):
-        print("  Action to be Executed: Check if the value in register 2 is more than the value in register 1, and change the index by data if that is the case and proceed otherwise")
+        #print("  Action to be Executed: Check if the value in register 2 is more than the value in register 1, and change the index by data if that is the case and proceed otherwise")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         data = read_byte(organisms_gene_list[i], index + 1, 3)
-        print("  Data Value including jump direction bit: " + str(data))
+        #print("  Data Value including jump direction bit: " + str(data))
         if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
           forward_index_jump = 1
-          print("  Jump Direction: Forward")
+          #print("  Jump Direction: Forward")
           data -= 2**(8*24 - 1)
         else:
           forward_index_jump = -1
-          print("  Jump Direction: Backward")
-        print("  Data Value not including jump direction bit: " + str(data))        
+          #print("  Jump Direction: Backward")
+        #print("  Data Value not including jump direction bit: " + str(data))        
         if(register_two_value > register_one_value):
-          print("  Register 2 is More Than Register 1")
-          print("  Changing Index by: " + str(data * forward_index_jump))
+          #print("  Register 2 is More Than Register 1")
+          #print("  Changing Index by: " + str(data * forward_index_jump))
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
         else:
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
 
       
       elif(action == 7):
-        print("  Action to be Executed: Check if the value in register 2 is equal to register 1, and change the index by data if that is the case and proceed otherwise")
+        #print("  Action to be Executed: Check if the value in register 2 is equal to register 1, and change the index by data if that is the case and proceed otherwise")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         data = read_byte(organisms_gene_list[i], index + 1, 3)
-        print("  Data Value including jump direction bit: " + str(data))
+        #print("  Data Value including jump direction bit: " + str(data))
         if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
           forward_index_jump = 1
-          print("  Jump Direction: Forward")
+          #print("  Jump Direction: Forward")
           data -= 2**(8*24 - 1)
         else:
           forward_index_jump = -1
-          print("  Jump Direction: Backward")
-        print("  Data Value not including jump direction bit: " + str(data))        
+          #print("  Jump Direction: Backward")
+        #print("  Data Value not including jump direction bit: " + str(data))        
         if(register_two_value == register_one_value):
-          print("  Register 2 is Equal to Register 1")
-          print("  Changing Index by: " + str(data * forward_index_jump))
+          #print("  Register 2 is Equal to Register 1")
+          #print("  Changing Index by: " + str(data * forward_index_jump))
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
         else:
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
           
       elif(action == 9):
-        print("  Action to be Executed: Check if the value in register 2 is less than register 1, and change the index by data if that is the case and proceed otherwise")
+        #print("  Action to be Executed: Check if the value in register 2 is less than register 1, and change the index by data if that is the case and proceed otherwise")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         data = read_byte(organisms_gene_list[i], index + 1, 3)
-        print("  Data Value including jump direction bit: " + str(data))
+        #print("  Data Value including jump direction bit: " + str(data))
         if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
           forward_index_jump = 1
-          print("  Jump Direction: Forward")
+          #print("  Jump Direction: Forward")
           data -= 2**(8*24 - 1)
         else:
           forward_index_jump = -1
-          print("  Jump Direction: Backward")
-        print("  Data Value not including jump direction bit: " + str(data))        
+          #print("  Jump Direction: Backward")
+        #print("  Data Value not including jump direction bit: " + str(data))        
         if(register_two_value < register_one_value):
-          print("  Register 2 is Less Than Register 1")
-          print("  Changing Index by: " + str(data * forward_index_jump))
+          #print("  Register 2 is Less Than Register 1")
+          #print("  Changing Index by: " + str(data * forward_index_jump))
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
         else:
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
           
       elif(action == 7):
-        print("  Action to be Executed: Check if the value in register 2 is NOT equal to register 1, and change the index by data if that is the case and proceed otherwise")
+        #print("  Action to be Executed: Check if the value in register 2 is NOT equal to register 1, and change the index by data if that is the case and proceed otherwise")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
         data = read_byte(organisms_gene_list[i], index + 1, 3)
-        print("  Data Value including jump direction bit: " + str(data))
+        #print("  Data Value including jump direction bit: " + str(data))
         if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
           forward_index_jump = 1
-          print("  Jump Direction: Forward")
+          #print("  Jump Direction: Forward")
           data -= 2**(8*24 - 1)
         else:
           forward_index_jump = -1
-          print("  Jump Direction: Backward")
-        print("  Data Value not including jump direction bit: " + str(data))        
+          #print("  Jump Direction: Backward")
+        #print("  Data Value not including jump direction bit: " + str(data))        
         if(register_two_value != register_one_value):
-          print("  Register 2 is NOT Equal to Register 1")
-          print("  Changing Index by: " + str(data * forward_index_jump))
+          #print("  Register 2 is NOT Equal to Register 1")
+          #print("  Changing Index by: " + str(data * forward_index_jump))
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
         else:
           organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 4)
 
       
       elif(action == 2):
-        print("  Action to be Executed: Swap the Values in Registers 1 and 3")
+        #print("  Action to be Executed: Swap the Values in Registers 1 and 3")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_three_value = read_byte(organisms_state_list[i], 20, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Three Value: " + str(register_three_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Three Value: " + str(register_three_value))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, register_three_value)
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, register_one_value)
-        print("    Registers Swapped!")
+        #print("    Registers Swapped!")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_three_value = read_byte(organisms_state_list[i], 20, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Three Value: " + str(register_three_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Three Value: " + str(register_three_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
       
       elif(action == 3):
-        print("  Action to be Executed: Swap the Values in Registers 2 and 3")
+        #print("  Action to be Executed: Swap the Values in Registers 2 and 3")
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
         register_three_value = read_byte(organisms_state_list[i], 20, 3)
-        print("  Register Two Value: " + str(register_two_value))
-        print("  Register Three Value: " + str(register_three_value))
+        #print("  Register Two Value: " + str(register_two_value))
+        #print("  Register Three Value: " + str(register_three_value))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 17, 3, register_three_value)
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, register_two_value)
-        print("    Registers Swapped!")
+        #print("    Registers Swapped!")
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
         register_three_value = read_byte(organisms_state_list[i], 20, 3)
-        print("  Register Two Value: " + str(register_two_value))
-        print("  Register Three Value: " + str(register_three_value))
+        #print("  Register Two Value: " + str(register_two_value))
+        #print("  Register Three Value: " + str(register_three_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
 
       elif(action == 5):
-        print("  Action to be Executed: Clear Register 1")
+        #print("  Action to be Executed: Clear Register 1")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
-        print("  Register One Value: " + str(register_one_value))
+        #print("  Register One Value: " + str(register_one_value))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, 0)
-        print("    Register Cleared!")
+        #print("    Register Cleared!")
         register_one_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
+        #print("  Register One Value: " + str(register_one_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
       
       elif(action == 17):
-        print("  Action to be Executed: Store the Organism's Energy Value in Register 1.")
+        #print("  Action to be Executed: Store the Organism's Energy Value in Register 1.")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
-        print("  Register One Value: " + str(register_one_value))
+        #print("  Register One Value: " + str(register_one_value))
         org_energy = read_byte(organisms_state_list[i], 11, 1)  # Retrieve the organism's energy level
-        print("  Energy Level of Organism: " + str(org_energy))
+        #print("  Energy Level of Organism: " + str(org_energy))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, org_energy)
-        print("    Energy Value Stored!")
+        #print("    Energy Value Stored!")
         register_one_value = read_byte(organisms_state_list[i], 17, 3)
-        print("  Register One Value: " + str(register_one_value))
+        #print("  Register One Value: " + str(register_one_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
       elif(action == 6):
-        print("  Action to be Executed: Clear All Registers")
+        #print("  Action to be Executed: Clear All Registers")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
         register_three_value = read_byte(organisms_state_list[i], 20, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
-        print("  Register Three Value: " + str(register_three_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
+        #print("  Register Three Value: " + str(register_three_value))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 14, 3, 0)
         organisms_state_list[i] = write_byte(organisms_state_list[i], 17, 3, 0)
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, 0)
-        print("    Registers Cleared!")
+        #print("    Registers Cleared!")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
         register_three_value = read_byte(organisms_state_list[i], 20, 3)
-        print("  Register One Value: " + str(register_one_value))
-        print("  Register Two Value: " + str(register_two_value))
-        print("  Register Three Value: " + str(register_three_value))
+        #print("  Register One Value: " + str(register_one_value))
+        #print("  Register Two Value: " + str(register_two_value))
+        #print("  Register Three Value: " + str(register_three_value))
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
       
       elif(action == 15):
-        print("  Action to be Executed: Change the Index by Data")
+        #print("  Action to be Executed: Change the Index by Data")
         data = read_byte(organisms_gene_list[i], index + 1, 3)
-        print("  Data Value including jump direction bit: " + str(data))
+        #print("  Data Value including jump direction bit: " + str(data))
         if(data >= 2**(8*24 - 1)):  # The first bit of data determines the direction of the jump, where 1 means forwards and 0 means backwards. This bit is then not included in calculating the spaces to jump if the condition is satisfied
           forward_index_jump = 1
-          print("  Jump Direction: Forward")
+          #print("  Jump Direction: Forward")
           data -= 2**(8*24 - 1)
         else:
           forward_index_jump = -1
-          print("  Jump Direction: Backward")
-        print("  Data Value not including jump direction bit: " + str(data))        
-        print("  Changing Index by: " + str(data * forward_index_jump))
+          #print("  Jump Direction: Backward")
+        #print("  Data Value not including jump direction bit: " + str(data))        
+        #print("  Changing Index by: " + str(data * forward_index_jump))
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + data * forward_index_jump)
 
       
@@ -940,20 +940,20 @@ def main_loop():
 
       
       elif(action == 26):
-        print("  Action to be Executed: Attempt Reproduction")
+        #print("  Action to be Executed: Attempt Reproduction")
         id = read_byte(organisms_state_list[i], 0, 6)
         energy = read_byte(organisms_state_list[i], 11, 1)
         data = read_byte(organisms_gene_list[i], index + 1, 1)
         fraction = data / 255
-        print("  Organism " + str(id) + " Has Energy Level: " + str(energy) + " And is Willing to Share " + str(fraction) + " Of Itself With Potential Offspring")
+        #print("  Organism " + str(id) + " Has Energy Level: " + str(energy) + " And is Willing to Share " + str(fraction) + " Of Itself With Potential Offspring")
         if(energy >= random.randint(32, 100) and len(organisms_gene_list) <= max_org_c):  # Will Act As a Current Setpoint for allowing reproduction AND only allows up to a certain number of organisms
-          print("  Organism Has Sufficient energy for Reproduction. Commencing")
+          #print("  Organism Has Sufficient energy for Reproduction. Commencing")
           energy_transfer = int(energy * fraction)
           organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy - energy_transfer)
-          print("  Parent Organism is Left With " + str(energy - energy_transfer) + " Enegy Units")
+          #print("  Parent Organism is Left With " + str(energy - energy_transfer) + " Enegy Units")
           new_org_index = org_counter
           org_counter += 1
-          print("  The New Organism's ID is: " + str(new_org_index))
+          #print("  The New Organism's ID is: " + str(new_org_index))
           new_org_genes = []
           for k in range(0, len(organisms_gene_list[i])):
             new_org_genes.append(organisms_gene_list[i][k])
@@ -1012,7 +1012,7 @@ def main_loop():
             
             r2 = 0
             while(r2 < 0.5):
-              print("  Adding a Random Mutation by Setting a Random Bit of Offspring's Geneome to a Random Value")
+              #print("  Adding a Random Mutation by Setting a Random Bit of Offspring's Geneome to a Random Value")
               random_gene_index = random.randint(0, len(organisms_gene_list[-1]) - 1)
               random_bit_value = random.randint(0, 1)
               organisms_gene_list[-1][random_gene_index] = random_bit_value
@@ -1025,34 +1025,34 @@ def main_loop():
         
           
         else:
-          print("  Organism Does Not Have Enough Energy For Reproduction. Skipping.")
+          #print("  Organism Does Not Have Enough Energy For Reproduction. Skipping.")
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 2)
       
       else:
-        print("  Action to be Executed: Do Nothing")
+        #print("  Action to be Executed: Do Nothing")
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 1)
         
         
               
         
-    print("\n\n~~~~~~~~~~~~~~~~~~~~CHECK FOR LISTS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~CHECK FOR LISTS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     
-    print("  Organism State List: " + str(organisms_state_list))
-    print("  Node State List: " + str(nodes_state_list))
-    print("  Node Velocity List: " + str(nodes_velocity_list))
-    print("  Muscle State List: " + str(muscles_state_list))
+    #print("  Organism State List: " + str(organisms_state_list))
+    #print("  Node State List: " + str(nodes_state_list))
+    #print("  Node Velocity List: " + str(nodes_velocity_list))
+    #print("  Muscle State List: " + str(muscles_state_list))
 
-    print("\n\n~~~~~~~~~~~~~~~~~~~~AGE ORGANISMS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~AGE ORGANISMS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for AGE
       age = read_byte(organisms_state_list[i], 25, 3)
-      print("  Organism Age: " + str(age))
+      #print("  Organism Age: " + str(age))
       if(age < 2**24 - 1):
         age += 1
       organisms_state_list[i] = write_byte(organisms_state_list[i], 25, 3, age)
 
-    print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE METABOLISM~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(len(organisms_state_list) - 1, -1, -1):    # Iterate through organisms for ITERATE METABOLISM backwards to avoid problems when/if organisms are removed
       energy = read_byte(organisms_state_list[i], 11, 1)
       num_nodes = len(nodes_state_list[i])
@@ -1062,13 +1062,13 @@ def main_loop():
         if(node_type != 1 and node_type != 2 and node_type != 4):
           num_non_structual_nodes += 1
       age = read_byte(organisms_state_list[i], 25, 3)
-      print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
+      #print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
       r = random.uniform(0, 1)
       r2 = random.uniform(0, 1)
       if( r < metabolism_c):
         energy -= int(1 * num_non_structual_nodes * 0.3 + 1)
       if(energy < 0 or (age > max_age and r2 < post_age_death_c)):
-        print("Organism has been executed...")
+        #print("Organism has been executed...")
         organisms_state_list.pop(i)
         organisms_gene_list.pop(i)
         nodes_state_list.pop(i)
@@ -1076,7 +1076,7 @@ def main_loop():
         nodes_velocity_list.pop(i)
       else:
         organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy)
-    print("\n\n~~~~~~~~~~~~~~~~~~~~COUNT THE NUMBER OF ORGANISMS IN EACH CELL AND ADD THE INDEX OF THE ORGANISM TO A TRACKER~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~COUNT THE NUMBER OF ORGANISMS IN EACH CELL AND ADD THE INDEX OF THE ORGANISM TO A TRACKER~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     cell_populations = []
     organism_tile_locations = []  # Each tile will contain the i index of the organisms in each tile if there are any
     for i in range(0, world_res):
@@ -1092,7 +1092,7 @@ def main_loop():
         for j in range(0, len(nodes_state_list[i])):
           node_type = read_byte(nodes_state_list[i][j], 2, 1)
           if(node_type == 3):
-            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Photosynthesis Node")
+            #print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Photosynthesis Node")
             node_index = read_byte(nodes_state_list[i][j], 0, 1)
             node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
             node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
@@ -1106,15 +1106,15 @@ def main_loop():
               node_y_unit = 0
             elif(node_y_unit >= 1):
               node_y_unit = .999999
-            print("  Node Unit X: " + str(node_x_unit))
-            print("  Node Unit Y: " + str(node_y_unit))
+            #print("  Node Unit X: " + str(node_x_unit))
+            #print("  Node Unit Y: " + str(node_y_unit))
             cell_index_x = int(node_x_unit * world_res)
             cell_index_y = int(node_y_unit * world_res)
-            print("  Node World Cell X-Index: " + str(cell_index_x))
-            print("  Node World Cell Y-Index: " + str(cell_index_y))
+            #print("  Node World Cell X-Index: " + str(cell_index_x))
+            #print("  Node World Cell Y-Index: " + str(cell_index_y))
             cell_populations[cell_index_x][cell_index_y] += 1
           if(node_type == 0 or node_type == 3):
-            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " ")
+            #print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " ")
             node_index = read_byte(nodes_state_list[i][j], 0, 1)
             node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
             node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
@@ -1128,21 +1128,21 @@ def main_loop():
               node_y_unit = 0
             elif(node_y_unit >= 1):
               node_y_unit = .999999
-            print("  Node Unit X: " + str(node_x_unit))
-            print("  Node Unit Y: " + str(node_y_unit))
+            #print("  Node Unit X: " + str(node_x_unit))
+            #print("  Node Unit Y: " + str(node_y_unit))
             cell_index_x = int(node_x_unit * world_res)
             cell_index_y = int(node_y_unit * world_res)
-            print("  Node World Cell X-Index: " + str(cell_index_x))
-            print("  Node World Cell Y-Index: " + str(cell_index_y))
+            #print("  Node World Cell X-Index: " + str(cell_index_x))
+            #print("  Node World Cell Y-Index: " + str(cell_index_y))
             organism_tile_locations[cell_index_x][cell_index_y].append(i)
     
     
-    print("\n\n~~~~~~~~~~~~~~~~~~~~ALLOW FOR COLLECTION OF LIGHT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~ALLOW FOR COLLECTION OF LIGHT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ALLOW FOR COLLECTION OF LIGHT. If a cell has at least one organism, a single unit of light is able to be consumed by all who inhabit
       for j in range(0, len(nodes_state_list[i])):
         node_type = read_byte(nodes_state_list[i][j], 2, 1)
         if(node_type == 3):
-          print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Photosynthesis Cell")
+          #print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Photosynthesis Cell")
           node_index = read_byte(nodes_state_list[i][j], 0, 1)
           node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
           node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
@@ -1156,27 +1156,27 @@ def main_loop():
             node_y_unit = 0
           elif(node_y_unit >= 1):
             node_y_unit = .999999
-          print("  Node Unit X: " + str(node_x_unit))
-          print("  Node Unit Y: " + str(node_y_unit))
+          #print("  Node Unit X: " + str(node_x_unit))
+          #print("  Node Unit Y: " + str(node_y_unit))
           cell_index_x = int(node_x_unit * world_res)
           cell_index_y = int(node_y_unit * world_res)
-          print("  Node World Cell X-Index: " + str(cell_index_x))
-          print("  Node World Cell Y-Index: " + str(cell_index_y))
+          #print("  Node World Cell X-Index: " + str(cell_index_x))
+          #print("  Node World Cell Y-Index: " + str(cell_index_y))
           light = world_light_values[cell_index_x][cell_index_y]
-          print("  Light In This Cell: " + str(light))
+          #print("  Light In This Cell: " + str(light))
           r1 = random.uniform(0, 1)
           if(light > 0 and r1 <= 1 / cell_populations[cell_index_x][cell_index_y]):  # Using the random variable, the chance of getting light is inversely proportional to the number of photosynthesis cells inhabiting the cell
             energy = read_byte(organisms_state_list[i], 11, 1)
             if( energy + 1 <= 255):
               organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy + 1)
             world_light_values[cell_index_x][cell_index_y] -= 1
-            print("  Organism's Energy Level Increased to: " + str(energy + 1))
-    print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE CARNIVORES FEEDING~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+            #print("  Organism's Energy Level Increased to: " + str(energy + 1))
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE CARNIVORES FEEDING~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):
         for j in range(0, len(nodes_state_list[i])):
           node_type = read_byte(nodes_state_list[i][j], 2, 1)
           if(node_type == 4):
-            print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Carnivorous Node")
+            #print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + ", Node " + str(read_byte(nodes_state_list[i][j], 0, 1)) + " Is a Carnivorous Node")
             node_index = read_byte(nodes_state_list[i][j], 0, 1)
             node_x = read_byte(nodes_state_list[i][node_index], 5, 3)
             node_y = read_byte(nodes_state_list[i][node_index], 8, 3)
@@ -1190,14 +1190,14 @@ def main_loop():
               node_y_unit = 0
             elif(node_y_unit >= 1):
               node_y_unit = .999999
-            print("  Node Unit X: " + str(node_x_unit))
-            print("  Node Unit Y: " + str(node_y_unit))
+            #print("  Node Unit X: " + str(node_x_unit))
+            #print("  Node Unit Y: " + str(node_y_unit))
             cell_index_x = int(node_x_unit * world_res)
             cell_index_y = int(node_y_unit * world_res)
-            print("  Node World Cell X-Index: " + str(cell_index_x))
-            print("  Node World Cell Y-Index: " + str(cell_index_y))
+            #print("  Node World Cell X-Index: " + str(cell_index_x))
+            #print("  Node World Cell Y-Index: " + str(cell_index_y))
             energy_predator = read_byte(organisms_state_list[i], 11, 1)
-            print(str(organism_tile_locations[cell_index_x][cell_index_y]))
+            #print(str(organism_tile_locations[cell_index_x][cell_index_y]))
             for k in range(0, len(organism_tile_locations[cell_index_x][cell_index_y])):
               index = organism_tile_locations[cell_index_x][cell_index_y][k]
               if(index == i):
@@ -1210,12 +1210,12 @@ def main_loop():
                   energy_prey -= energy_transfer
                   organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
                   organisms_state_list[index] = write_byte(organisms_state_list[index], 11, 1, energy_prey)
-    print("\n\n~~~~~~~~~~~~~~~~~~~~SEED ORGANISM IF ALL LIFE IS EXTINCT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~SEED ORGANISM IF ALL LIFE IS EXTINCT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     if(len(organisms_state_list) == 0):
       seed_organism()
-      print("Seeded Organism")
+      #print("Seeded Organism")
 
-    print("\n\n~~~~~~~~~~~~~~~~~~~~ADD LIGHT TO WORLD CELLS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~ADD LIGHT TO WORLD CELLS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, world_res):
       for j in range(0, world_res):
         light = world_light_values[i][j]
@@ -1226,26 +1226,26 @@ def main_loop():
         world_light_values[i][j] = light
           
     
-    print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
-      print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 0, 6)))
+      #print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 0, 6)))
       if(len(nodes_state_list[i]) > 1 and len(muscles_state_list[i]) > 0):
         for j in range(0, len(muscles_state_list[i])):
-          print("  Calculating Physics for Muscle: " + str(read_byte(muscles_state_list[i][j], 1, 1)))
+          #print("  Calculating Physics for Muscle: " + str(read_byte(muscles_state_list[i][j], 1, 1)))
           node_one_index = read_byte(muscles_state_list[i][j], 1, 1)
           node_two_index = read_byte(muscles_state_list[i][j], 2, 1)
-          print("    Node One index: " + str(node_one_index))
-          print("    Node Two index: " + str(node_two_index))
+          #print("    Node One index: " + str(node_one_index))
+          #print("    Node Two index: " + str(node_two_index))
           if(node_one_index == node_two_index or node_one_index < 0 or node_two_index < 0 or node_one_index >= len(nodes_state_list[i]) or node_two_index >= len(nodes_state_list[i])):
             continue
           node_one_x = read_byte(nodes_state_list[i][node_one_index], 5, 3)
           node_one_y = read_byte(nodes_state_list[i][node_one_index], 8, 3)
           node_two_x = read_byte(nodes_state_list[i][node_two_index], 5, 3)
           node_two_y = read_byte(nodes_state_list[i][node_two_index], 8, 3)
-          print("    Node One X-Value: " + str(node_one_x))
-          print("    Node One Y-Value: " + str(node_one_y))
-          print("    Node Two X-Value: " + str(node_two_x))
-          print("    Node Two Y-Value: " + str(node_two_y))
+          #print("    Node One X-Value: " + str(node_one_x))
+          #print("    Node One Y-Value: " + str(node_one_y))
+          #print("    Node Two X-Value: " + str(node_two_x))
+          #print("    Node Two Y-Value: " + str(node_two_y))
 
           if(node_one_x == node_two_x and node_one_y == node_two_y):
             continue
@@ -1256,10 +1256,10 @@ def main_loop():
           node_two_x_unit = node_two_x  / (2**24 - 1)
           node_two_y_unit = node_two_y  / (2**24 - 1)
   
-          print("    Node One Unit X-Value: " + str(node_one_x_unit))
-          print("    Node One Unit Y-Value: " + str(node_one_y_unit))
-          print("    Node Two Unit X-Value: " + str(node_two_x_unit))
-          print("    Node Two Unit Y-Value: " + str(node_two_y_unit))
+          #print("    Node One Unit X-Value: " + str(node_one_x_unit))
+          #print("    Node One Unit Y-Value: " + str(node_one_y_unit))
+          #print("    Node Two Unit X-Value: " + str(node_two_x_unit))
+          #print("    Node Two Unit Y-Value: " + str(node_two_y_unit))
   
           # Muscle physics
           node_one_x_v = nodes_velocity_list[i][node_one_index][0]
@@ -1267,40 +1267,40 @@ def main_loop():
           node_two_x_v = nodes_velocity_list[i][node_two_index][0]
           node_two_y_v = nodes_velocity_list[i][node_two_index][1]
   
-          print("    Node One X-Velocity: " + str(node_one_x_v))
-          print("    Node One Y-Velocity: " + str(node_one_y_v))
-          print("    Node Two X-Velocity: " + str(node_two_x_v))
-          print("    Node Two Y-Velocity: " + str(node_two_y_v))
+          #print("    Node One X-Velocity: " + str(node_one_x_v))
+          #print("    Node One Y-Velocity: " + str(node_one_y_v))
+          #print("    Node Two X-Velocity: " + str(node_two_x_v))
+          #print("    Node Two Y-Velocity: " + str(node_two_y_v))
   
           dx = node_two_x_unit - node_one_x_unit
           dy = node_two_y_unit - node_one_y_unit
           distance = ((dx)**2 + (dy)**2)**0.5
-          print("    X-Distance: " + str(dx))
-          print("    Y-Distance: " + str(dy))
-          print("    Distance Between Nodes: " + str(distance))
+          #print("    X-Distance: " + str(dx))
+          #print("    Y-Distance: " + str(dy))
+          #print("    Distance Between Nodes: " + str(distance))
   
           spring_constant = read_byte(muscles_state_list[i][j], 5, 1)
   
-          print("    Spring Constant: " + str(spring_constant))
+          #print("    Spring Constant: " + str(spring_constant))
   
           toggle_state = read_byte(muscles_state_list[i][j], 6, 1)  # 0 = expanded, 1 = contracted
           if(toggle_state == 0):
-            print("    Muscle is in Expanded State")
+            #print("    Muscle is in Expanded State")
             muscle_length = read_byte(muscles_state_list[i][j], 4, 1) / 255 * max_node_offset  # Pull the expanded length
           else:
-            print("    Muscle is in Contracted State")
+            #print("    Muscle is in Contracted State")
             muscle_length = read_byte(muscles_state_list[i][j], 3, 1) / 255 * max_node_offset  # Pull the contracted length
-          print("    Muscle length: " + str(muscle_length))
+          #print("    Muscle length: " + str(muscle_length))
           force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
           force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
   
-          print("    Force Between Nodes in X-direction: " + str(force_x))
-          print("    Force Between Nodes in Y-direction: " + str(force_y))
+          #print("    Force Between Nodes in X-direction: " + str(force_x))
+          #print("    Force Between Nodes in Y-direction: " + str(force_y))
   
           node_one_mass = read_byte(nodes_state_list[i][node_one_index], 1, 1)
           node_two_mass = read_byte(nodes_state_list[i][node_two_index], 1, 1)
-          print("    Node 1 Mass: " + str(node_one_mass))
-          print("    Node 2 Mass: " + str(node_two_mass))
+          #print("    Node 1 Mass: " + str(node_one_mass))
+          #print("    Node 2 Mass: " + str(node_two_mass))
   
           # Apply the foces to alter the velocities in accordance with Newton's Second Law
           nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier) * dt
@@ -1340,10 +1340,10 @@ def main_loop():
           node_two_x_new = int(node_two_x_unit * (2**24 - 1))
           node_two_y_new = int(node_two_y_unit * (2**24 - 1))
           
-          print("    Node One New X-Value: " + str(node_one_x_new))
-          print("    Node One New Y-Value: " + str(node_one_y_new))
-          print("    Node Two New X-Value: " + str(node_two_x_new))
-          print("    Node Two New Y-Value: " + str(node_two_y_new))
+          #print("    Node One New X-Value: " + str(node_one_x_new))
+          #print("    Node One New Y-Value: " + str(node_one_y_new))
+          #print("    Node Two New X-Value: " + str(node_two_x_new))
+          #print("    Node Two New Y-Value: " + str(node_two_y_new))
           
           # Store new values
           nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 5, 3, node_one_x_new)
@@ -1351,8 +1351,8 @@ def main_loop():
           nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_new)
           nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_new)
 
-    print("\n\n~~~~~~~~~~~~~~~~~~~~OUTPUT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-    print("Output (node type, x, y): " + str(get_positions_of_nodes()))
+    #print("\n\n~~~~~~~~~~~~~~~~~~~~OUTPUT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+    #print("Output (node type, x, y): " + str(get_positions_of_nodes()))
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
     with open('statistics.txt', 'w') as file:
