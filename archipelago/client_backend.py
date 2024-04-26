@@ -59,11 +59,11 @@ drag_m = 0.02    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 7000  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.20  # Chance that the organism goes through an iteration of metabolism
 max_age = 5000  # Maximum age until organism has a chance of random death each iteration
-post_age_death_c = 0.01  # Chance of death each iteration after the organism has reached the max age
-mutation_c = 0.2
-out_c = 0.01  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
-carn_m = 0.5  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
-carn_eff = 0.8  # Fraction of eaten energy carnivores recieve
+post_age_death_c = 0.003  # Chance of death each iteration after the organism has reached the max age
+mutation_c = 0.2  #Chance, during reproduction, that any mutation(s) are made
+out_c = 0.001  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
+carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
+carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
 
 sleep_time = 0  # Time between iterations
 
@@ -1059,7 +1059,7 @@ def main_loop():
       num_non_structual_nodes = 0
       for j in range(0, len(nodes_state_list[i])):
         node_type = read_byte(nodes_state_list[i][j], 2, 1)
-        if(node_type != 1 and node_type != 2):
+        if(node_type != 1 and node_type != 2 and node_type != 4):
           num_non_structual_nodes += 1
       age = read_byte(organisms_state_list[i], 25, 3)
       print("Organism " + str(read_byte(organisms_state_list[i], 0, 6)) + " Has Energy: " + str(energy))
