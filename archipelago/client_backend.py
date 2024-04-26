@@ -492,13 +492,13 @@ def main_loop():
         #print("  Mass of New Node: " + str(mass))
         node_type = read_byte(organisms_gene_list[i], index + 2, 1)  # Node type
         #print("  Node Type: " + str(node_type))
-        if(node_type == 0):
+        #if(node_type == 0):
           #print("    Node Type Name: Soul")
-        elif(node_type == 1):
+        #elif(node_type == 1):
           #print("    Node Type Name: Structual")
-        elif(node_type == 2):
+        #elif(node_type == 2):
           #print("    Node Type Name: Gripper")
-        elif(node_type == 3):
+        #elif(node_type == 3):
           #print("    Node Type Name: Photosynthesis")
         x_offset = read_byte(organisms_gene_list[i], index + 3, 1)  # X-Offset
         #print("  X-Offset: " + str(x_offset))
@@ -1025,7 +1025,7 @@ def main_loop():
               file.write(str(send_organism_out()))
         
           
-        else:
+        #else:
           #print("  Organism Does Not Have Enough Energy For Reproduction. Skipping.")
         # Increment Genetic Index
         organisms_state_list[i] = write_byte(organisms_state_list[i], 23, 2, index + 2)
