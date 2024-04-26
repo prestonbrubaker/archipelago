@@ -1356,7 +1356,7 @@ def main_loop():
     #print("Output (node type, x, y): " + str(get_positions_of_nodes()))
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
-    if(age_of_world_dec % save_int == 0):
+    if((age_of_world_dec + 1) % save_int == 0):
       with open('statistics.txt', 'w') as file:
         file.write(str(get_statistics()))
       with open('muscles.txt', 'w') as file:
