@@ -53,9 +53,9 @@ org_counter = 0  # Counter of organisms ever to exist in this world. Iterated fo
 
 max_node_offset = 0.04    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 1  # Multiplier for the maximum spring constant
-mass_multiplier = 0.05
+mass_multiplier = 0.03
 dt = 1  # Time Step for Physics
-drag_m = 0.02    # Velocities will be multiplied by (1-drag_m) each turn
+drag_m = 0.01    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 7000  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.20  # Chance that the organism goes through an iteration of metabolism
 max_age = 5000  # Maximum age until organism has a chance of random death each iteration
@@ -64,7 +64,7 @@ mutation_c = 0.2  #Chance, during reproduction, that any mutation(s) are made
 out_c = 0.001  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
 carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
-save_int = 5  # Number of iterations between saving to the text files
+save_int = 2  # Number of iterations between saving to the text files
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
 
 sleep_time = 0  # Time between iterations
