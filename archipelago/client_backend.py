@@ -44,14 +44,14 @@ muscles_state_list = [    #3-D list of muscles (organism index, muscle index, mu
 world_light_values = [  # 2-D list of light values in the cell. For now it will be 10x10,and they will have an initial and max of 2
 
 ]
-world_res = 60  # Number of rows/columns of the world. Number of cells will be world_res squared.
+world_res = 120  # Number of rows/columns of the world. Number of cells will be world_res squared.
 light_max = 2  # The maximum amount of light. Also the initial amount.
 
 org_counter = 0  # Counter of organisms ever to exist in this world. Iterated for each birth to assign new ID's that have never been used
 
 # Parameters for the environment or general rules
 
-max_node_offset = 0.04    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
+max_node_offset = 0.015    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 1  # Multiplier for the maximum spring constant
 mass_multiplier = 0.03
 dt = 1  # Time Step for Physics
@@ -64,7 +64,7 @@ mutation_c = 0.2  #Chance, during reproduction, that any mutation(s) are made
 out_c = 0.001  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
 carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
-save_int = 100  # Number of iterations between saving to the text files
+save_int = 1  # Number of iterations between saving to the text files
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
 
 sleep_time = 0  # Time between iterations
