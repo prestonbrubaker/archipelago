@@ -745,7 +745,10 @@ def main_loop():
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
         #print("  Register One Value: " + str(register_one_value))
         #print("  Register Two Value: " + str(register_two_value))
-        modulus_result = register_one_value % register_two_value
+        if(register_two_value > 0):  # Prevent modulus by zero error
+          modulus_result = register_one_value % register_two_value
+        else:
+          modulus_result = 1
         organisms_state_list[i] = write_byte(organisms_state_list[i], 20, 3, modulus_result)
         #print("  Result Stored in Register 3: " + str(modulus_result))
         # Increment Genetic Index
