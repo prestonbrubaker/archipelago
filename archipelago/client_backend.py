@@ -1325,7 +1325,7 @@ def main_loop():
           node_type_2 = read_byte(nodes_state_list[i][node_two_index], 2, 1)
 
           if(node_one_y_unit > 0.7 and node_one_y_unit > 0.7):
-            drag_m_adj = drag_m * (1 / (1 - 0.7)) * (1 - node_one_y_unit)
+            drag_m_adj = drag_m * ((1 / (1 - 0.7)) * (1 - node_one_y_unit) + 0.0001)
           else:
             drag_m_adj = drag_m
           
@@ -1342,7 +1342,18 @@ def main_loop():
           else:
             nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m_adj
             nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m_adj
-          
+
+          if(node_one_x_unit > 1):
+            node_one_x_unit = 1
+            
+          if(node_one_y_unit > 1):
+            node_one_y_unit = 1
+            
+          if(node_one_x_unit < 0):
+            node_one_x_unit = 0
+            
+          if(node_one_y_unit < 0):
+            node_one_y_unit = 0
   
           # Convert coordinate values back to values ready to be stored in 3 bytes
           node_one_x_new = int(node_one_x_unit * (2**24 - 1))
