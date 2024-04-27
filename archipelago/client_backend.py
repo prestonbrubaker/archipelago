@@ -1321,7 +1321,7 @@ def main_loop():
           node_type_2 = read_byte(nodes_state_list[i][node_two_index], 2, 1)
 
           if(node_one_y_unit > 0.7 and node_one_y_unit > 0.7):
-            drag_m_adj = 0
+            drag_m_adj = drag_m * (1 / (1 - 0.7)) * (1 - node_one_y_unit)
           else:
             drag_m_adj = drag_m
           
