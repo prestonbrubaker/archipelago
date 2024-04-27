@@ -64,7 +64,7 @@ mutation_c = 0.2  #Chance, during reproduction, that any mutation(s) are made
 out_c = 0.001  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
 carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
-save_int = 2  # Number of iterations between saving to the text files
+save_int = 10  # Number of iterations between saving to the text files
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
 
 sleep_time = 0  # Time between iterations
