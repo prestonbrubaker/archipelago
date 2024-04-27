@@ -65,6 +65,7 @@ out_c = 0.001  # Chance that upon birth, the organism is exported to a text file
 carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
 save_int = 5  # Number of iterations between saving to the text files
+mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
 
 sleep_time = 0  # Time between iterations
 
@@ -1304,10 +1305,10 @@ def main_loop():
           #print("    Node 2 Mass: " + str(node_two_mass))
   
           # Apply the foces to alter the velocities in accordance with Newton's Second Law
-          nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier) * dt
-          nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier) * dt
-          nodes_velocity_list[i][node_two_index][0] += -1 * force_x / (node_two_mass * mass_multiplier) * dt
-          nodes_velocity_list[i][node_two_index][1] += -1 * force_y / (node_two_mass * mass_multiplier) * dt
+          nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier + mass_c) * dt
+          nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier + mass_c) * dt
+          nodes_velocity_list[i][node_two_index][0] += -1 * force_x / (node_two_mass * mass_multiplier + mass_c) * dt
+          nodes_velocity_list[i][node_two_index][1] += -1 * force_y / (node_two_mass * mass_multiplier + mass_c) * dt
   
           # Iterate the positions of the nodes by their velocities
           node_one_x_unit += nodes_velocity_list[i][node_one_index][0] * dt
