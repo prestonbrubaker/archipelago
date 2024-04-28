@@ -53,8 +53,8 @@ org_counter = 0  # Counter of organisms ever to exist in this world. Iterated fo
 
 max_node_offset = 0.010    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 1  # Multiplier for the maximum spring constant
-mass_multiplier = 0.03
-dt = 1.5  # Time Step for Physics
+mass_multiplier = 0.02
+dt = 1.0  # Time Step for Physics
 drag_m = 0.002    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 7000  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.20  # Chance that the organism goes through an iteration of metabolism
@@ -66,7 +66,9 @@ carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can ta
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
 save_int = 1  # Number of iterations between saving to the text files
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
-time_splits = 100  # Number of splits for each organism that the physics is iterated.
+muscle_drag_m = 10  # Multiplier to the drag when in contracting mode
+time_splits = 1  # Number of splits for each organism that the physics is iterated.
+max_max_node_offset_m = 3  # Maximum multiple of max_node_length two nodes can be before no force is applied
 
 sleep_time = 0.1  # Time between iterations
 
@@ -1290,15 +1292,20 @@ def main_loop():
             spring_constant = read_byte(muscles_state_list[i][j], 5, 1)
     
             #print("    Spring Constant: " + str(spring_constant))
-    
+            is_contracted = False
             toggle_state = read_byte(muscles_state_list[i][j], 6, 1)  # 0 = expanded, 1 = contracted
             if(toggle_state == 0):
               #print("    Muscle is in Expanded State")
+              is_contracted = True
               muscle_length = read_byte(muscles_state_list[i][j], 4, 1) / 255 * max_node_offset  # Pull the expanded length
             else:
               #print("    Muscle is in Contracted State")
               muscle_length = read_byte(muscles_state_list[i][j], 3, 1) / 255 * max_node_offset  # Pull the contracted length
             #print("    Muscle length: " + str(muscle_length))
+
+            if(distance > max_max_node_offset_m * max_node_offset):  # Ensures no force is calculated so that the distance corrects itself
+              distance = muscle_length
+            
             force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
             force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
     
@@ -1331,6 +1338,9 @@ def main_loop():
               drag_m_adj = drag_m * ((1 / (1 - 0.7)) * (1 - node_one_y_unit) + 0.0001)
             else:
               drag_m_adj = drag_m
+
+            if(is_contracted):
+              drag_m_adj *= muscle_drag_m
             
             if(node_type_1 == 2):
               nodes_velocity_list[i][node_one_index][0] *= .3
