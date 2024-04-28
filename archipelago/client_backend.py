@@ -1343,8 +1343,12 @@ def main_loop():
               nodes_velocity_list[i][node_one_index][0] *= .3
               nodes_velocity_list[i][node_one_index][1] *= .3
             else:
-              nodes_velocity_list[i][node_one_index][0] *= 1 - (drag_m_adj / time_splits / 2.711)
-              nodes_velocity_list[i][node_one_index][1] *= 1 - (drag_m_adj / time_splits / 2.711)
+              if(is_contracted):
+                nodes_velocity_list[i][node_one_index][0] *= 1 - (drag_m_adj / time_splits / 2.711)
+                nodes_velocity_list[i][node_one_index][1] *= 1 - (drag_m_adj / time_splits / 2.711)
+              else:
+                nodes_velocity_list[i][node_one_index][0] *= 1 - (drag_m_adj * muscle_drag_m / time_splits / 2.711)
+                nodes_velocity_list[i][node_one_index][1] *= 1 - (drag_m_adj * muscle_drag_m / time_splits / 2.711)
             
             if(node_type_2 == 2):
               nodes_velocity_list[i][node_two_index][0] *= .3
