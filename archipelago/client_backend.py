@@ -66,6 +66,7 @@ carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can ta
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
 save_int = 1  # Number of iterations between saving to the text files
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
+time_splits = 100  # Number of splits for each organism that the physics is iterated.
 
 sleep_time = 0.1  # Time between iterations
 
@@ -1234,149 +1235,151 @@ def main_loop():
     #print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
       #print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 0, 6)))
-      if(len(nodes_state_list[i]) > 1 and len(muscles_state_list[i]) > 0):
-        for j in range(0, len(muscles_state_list[i])):
-          #print("  Calculating Physics for Muscle: " + str(read_byte(muscles_state_list[i][j], 1, 1)))
-          node_one_index = read_byte(muscles_state_list[i][j], 1, 1)
-          node_two_index = read_byte(muscles_state_list[i][j], 2, 1)
-          #print("    Node One index: " + str(node_one_index))
-          #print("    Node Two index: " + str(node_two_index))
-          if(node_one_index == node_two_index or node_one_index < 0 or node_two_index < 0 or node_one_index >= len(nodes_state_list[i]) or node_two_index >= len(nodes_state_list[i])):
-            continue
-          node_one_x = read_byte(nodes_state_list[i][node_one_index], 5, 3)
-          node_one_y = read_byte(nodes_state_list[i][node_one_index], 8, 3)
-          node_two_x = read_byte(nodes_state_list[i][node_two_index], 5, 3)
-          node_two_y = read_byte(nodes_state_list[i][node_two_index], 8, 3)
-          #print("    Node One X-Value: " + str(node_one_x))
-          #print("    Node One Y-Value: " + str(node_one_y))
-          #print("    Node Two X-Value: " + str(node_two_x))
-          #print("    Node Two Y-Value: " + str(node_two_y))
-
-          if(node_one_x == node_two_x and node_one_y == node_two_y):
-            continue
+      
+      for k in range(0, time_splits):
+        if(len(nodes_state_list[i]) > 1 and len(muscles_state_list[i]) > 0):
+          for j in range(0, len(muscles_state_list[i])):
+            #print("  Calculating Physics for Muscle: " + str(read_byte(muscles_state_list[i][j], 1, 1)))
+            node_one_index = read_byte(muscles_state_list[i][j], 1, 1)
+            node_two_index = read_byte(muscles_state_list[i][j], 2, 1)
+            #print("    Node One index: " + str(node_one_index))
+            #print("    Node Two index: " + str(node_two_index))
+            if(node_one_index == node_two_index or node_one_index < 0 or node_two_index < 0 or node_one_index >= len(nodes_state_list[i]) or node_two_index >= len(nodes_state_list[i])):
+              continue
+            node_one_x = read_byte(nodes_state_list[i][node_one_index], 5, 3)
+            node_one_y = read_byte(nodes_state_list[i][node_one_index], 8, 3)
+            node_two_x = read_byte(nodes_state_list[i][node_two_index], 5, 3)
+            node_two_y = read_byte(nodes_state_list[i][node_two_index], 8, 3)
+            #print("    Node One X-Value: " + str(node_one_x))
+            #print("    Node One Y-Value: " + str(node_one_y))
+            #print("    Node Two X-Value: " + str(node_two_x))
+            #print("    Node Two Y-Value: " + str(node_two_y))
   
-          # Convert coordinate values to a unit scale
-          node_one_x_unit = node_one_x  / (2**24 - 1)
-          node_one_y_unit = node_one_y  / (2**24 - 1)
-          node_two_x_unit = node_two_x  / (2**24 - 1)
-          node_two_y_unit = node_two_y  / (2**24 - 1)
+            if(node_one_x == node_two_x and node_one_y == node_two_y):
+              continue
+    
+            # Convert coordinate values to a unit scale
+            node_one_x_unit = node_one_x  / (2**24 - 1)
+            node_one_y_unit = node_one_y  / (2**24 - 1)
+            node_two_x_unit = node_two_x  / (2**24 - 1)
+            node_two_y_unit = node_two_y  / (2**24 - 1)
+    
+            #print("    Node One Unit X-Value: " + str(node_one_x_unit))
+            #print("    Node One Unit Y-Value: " + str(node_one_y_unit))
+            #print("    Node Two Unit X-Value: " + str(node_two_x_unit))
+            #print("    Node Two Unit Y-Value: " + str(node_two_y_unit))
+    
+            # Muscle physics
+            node_one_x_v = nodes_velocity_list[i][node_one_index][0]
+            node_one_y_v = nodes_velocity_list[i][node_one_index][1]
+            node_two_x_v = nodes_velocity_list[i][node_two_index][0]
+            node_two_y_v = nodes_velocity_list[i][node_two_index][1]
+    
+            #print("    Node One X-Velocity: " + str(node_one_x_v))
+            #print("    Node One Y-Velocity: " + str(node_one_y_v))
+            #print("    Node Two X-Velocity: " + str(node_two_x_v))
+            #print("    Node Two Y-Velocity: " + str(node_two_y_v))
+    
+            dx = node_two_x_unit - node_one_x_unit
+            dy = node_two_y_unit - node_one_y_unit
+            distance = ((dx)**2 + (dy)**2)**0.5
+            #print("    X-Distance: " + str(dx))
+            #print("    Y-Distance: " + str(dy))
+            #print("    Distance Between Nodes: " + str(distance))
+    
+            spring_constant = read_byte(muscles_state_list[i][j], 5, 1)
+    
+            #print("    Spring Constant: " + str(spring_constant))
+    
+            toggle_state = read_byte(muscles_state_list[i][j], 6, 1)  # 0 = expanded, 1 = contracted
+            if(toggle_state == 0):
+              #print("    Muscle is in Expanded State")
+              muscle_length = read_byte(muscles_state_list[i][j], 4, 1) / 255 * max_node_offset  # Pull the expanded length
+            else:
+              #print("    Muscle is in Contracted State")
+              muscle_length = read_byte(muscles_state_list[i][j], 3, 1) / 255 * max_node_offset  # Pull the contracted length
+            #print("    Muscle length: " + str(muscle_length))
+            force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
+            force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
+    
+            #print("    Force Between Nodes in X-direction: " + str(force_x))
+            #print("    Force Between Nodes in Y-direction: " + str(force_y))
+    
+            node_one_mass = read_byte(nodes_state_list[i][node_one_index], 1, 1)
+            node_two_mass = read_byte(nodes_state_list[i][node_two_index], 1, 1)
+            #print("    Node 1 Mass: " + str(node_one_mass))
+            #print("    Node 2 Mass: " + str(node_two_mass))
+    
+            # Apply the foces to alter the velocities in accordance with Newton's Second Law
+            nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier + mass_c) * dt / time_splits
+            nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier + mass_c) * dt / time_splits
+            nodes_velocity_list[i][node_two_index][0] += -1 * force_x / (node_two_mass * mass_multiplier + mass_c) * dt / time_splits
+            nodes_velocity_list[i][node_two_index][1] += -1 * force_y / (node_two_mass * mass_multiplier + mass_c) * dt / time_splits
+    
+            # Iterate the positions of the nodes by their velocities
+            node_one_x_unit += nodes_velocity_list[i][node_one_index][0] * dt / time_splits
+            node_one_y_unit += nodes_velocity_list[i][node_one_index][1] * dt / time_splits
+            node_two_x_unit += nodes_velocity_list[i][node_two_index][0] * dt / time_splits
+            node_two_y_unit += nodes_velocity_list[i][node_two_index][1] * dt / time_splits
+    
+            # Drag force applied to slow all speeds by an amount proportional to their current speed
   
-          #print("    Node One Unit X-Value: " + str(node_one_x_unit))
-          #print("    Node One Unit Y-Value: " + str(node_one_y_unit))
-          #print("    Node Two Unit X-Value: " + str(node_two_x_unit))
-          #print("    Node Two Unit Y-Value: " + str(node_two_y_unit))
+            node_type_1 = read_byte(nodes_state_list[i][node_one_index], 2, 1)  # Pull the node type for special physics for gripper (2) nodes.
+            node_type_2 = read_byte(nodes_state_list[i][node_two_index], 2, 1)
   
-          # Muscle physics
-          node_one_x_v = nodes_velocity_list[i][node_one_index][0]
-          node_one_y_v = nodes_velocity_list[i][node_one_index][1]
-          node_two_x_v = nodes_velocity_list[i][node_two_index][0]
-          node_two_y_v = nodes_velocity_list[i][node_two_index][1]
-  
-          #print("    Node One X-Velocity: " + str(node_one_x_v))
-          #print("    Node One Y-Velocity: " + str(node_one_y_v))
-          #print("    Node Two X-Velocity: " + str(node_two_x_v))
-          #print("    Node Two Y-Velocity: " + str(node_two_y_v))
-  
-          dx = node_two_x_unit - node_one_x_unit
-          dy = node_two_y_unit - node_one_y_unit
-          distance = ((dx)**2 + (dy)**2)**0.5
-          #print("    X-Distance: " + str(dx))
-          #print("    Y-Distance: " + str(dy))
-          #print("    Distance Between Nodes: " + str(distance))
-  
-          spring_constant = read_byte(muscles_state_list[i][j], 5, 1)
-  
-          #print("    Spring Constant: " + str(spring_constant))
-  
-          toggle_state = read_byte(muscles_state_list[i][j], 6, 1)  # 0 = expanded, 1 = contracted
-          if(toggle_state == 0):
-            #print("    Muscle is in Expanded State")
-            muscle_length = read_byte(muscles_state_list[i][j], 4, 1) / 255 * max_node_offset  # Pull the expanded length
-          else:
-            #print("    Muscle is in Contracted State")
-            muscle_length = read_byte(muscles_state_list[i][j], 3, 1) / 255 * max_node_offset  # Pull the contracted length
-          #print("    Muscle length: " + str(muscle_length))
-          force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
-          force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
-  
-          #print("    Force Between Nodes in X-direction: " + str(force_x))
-          #print("    Force Between Nodes in Y-direction: " + str(force_y))
-  
-          node_one_mass = read_byte(nodes_state_list[i][node_one_index], 1, 1)
-          node_two_mass = read_byte(nodes_state_list[i][node_two_index], 1, 1)
-          #print("    Node 1 Mass: " + str(node_one_mass))
-          #print("    Node 2 Mass: " + str(node_two_mass))
-  
-          # Apply the foces to alter the velocities in accordance with Newton's Second Law
-          nodes_velocity_list[i][node_one_index][0] += force_x / (node_one_mass * mass_multiplier + mass_c) * dt
-          nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier + mass_c) * dt
-          nodes_velocity_list[i][node_two_index][0] += -1 * force_x / (node_two_mass * mass_multiplier + mass_c) * dt
-          nodes_velocity_list[i][node_two_index][1] += -1 * force_y / (node_two_mass * mass_multiplier + mass_c) * dt
-  
-          # Iterate the positions of the nodes by their velocities
-          node_one_x_unit += nodes_velocity_list[i][node_one_index][0] * dt
-          node_one_y_unit += nodes_velocity_list[i][node_one_index][1] * dt
-          node_two_x_unit += nodes_velocity_list[i][node_two_index][0] * dt
-          node_two_y_unit += nodes_velocity_list[i][node_two_index][1] * dt
-  
-          # Drag force applied to slow all speeds by an amount proportional to their current speed
-
-          node_type_1 = read_byte(nodes_state_list[i][node_one_index], 2, 1)  # Pull the node type for special physics for gripper (2) nodes.
-          node_type_2 = read_byte(nodes_state_list[i][node_two_index], 2, 1)
-
-          if(node_one_y_unit > 0.7 and node_one_y_unit > 0.7):
-            drag_m_adj = drag_m * ((1 / (1 - 0.7)) * (1 - node_one_y_unit) + 0.0001)
-          else:
-            drag_m_adj = drag_m
-          
-          if(node_type_1 == 2):
-            nodes_velocity_list[i][node_one_index][0] *= .3
-            nodes_velocity_list[i][node_one_index][1] *= .3
-          else:
-            nodes_velocity_list[i][node_one_index][0] *= 1 - drag_m_adj
-            nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m_adj
-          
-          if(node_type_2 == 2):
-            nodes_velocity_list[i][node_two_index][0] *= .3
-            nodes_velocity_list[i][node_two_index][1] *= .3
-          else:
-            nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m_adj
-            nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m_adj
-
-          willoh = True
-          
-          if(node_one_x_unit > 1):
-            node_one_x_unit = 1 - 0.000001
-            nodes_velocity_list[i][node_one_index][0] = 0
+            if(node_one_y_unit > 0.7 and node_one_y_unit > 0.7):
+              drag_m_adj = drag_m * ((1 / (1 - 0.7)) * (1 - node_one_y_unit) + 0.0001)
+            else:
+              drag_m_adj = drag_m
             
-          if(node_one_y_unit > 1):
-            node_one_y_unit = 1 - 0.000001
-            nodes_velocity_list[i][node_one_index][1] = 0
+            if(node_type_1 == 2):
+              nodes_velocity_list[i][node_one_index][0] *= .3
+              nodes_velocity_list[i][node_one_index][1] *= .3
+            else:
+              nodes_velocity_list[i][node_one_index][0] *= 1 - drag_m_adj
+              nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m_adj
             
-          if(node_one_x_unit < 0):
-            node_one_x_unit = 0.000001
-            nodes_velocity_list[i][node_two_index][0] = 0
-            
-          if(node_one_y_unit < 0):
-            node_one_y_unit = 0.000001
-            nodes_velocity_list[i][node_two_index][1] = 0
+            if(node_type_2 == 2):
+              nodes_velocity_list[i][node_two_index][0] *= .3
+              nodes_velocity_list[i][node_two_index][1] *= .3
+            else:
+              nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m_adj
+              nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m_adj
   
-          # Convert coordinate values back to values ready to be stored in 3 bytes
-          node_one_x_new = int(node_one_x_unit * (2**24 - 1))
-          node_one_y_new = int(node_one_y_unit * (2**24 - 1))
-          node_two_x_new = int(node_two_x_unit * (2**24 - 1))
-          node_two_y_new = int(node_two_y_unit * (2**24 - 1))
-          
-          #print("    Node One New X-Value: " + str(node_one_x_new))
-          #print("    Node One New Y-Value: " + str(node_one_y_new))
-          #print("    Node Two New X-Value: " + str(node_two_x_new))
-          #print("    Node Two New Y-Value: " + str(node_two_y_new))
-          
-          # Store new values
-          nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 5, 3, node_one_x_new)
-          nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 8, 3, node_one_y_new)
-          nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_new)
-          nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_new)
+            willoh = True
+            
+            if(node_one_x_unit > 1):
+              node_one_x_unit = 1 - 0.000001
+              nodes_velocity_list[i][node_one_index][0] = 0
+              
+            if(node_one_y_unit > 1):
+              node_one_y_unit = 1 - 0.000001
+              nodes_velocity_list[i][node_one_index][1] = 0
+              
+            if(node_one_x_unit < 0):
+              node_one_x_unit = 0.000001
+              nodes_velocity_list[i][node_two_index][0] = 0
+              
+            if(node_one_y_unit < 0):
+              node_one_y_unit = 0.000001
+              nodes_velocity_list[i][node_two_index][1] = 0
+    
+            # Convert coordinate values back to values ready to be stored in 3 bytes
+            node_one_x_new = int(node_one_x_unit * (2**24 - 1))
+            node_one_y_new = int(node_one_y_unit * (2**24 - 1))
+            node_two_x_new = int(node_two_x_unit * (2**24 - 1))
+            node_two_y_new = int(node_two_y_unit * (2**24 - 1))
+            
+            #print("    Node One New X-Value: " + str(node_one_x_new))
+            #print("    Node One New Y-Value: " + str(node_one_y_new))
+            #print("    Node Two New X-Value: " + str(node_two_x_new))
+            #print("    Node Two New Y-Value: " + str(node_two_y_new))
+            
+            # Store new values
+            nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 5, 3, node_one_x_new)
+            nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 8, 3, node_one_y_new)
+            nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_new)
+            nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_new)
 
     #print("\n\n~~~~~~~~~~~~~~~~~~~~OUTPUT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     #print("Output (node type, x, y): " + str(get_positions_of_nodes()))
