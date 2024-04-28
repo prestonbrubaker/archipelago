@@ -66,7 +66,7 @@ carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can ta
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
 save_int = 1  # Number of iterations between saving to the text files
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
-muscle_drag_m = 10  # Multiplier to the drag when in contracting mode
+muscle_drag_m = 100  # Multiplier to the drag when in contracting mode
 time_splits = 1  # Number of splits for each organism that the physics is iterated.
 max_max_node_offset_m = 3  # Maximum multiple of max_node_length two nodes can be before no force is applied
 
