@@ -55,7 +55,7 @@ max_node_offset = 0.010    # Maximum horizontal or vertical distance (as a fract
 spring_multiplier = 1  # Multiplier for the maximum spring constant
 mass_multiplier = 0.03
 dt = 1.5  # Time Step for Physics
-drag_m = 0.008    # Velocities will be multiplied by (1-drag_m) each turn
+drag_m = 0.002    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 7000  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.20  # Chance that the organism goes through an iteration of metabolism
 max_age = 1500  # Maximum age until organism has a chance of random death each iteration
@@ -1336,15 +1336,15 @@ def main_loop():
               nodes_velocity_list[i][node_one_index][0] *= .3
               nodes_velocity_list[i][node_one_index][1] *= .3
             else:
-              nodes_velocity_list[i][node_one_index][0] *= 1 - drag_m_adj
-              nodes_velocity_list[i][node_one_index][1] *= 1 - drag_m_adj
+              nodes_velocity_list[i][node_one_index][0] *= 1 - (drag_m_adj / time_splits / 2.711)
+              nodes_velocity_list[i][node_one_index][1] *= 1 - (drag_m_adj / time_splits / 2.711)
             
             if(node_type_2 == 2):
               nodes_velocity_list[i][node_two_index][0] *= .3
               nodes_velocity_list[i][node_two_index][1] *= .3
             else:
-              nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m_adj
-              nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m_adj
+              nodes_velocity_list[i][node_two_index][0] *= 1 - (drag_m_adj / time_splits / 2.711)
+              nodes_velocity_list[i][node_two_index][1] *= 1 - (drag_m_adj / time_splits / 2.711)
   
             willoh = True
             
