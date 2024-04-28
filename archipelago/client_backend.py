@@ -67,7 +67,7 @@ carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
 save_int = 1  # Number of iterations between saving to the text files
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
 
-sleep_time = 1  # Time between iterations
+sleep_time = 0.1  # Time between iterations
 
 def make_world(world_res_in, light_max_in):  # Makes a 2_D list of the light values
   list_out = []
