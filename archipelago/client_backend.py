@@ -1305,9 +1305,14 @@ def main_loop():
 
             if(distance > max_max_node_offset_m * max_node_offset):  # Ensures no force is calculated so that the distance corrects itself
               distance = muscle_length
-            
-            force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
-            force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
+              organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, 0)  # Punish organism severely by reducing its energy to 0
+
+            if(distance == muscle_length):
+              force_x = 0
+              force_y = 0
+            else:
+              force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
+              force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
     
             #print("    Force Between Nodes in X-direction: " + str(force_x))
             #print("    Force Between Nodes in Y-direction: " + str(force_y))
