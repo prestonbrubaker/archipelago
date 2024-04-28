@@ -1216,8 +1216,14 @@ def main_loop():
                 if(energy_transfer > 0):
                   energy_predator += int(energy_transfer * carn_eff)
                   energy_prey -= energy_transfer
-                  organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
-                  organisms_state_list[index] = write_byte(organisms_state_list[index], 11, 1, energy_prey)
+                  if(energy_predator < 255):
+                    organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
+                  else:
+                    organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy_predator)
+                  if(energy_prey > 0):
+                    organisms_state_list[index] = write_byte(organisms_state_list[index], 11, 1, energy_prey)
+                  else:
+                    organisms_state_list[index] = write_byte(organisms_state_list[index], 11, 1, 0)
     #print("\n\n~~~~~~~~~~~~~~~~~~~~SEED ORGANISM IF ALL LIFE IS EXTINCT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     if(len(organisms_state_list) == 0):
       seed_organism()
