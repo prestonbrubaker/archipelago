@@ -1343,17 +1343,23 @@ def main_loop():
             nodes_velocity_list[i][node_two_index][0] *= 1 - drag_m_adj
             nodes_velocity_list[i][node_two_index][1] *= 1 - drag_m_adj
 
+          willoh = True
+          
           if(node_one_x_unit > 1):
-            node_one_x_unit = 1
+            node_one_x_unit = 1 - 0.000001
+            nodes_velocity_list[i][node_one_index][0] = 0
             
           if(node_one_y_unit > 1):
-            node_one_y_unit = 1
+            node_one_y_unit = 1 - 0.000001
+            nodes_velocity_list[i][node_one_index][1] = 0
             
           if(node_one_x_unit < 0):
-            node_one_x_unit = 0
+            node_one_x_unit = 0.000001
+            nodes_velocity_list[i][node_two_index][0] = 0
             
           if(node_one_y_unit < 0):
-            node_one_y_unit = 0
+            node_one_y_unit = 0.000001
+            nodes_velocity_list[i][node_two_index][1] = 0
   
           # Convert coordinate values back to values ready to be stored in 3 bytes
           node_one_x_new = int(node_one_x_unit * (2**24 - 1))
