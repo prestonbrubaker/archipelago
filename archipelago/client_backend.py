@@ -51,14 +51,14 @@ org_counter = 0  # Counter of organisms ever to exist in this world. Iterated fo
 
 # Parameters for the environment or general rules
 
-max_node_offset = 0.010    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
+max_node_offset = 0.013    # Maximum horizontal or vertical distance (as a fraction of the screen) a node can be placed when an action to produce a new node is called
 spring_multiplier = 1  # Multiplier for the maximum spring constant
 mass_multiplier = 0.008
 dt = 1.0  # Time Step for Physics
-drag_m = 0.02    # Velocities will be multiplied by (1-drag_m) each turn
+drag_m = 0.008    # Velocities will be multiplied by (1-drag_m) each turn
 max_org_c = 70000  # Maximum organisms allowed before reproduction is banned
 metabolism_c = 0.20  # Chance that the organism goes through an iteration of metabolism
-max_age = 1200  # Maximum age until organism has a chance of random death each iteration
+max_age = 800  # Maximum age until organism has a chance of random death each iteration
 post_age_death_c = 0.003  # Chance of death each iteration after the organism has reached the max age
 mutation_c = 0.2  #Chance, during reproduction, that any mutation(s) are made
 out_c = 0.001  # Chance that upon birth, the organism is exported to a text file organisms_out.txt
@@ -66,7 +66,7 @@ carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can ta
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
 save_int = 1  # Number of iterations between saving to the text files
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
-muscle_drag_m = 5  # Multiplier to the drag when in contracting mode
+muscle_drag_m = 3  # Multiplier to the drag when in contracting mode
 time_splits = 1  # Number of splits for each organism that the physics is iterated.
 max_max_node_offset_m = 3  # Maximum multiple of max_node_length two nodes can be before no force is applied
 
