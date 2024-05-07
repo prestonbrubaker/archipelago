@@ -25,8 +25,8 @@ draw_light_values_flag = False
 stats_descriptions = [
     "World age: ",
     "Population: ",
-    "Birth Rate: ",
     "Total Food: ",
+    "Birth Rate: ",
     "Sunlight Intake Rate: ",
     "Metabolism Rate: ",
     "Distance Change Rate: ",
