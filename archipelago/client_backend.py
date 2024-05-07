@@ -102,7 +102,8 @@ def make_world(world_res_in, light_max_in):  # Makes a 2_D list of the light val
 
 def seed_organism():
   global org_counter
-  
+  global birth_rate
+  birth_rate += 1
   initial_state = [
 
 
@@ -481,12 +482,38 @@ world_id_dec = read_byte(world_id, 0, 1)
 def main_loop():
   global age_of_world
   global org_counter
+  global birth_rate
+  global sunlight_intake_rate
+  global metabolism_rate
+  global distance_change_rate
+  global net_speed_rate
+  global average_nodes_current
+  global average_muscles_current
+  global time_current
+  global average_force_current
+  global average_muscle_length
+  global death_rate
+  global average_age
   
   while True:
     #print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n~~~~~~~~~~~~~~~~~~~~STATE OF WORLD~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     age_of_world_dec = read_byte(age_of_world, 0, 6)
     #print(age_of_world)
     #print("AGE OF WORLD: " + str(age_of_world_dec))
+
+    #Set any necessary averaging or iteration based statistics to 0
+    birth_rate = 0
+    sunlight_intake_rate = 0
+    metabolism_rate = 0
+    distance_change_rate = 0
+    net_speed_rate = 0
+    average_nodes_current = 0
+    average_muscles_current = 0
+    time_current = time.time() - time_ref
+    average_force_current = 0
+    average_muscle_length = 0
+    death_rate = 0
+    average_age = 0
     
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for ACTIONS
       
@@ -944,7 +971,23 @@ def main_loop():
         #print("  Action to be Executed: Clear All Registers")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        register_three_value = read_byte(organisms_state_list[i], 20, 3)
+        register_three_value = read_byte(organisms_state_list[i], 20, 3)    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+    0, 0, 0, 0,  0, 0, 0, 0,
+  list_out = [] # 0: world age, 1: number of organisms, 2: total food, 3: birth rate, 4: sunlight intake rate, 5: metabolism rate, 6: distance change rate, 7: net speed rate, 8: average current nodes, 9: average muscles current, 10: current time, 11: average current force, 12: average muscle length
+  list_out.append(read_byte(age_of_world, 0, 6))
+
         #print("  Register One Value: " + str(register_one_value))
         #print("  Register Two Value: " + str(register_two_value))
         #print("  Register Three Value: " + str(register_three_value))
@@ -989,6 +1032,7 @@ def main_loop():
         #print("  Organism " + str(id) + " Has Energy Level: " + str(energy) + " And is Willing to Share " + str(fraction) + " Of Itself With Potential Offspring")
         if(energy >= random.randint(32, 100) and len(organisms_gene_list) <= max_org_c):  # Will Act As a Current Setpoint for allowing reproduction AND only allows up to a certain number of organisms
           #print("  Organism Has Sufficient energy for Reproduction. Commencing")
+          birth_rate += 1
           energy_transfer = int(energy * fraction)
           organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy - energy_transfer)
           #print("  Parent Organism is Left With " + str(energy - energy_transfer) + " Enegy Units")
@@ -1088,6 +1132,7 @@ def main_loop():
     #print("\n\n~~~~~~~~~~~~~~~~~~~~AGE ORGANISMS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     for i in range(0, len(organisms_state_list)):    # Iterate through organisms for AGE
       age = read_byte(organisms_state_list[i], 25, 3)
+      average_age += age
       #print("  Organism Age: " + str(age))
       if(age < 2**24 - 1):
         age += 1
@@ -1108,8 +1153,10 @@ def main_loop():
       r2 = random.uniform(0, 1)
       if( r < metabolism_c):
         energy -= int(1 * num_non_structual_nodes * 0.3 + 1)
+        metabolism_rate += int(1 * num_non_structual_nodes * 0.3 + 1)
       if(energy < 0 or (age > max_age and r2 < post_age_death_c)):
         #print("Organism has been executed...")
+        death_rate += 1
         organisms_state_list.pop(i)
         organisms_gene_list.pop(i)
         nodes_state_list.pop(i)
@@ -1210,6 +1257,7 @@ def main_loop():
             energy = read_byte(organisms_state_list[i], 11, 1)
             if( energy + 1 <= 255):
               organisms_state_list[i] = write_byte(organisms_state_list[i], 11, 1, energy + 1)
+              sunlight_intake_rate += 1
             world_light_values[cell_index_x][cell_index_y] -= 1
             #print("  Organism's Energy Level Increased to: " + str(energy + 1))
     #print("\n\n~~~~~~~~~~~~~~~~~~~~ITERATE CARNIVORES FEEDING~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
@@ -1274,9 +1322,15 @@ def main_loop():
           
     
     #print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
+      for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
       #print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 0, 6)))
-      
+      net_org_x = 0
+      net_org_y = 0
+      force_sum_x = 0
+      force_sum_y = 0
+      org_mass_total = 0
+      average_nodes_current += len(nodes_state_list[i])
+      average_muscles_current += len(muscles_state_list[i])
       for k in range(0, time_splits):
         if(len(nodes_state_list[i]) > 1 and len(muscles_state_list[i]) > 0):
           for j in range(0, len(muscles_state_list[i])):
@@ -1324,6 +1378,7 @@ def main_loop():
             dx = node_two_x_unit - node_one_x_unit
             dy = node_two_y_unit - node_one_y_unit
             distance = ((dx)**2 + (dy)**2)**0.5
+            average_muscle_length += distance / time_splits
             #print("    X-Distance: " + str(dx))
             #print("    Y-Distance: " + str(dy))
             #print("    Distance Between Nodes: " + str(distance))
@@ -1352,6 +1407,8 @@ def main_loop():
             else:
               force_x = spring_multiplier * spring_constant / 255 * dx / (distance) * (distance - muscle_length)
               force_y = spring_multiplier * spring_constant / 255 * dy / (distance) * (distance - muscle_length)
+              force_sum_x += ((force_sum_x)**2)**0.5
+              force_sum_y += ((force_sum_y)**2)**0.5
     
             #print("    Force Between Nodes in X-direction: " + str(force_x))
             #print("    Force Between Nodes in Y-direction: " + str(force_y))
@@ -1366,13 +1423,25 @@ def main_loop():
             nodes_velocity_list[i][node_one_index][1] += force_y / (node_one_mass * mass_multiplier + mass_c) * dt / time_splits
             nodes_velocity_list[i][node_two_index][0] += -1 * force_x / (node_two_mass * mass_multiplier + mass_c) * dt / time_splits
             nodes_velocity_list[i][node_two_index][1] += -1 * force_y / (node_two_mass * mass_multiplier + mass_c) * dt / time_splits
-    
+            
             # Iterate the positions of the nodes by their velocities
             node_one_x_unit += nodes_velocity_list[i][node_one_index][0] * dt / time_splits
             node_one_y_unit += nodes_velocity_list[i][node_one_index][1] * dt / time_splits
             node_two_x_unit += nodes_velocity_list[i][node_two_index][0] * dt / time_splits
             node_two_y_unit += nodes_velocity_list[i][node_two_index][1] * dt / time_splits
-    
+            
+
+            # Obtain term for sum of distance displacement
+            distance_change_rate += ((nodes_velocity_list[i][node_one_index][0] * dt / time_splits)**2 + (nodes_velocity_list[i][node_one_index][1] * dt / time_splits)**2)**0.5 + ((nodes_velocity_list[i][node_two_index][0] * dt / time_splits)**2 + (nodes_velocity_list[i][node_two_index][1] * dt / time_splits))**0.5
+
+            # Accumulate net x, y, and mass
+            net_org_x += nodes_velocity_list[i][node_one_index][0] * dt / time_splits * node_one_mass
+            net_org_y += nodes_velocity_list[i][node_one_index][1] * dt / time_splits * node_one_mass
+            org_mass_total += node_one_mass
+            net_org_x += nodes_velocity_list[i][node_two_index][0] * dt / time_splits * node_two_mass
+            net_org_y += nodes_velocity_list[i][node_two_index][1] * dt / time_splits * node_two_mass
+            org_mass_total += node_two_mass
+            
             # Drag force applied to slow all speeds by an amount proportional to their current speed
   
             node_type_1 = read_byte(nodes_state_list[i][node_one_index], 2, 1)  # Pull the node type for special physics for gripper (2) nodes.
@@ -1439,6 +1508,15 @@ def main_loop():
             nodes_state_list[i][node_one_index] = write_byte(nodes_state_list[i][node_one_index], 8, 3, node_one_y_new)
             nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 5, 3, node_two_x_new)
             nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_new)
+      net_speed_rate += ((net_org_x / org_mass_total)**2 + (net_org_y / org_mass_total)**2)**0.5
+      average_force_current += ((sum_force_x**2) + (sum_force_y**2))**0.5
+    distance_change_rate *= 1 / len(organism_state_list)
+    net_speed_rate *= 1 / len(organism_state_list)
+    average_nodes_current *= 1 / len(organism_state_list)
+    average_muscles_current *= 1 / len(organism_state_list)
+    if((len(organism_state_list) - death_rate) != 0):
+      average_age *= 1 / (len(organism_state_list) - death_rate)
+    
 
     #print("\n\n~~~~~~~~~~~~~~~~~~~~OUTPUT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
     #print("Output (node type, x, y): " + str(get_positions_of_nodes()))
