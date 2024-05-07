@@ -71,6 +71,22 @@ max_max_node_offset_m = 3  # Maximum multiple of max_node_length two nodes can b
 
 sleep_time = 0.001  # Time between iterations
 
+
+#Statistics variables
+time_ref = time.time()  #Epoch time in seconds that the simulation started
+birth_rate = 0        # Number of organisms born on a given iteration
+sunlight_intake_rate = 0   # Amount of energy consumed from available sunlight on a given iteration
+metabolism_rate = 0        # Amount of energy spent as metabolism on a given iteration
+distance_change_rate = 0  # Total sum of displacement of each node from its turn previous
+net_speed_rate = 0        # Average speed of organisms, found by change in the center of mass from last turn
+
+average_nodes_current = 0    # Average number of nodes of organisms at the current iteration
+average_muscles_current = 0  # Average number of muscles of organisms at the current iteration
+time_current = 0             # Current time in epoch seconds elapsed since the reference time stored in time_ref
+average_force_current = 0    # Average sum of the magnitude of forces of organism
+
+
+
 def make_world(world_res_in, light_max_in):  # Makes a 2_D list of the light values
   list_out = []
   for i in range(0, world_res_in):
