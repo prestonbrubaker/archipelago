@@ -1498,7 +1498,7 @@ def main_loop():
     net_speed_rate *= 1 / len(organisms_state_list)
     average_nodes_current *= 1 / len(organisms_state_list)
     average_muscles_current *= 1 / len(organisms_state_list)
-    if((len(organism_state_list) - death_rate) != 0):
+    if((len(organisms_state_list) - death_rate) != 0):
       average_age *= 1 / (len(organisms_state_list) - death_rate)
     
 
