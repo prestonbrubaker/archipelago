@@ -64,6 +64,7 @@ out_c = 0.001  # Chance that upon birth, the organism is exported to a text file
 carn_m = 0.25  # Fraction of other organisms food that the carnivore cell can take if the other cell is in the same tile.
 carn_eff = 0.99  # Fraction of eaten energy carnivores recieve
 save_int = 1  # Number of iterations between saving to the text files
+record_int_stats = 1000  # Number of iterations between adding the current statistics values to the statistics_log file
 mass_c = 50  # added constant to mass of nodes to prevent nodes from being able to be accelerated to an unreasonable degree
 muscle_drag_m = 3  # Multiplier to the drag when in contracting mode
 time_splits = 5  # Number of splits for each organism that the physics is iterated.
@@ -1511,6 +1512,9 @@ def main_loop():
     #print("Output (node type, x, y): " + str(get_positions_of_nodes()))
       
     age_of_world = write_byte(age_of_world, 0, 6, age_of_world_dec + 1)
+    if((age_of_world_dec + 1) % record_int_stats == 0):
+      with open('statistics_log.txt', 'a') as file:
+        file.write(str(get_statistics()) + "\n")
     if((age_of_world_dec + 1) % save_int == 0):
       with open('statistics.txt', 'w') as file:
         file.write(str(get_statistics()))
