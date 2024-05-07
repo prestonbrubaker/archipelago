@@ -1417,7 +1417,7 @@ def main_loop():
             
 
             # Obtain term for sum of distance displacement
-            distance_change_rate += ((nodes_velocity_list[i][node_one_index][0] * dt / time_splits)**2 + (nodes_velocity_list[i][node_one_index][1] * dt / time_splits)**2)**0.5 + ((nodes_velocity_list[i][node_two_index][0] * dt / time_splits)**2 + (nodes_velocity_list[i][node_two_index][1] * dt / time_splits))**0.5
+            distance_change_rate += ((nodes_velocity_list[i][node_one_index][0] * dt / time_splits)**2 + (nodes_velocity_list[i][node_one_index][1] * dt / time_splits)**2)**0.5 + ((nodes_velocity_list[i][node_two_index][0] * dt / time_splits)**2 + (nodes_velocity_list[i][node_two_index][1] * dt / time_splits)**2)**0.5
 
             # Accumulate net x, y, and mass
             net_org_x += nodes_velocity_list[i][node_one_index][0] * dt / time_splits * node_one_mass
