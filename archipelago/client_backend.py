@@ -1494,12 +1494,12 @@ def main_loop():
             nodes_state_list[i][node_two_index] = write_byte(nodes_state_list[i][node_two_index], 8, 3, node_two_y_new)
       net_speed_rate += ((net_org_x / org_mass_total)**2 + (net_org_y / org_mass_total)**2)**0.5
       average_force_current += ((force_sum_x**2) + (force_sum_y**2))**0.5
-    distance_change_rate *= 1 / len(organism_state_list)
-    net_speed_rate *= 1 / len(organism_state_list)
-    average_nodes_current *= 1 / len(organism_state_list)
-    average_muscles_current *= 1 / len(organism_state_list)
+    distance_change_rate *= 1 / len(organisms_state_list)
+    net_speed_rate *= 1 / len(organisms_state_list)
+    average_nodes_current *= 1 / len(organisms_state_list)
+    average_muscles_current *= 1 / len(organisms_state_list)
     if((len(organism_state_list) - death_rate) != 0):
-      average_age *= 1 / (len(organism_state_list) - death_rate)
+      average_age *= 1 / (len(organisms_state_list) - death_rate)
     
 
     #print("\n\n~~~~~~~~~~~~~~~~~~~~OUTPUT~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
