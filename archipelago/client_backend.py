@@ -1306,7 +1306,7 @@ def main_loop():
           
     
     #print("\n\n~~~~~~~~~~~~~~~~~~~~PHYSICS~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-      for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
+    for i in range(0, len(organisms_state_list)):    # Iterate through organisms for PHYSICS
       #print("Calculating Physics for Organism: " + str(read_byte(organisms_state_list[i], 0, 6)))
       net_org_x = 0
       net_org_y = 0
