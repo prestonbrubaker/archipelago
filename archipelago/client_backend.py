@@ -78,13 +78,15 @@ birth_rate = 0        # Number of organisms born on a given iteration
 sunlight_intake_rate = 0   # Amount of energy consumed from available sunlight on a given iteration
 metabolism_rate = 0        # Amount of energy spent as metabolism on a given iteration
 distance_change_rate = 0  # Total sum of displacement of each node from its turn previous
-net_speed_rate = 0        # Average speed of organisms, found by change in the center of mass from last turn
+net_speed_rate = 0        # Average speed of organisms, found by change in the center of mass from last iteration
 
 average_nodes_current = 0    # Average number of nodes of organisms at the current iteration
 average_muscles_current = 0  # Average number of muscles of organisms at the current iteration
 time_current = 0             # Current time in epoch seconds elapsed since the reference time stored in time_ref
 average_force_current = 0    # Average sum of the magnitude of forces of organism
 average_muscle_length = 0    # Average length of a muscle for all organisms
+death_rate = 0               # Number of deaths since the last iteration
+average_age = 0              # Average age of organisms
 
 
 
@@ -382,7 +384,9 @@ def get_positions_of_muscles():
   return list_out
   
 def get_statistics():
-  list_out = [] # 0: world age, 1: number of organisms
+  list_out = [] # 0: world age, 1: number of organisms, 2: total food, 3: birth rate, 4: sunlight intake rate, 5: metabolism rate, 6: distance change rate, 
+  #7: net speed rate, 8: average current nodes, 9: average muscles current, 10: current time, 11: average current force, 12: average muscle length, 13: death rate, 14: average age
+  
   list_out.append(read_byte(age_of_world, 0, 6))
   list_out.append(len(organisms_gene_list))
   total_food = 0
@@ -390,6 +394,19 @@ def get_statistics():
     for j in range(0, world_res):
       total_food += world_light_values[i][j]
   list_out.append(total_food)
+  list_out.append(birth_rate)
+  list_out.append(sunlight_intake_rate)
+  list_out.append(metabolism_rate)
+  list_out.append(distance_change_rate)
+  list_out.append(net_speed_rate)
+  list_out.append(average_nodes_current)
+  list_out.append(time_current)
+  list_out.append(average_force_current)
+  list_out.append(average_muscle_length)
+  list_out.append(death_rate)
+  list_out.append(average_age)
+  
+  
   return list_out
 
 def send_organism_out():
