@@ -25,7 +25,7 @@ draw_light_values_flag = False
 stats_descriptions = [
     "World age: ",
     "Population: ",
-    "Birth Rate: ".
+    "Birth Rate: ",
     "Total Food: ",
     "Sunlight Intake Rate: ",
     "Metabolism Rate: ",
@@ -37,7 +37,7 @@ stats_descriptions = [
     "Average Net Force: ",
     "Average Muscle Length: ",
     "Death Rate: ",
-    "Average Age: ",
+    "Average Age: "
 ]
 
 def safely_evaluate_data(file_path, default):
