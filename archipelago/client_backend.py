@@ -84,6 +84,7 @@ average_nodes_current = 0    # Average number of nodes of organisms at the curre
 average_muscles_current = 0  # Average number of muscles of organisms at the current iteration
 time_current = 0             # Current time in epoch seconds elapsed since the reference time stored in time_ref
 average_force_current = 0    # Average sum of the magnitude of forces of organism
+average_muscle_length = 0    # Average length of a muscle for all organisms
 
 
 
