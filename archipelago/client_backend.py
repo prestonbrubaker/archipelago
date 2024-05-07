@@ -971,23 +971,7 @@ def main_loop():
         #print("  Action to be Executed: Clear All Registers")
         register_one_value = read_byte(organisms_state_list[i], 14, 3)
         register_two_value = read_byte(organisms_state_list[i], 17, 3)
-        register_three_value = read_byte(organisms_state_list[i], 20, 3)    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-    0, 0, 0, 0,  0, 0, 0, 0,
-  list_out = [] # 0: world age, 1: number of organisms, 2: total food, 3: birth rate, 4: sunlight intake rate, 5: metabolism rate, 6: distance change rate, 7: net speed rate, 8: average current nodes, 9: average muscles current, 10: current time, 11: average current force, 12: average muscle length
-  list_out.append(read_byte(age_of_world, 0, 6))
-
+        register_three_value = read_byte(organisms_state_list[i], 20, 3)
         #print("  Register One Value: " + str(register_one_value))
         #print("  Register Two Value: " + str(register_two_value))
         #print("  Register Three Value: " + str(register_three_value))
