@@ -388,24 +388,25 @@ def get_statistics():
   list_out = [] # 0: world age, 1: number of organisms, 2: total food, 3: birth rate, 4: sunlight intake rate, 5: metabolism rate, 6: distance change rate, 
   #7: net speed rate, 8: average current nodes, 9: average muscles current, 10: current time, 11: average current force, 12: average muscle length, 13: death rate, 14: average age
   
-  list_out.append(read_byte(age_of_world, 0, 6))
-  list_out.append(len(organisms_gene_list))
+  list_out.append(read_byte(age_of_world, 0, 6))    #0
+  list_out.append(len(organisms_gene_list))         #1
   total_food = 0
   for i in range(0, world_res):
     for j in range(0, world_res):
       total_food += world_light_values[i][j]
-  list_out.append(total_food)
-  list_out.append(birth_rate)
-  list_out.append(sunlight_intake_rate)
-  list_out.append(metabolism_rate)
-  list_out.append(distance_change_rate)
-  list_out.append(net_speed_rate)
-  list_out.append(average_nodes_current)
-  list_out.append(time_current)
-  list_out.append(average_force_current)
-  list_out.append(average_muscle_length)
-  list_out.append(death_rate)
-  list_out.append(average_age)
+  list_out.append(total_food)               #2
+  list_out.append(birth_rate)               #3
+  list_out.append(sunlight_intake_rate)     #4
+  list_out.append(metabolism_rate)          #5
+  list_out.append(distance_change_rate)     #6
+  list_out.append(net_speed_rate)           #7
+  list_out.append(average_nodes_current)    #8
+  list_out.append(average_muscles_current)  #9
+  list_out.append(time_current)             #10
+  list_out.append(average_force_current)    #11
+  list_out.append(average_muscle_length)    #12
+  list_out.append(death_rate)               #13
+  list_out.append(average_age)              #14
   
   
   return list_out
@@ -1498,7 +1499,10 @@ def main_loop():
     distance_change_rate *= 1 / len(organisms_state_list)
     net_speed_rate *= 1 / len(organisms_state_list)
     average_nodes_current *= 1 / len(organisms_state_list)
+    
     average_muscles_current *= 1 / len(organisms_state_list)
+    if(average_muscles_current != 0):
+      average_muscle_length *= 1 / len(organisms_state_list) / average_muscles_current
     if((len(organisms_state_list) - death_rate) != 0):
       average_age *= 1 / (len(organisms_state_list) - death_rate)
     
