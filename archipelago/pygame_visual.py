@@ -36,7 +36,8 @@ stats_descriptions = [
     "Average Net Force: ",
     "Average Muscle Length: ",
     "Death Rate: ",
-    "Average Age: "
+    "Average Age: ",
+    ""
 ]
 
 def safely_evaluate_data(file_path, default):
